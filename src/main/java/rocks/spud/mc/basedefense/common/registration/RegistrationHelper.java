@@ -32,6 +32,7 @@ import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 import rocks.spud.mc.basedefense.common.registration.annotation.BlockDefinition;
 import rocks.spud.mc.basedefense.common.registration.annotation.BlockEntityDefinition;
+import rocks.spud.mc.basedefense.common.registration.annotation.Criteria;
 import rocks.spud.mc.basedefense.common.registration.annotation.ItemDefinition;
 
 import java.lang.annotation.Annotation;
@@ -55,6 +56,12 @@ public class RegistrationHelper {
 	private static final Logger logger = LogManager.getFormatterLogger (RegistrationHelper.class);
 
 	/**
+	 * Stores the active modification configuration.
+	 */
+	@Getter (AccessLevel.PROTECTED)
+	private final net.minecraftforge.common.config.Configuration configuration;
+
+	/**
 	 * Stores the Reflections instance.
 	 */
 	@Getter (AccessLevel.PROTECTED)
@@ -63,8 +70,8 @@ public class RegistrationHelper {
 	/**
 	 * Constructs a new RegistrationHelper.
 	 */
-	public RegistrationHelper () {
-		this (RegistrationHelper.class.getClassLoader ());
+	public RegistrationHelper (net.minecraftforge.common.config.Configuration configuration) {
+		this (configuration, RegistrationHelper.class.getClassLoader ());
 	}
 
 	/**
@@ -72,7 +79,8 @@ public class RegistrationHelper {
 	 *
 	 * @param classLoader The class loader to setup for scanning.
 	 */
-	public RegistrationHelper (ClassLoader classLoader) {
+	public RegistrationHelper (net.minecraftforge.common.config.Configuration configuration, ClassLoader classLoader) {
+		this.configuration = configuration;
 		this.reflections = new Reflections (this.buildConfiguration (classLoader));
 	}
 
@@ -88,6 +96,31 @@ public class RegistrationHelper {
 		configurationBuilder.setClassLoaders (new ClassLoader[] { classLoader });
 
 		return ConfigurationBuilder.build ();
+	}
+
+	/**
+	 * Checks the criteria attached to an object.
+	 * @param object The object.
+	 * @return True if all criteria is met.
+	 */
+	protected boolean checkCriteria (Object object) {
+		return this.checkCriteria (object.getClass ());
+	}
+
+	/**
+	 * Checks the criteria attached to a class.
+	 * @param type The type.
+	 * @return True if all criteria is met.
+	 */
+	protected boolean checkCriteria (Class<?> type) {
+		if (!type.isAnnotationPresent (Criteria.class)) return true;
+		Criteria criteria = type.getAnnotation (Criteria.class);
+
+		for (StandardCriteria current : criteria.value ()) {
+			if (!current.isMet (this.configuration)) return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -157,6 +190,7 @@ public class RegistrationHelper {
 	public void registerBlock (@NonNull Block block) {
 		Class<? extends Block> blockType = block.getClass ();
 		Preconditions.checkArgument (blockType.isAnnotationPresent (BlockDefinition.class), "No @BlockDefinition annotation present for Block type %s.", blockType.getCanonicalName ());
+		if (!this.checkCriteria (block)) return;
 		GameRegistry.registerBlock (block, blockType.getAnnotation (BlockDefinition.class).value ());
 	}
 
@@ -177,6 +211,7 @@ public class RegistrationHelper {
 	 */
 	public void registerBlockEntity (@NonNull Class<? extends TileEntity> entityType) {
 		Preconditions.checkArgument (entityType.isAnnotationPresent (BlockEntityDefinition.class));
+		if (!this.checkCriteria (entityType)) return;
 		GameRegistry.registerTileEntity (entityType, entityType.getAnnotation (BlockEntityDefinition.class).value ());
 	}
 
@@ -207,6 +242,7 @@ public class RegistrationHelper {
 	public void registerItem (@NonNull Item item) {
 		Class<? extends Item> itemType = item.getClass ();
 		Preconditions.checkArgument (itemType.isAnnotationPresent (ItemDefinition.class));
+		if (!this.checkCriteria (item)) return;
 		GameRegistry.registerItem (item, item.getClass ().getAnnotation (ItemDefinition.class).value ());
 	}
 

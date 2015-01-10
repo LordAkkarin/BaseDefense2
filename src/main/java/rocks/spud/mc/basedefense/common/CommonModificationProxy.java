@@ -22,6 +22,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import lombok.AccessLevel;
 import lombok.Getter;
+import net.minecraftforge.common.config.Configuration;
 import rocks.spud.mc.basedefense.common.registration.RegistrationHelper;
 
 /**
@@ -30,17 +31,16 @@ import rocks.spud.mc.basedefense.common.registration.RegistrationHelper;
 public class CommonModificationProxy {
 
 	/**
+	 * Stores the active configuration.
+	 */
+	@Getter (AccessLevel.PROTECTED)
+	private Configuration configuration;
+
+	/**
 	 * Provides an instance of RegistrationHelper.
 	 */
 	@Getter (AccessLevel.PROTECTED)
-	private final RegistrationHelper registrationHelper;
-
-	/**
-	 * Constructs a new CommonProxy.
-	 */
-	public CommonModificationProxy () {
-		this.registrationHelper = new RegistrationHelper ();
-	}
+	private RegistrationHelper registrationHelper;
 
 	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLInitializationEvent} event.
@@ -56,12 +56,19 @@ public class CommonModificationProxy {
 	 *
 	 * @param event The event.
 	 */
-	public void postInitialize (FMLPostInitializationEvent event) { }
+	public void postInitialize (FMLPostInitializationEvent event) {
+		this.configuration.save ();
+	}
 
 	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLPreInitializationEvent} event.
 	 *
 	 * @param event The event.
 	 */
-	public void preInitialize (FMLPreInitializationEvent event) { }
+	public void preInitialize (FMLPreInitializationEvent event) {
+		this.configuration = new Configuration (event.getSuggestedConfigurationFile ());
+		this.configuration.load ();
+
+		this.registrationHelper = new RegistrationHelper (this.getConfiguration ());
+	}
 }
