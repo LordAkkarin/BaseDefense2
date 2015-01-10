@@ -23,6 +23,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automating block registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -31,6 +32,7 @@ public @interface BlockDefinition {
 
 	/**
 	 * Defines the block name.
+	 *
 	 * @return The name.
 	 */
 	public String value ();

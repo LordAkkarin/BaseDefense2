@@ -43,13 +43,8 @@ public class CommonModificationProxy {
 	}
 
 	/**
-	 * Handles the {@link cpw.mods.fml.common.event.FMLPreInitializationEvent} event.
-	 * @param event The event.
-	 */
-	public void preInitialize (FMLPreInitializationEvent event) { }
-
-	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLInitializationEvent} event.
+	 *
 	 * @param event The event.
 	 */
 	public void initialize (FMLInitializationEvent event) {
@@ -58,7 +53,15 @@ public class CommonModificationProxy {
 
 	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLPostInitializationEvent} event
+	 *
 	 * @param event The event.
 	 */
 	public void postInitialize (FMLPostInitializationEvent event) { }
+
+	/**
+	 * Handles the {@link cpw.mods.fml.common.event.FMLPreInitializationEvent} event.
+	 *
+	 * @param event The event.
+	 */
+	public void preInitialize (FMLPreInitializationEvent event) { }
 }

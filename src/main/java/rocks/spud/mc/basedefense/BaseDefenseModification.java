@@ -27,6 +27,7 @@ import rocks.spud.mc.basedefense.common.CommonModificationProxy;
 
 /**
  * Provides the Base Defense 2 modification.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Mod (modid = BaseDefenseModification.IDENTIFIER, version = BaseDefenseModification.VERSION, useMetadata = true, acceptedMinecraftVersions = BaseDefenseModification.SUPPORTED_MINECRAFT_VERSION_RANGE, acceptableSaveVersions = BaseDefenseModification.SUPPORTED_VERSION_RANGE, acceptableRemoteVersions = BaseDefenseModification.SUPPORTED_VERSION_RANGE)
@@ -38,14 +39,21 @@ public class BaseDefenseModification {
 	public static final String IDENTIFIER = "basedefense2";
 
 	/**
-	 * Defines the default version used in absence of an mcmod.info file.
-	 */
-	public static final String VERSION = "1.0.0-SNAPSHOT";
-
-	/**
 	 * Defines the supported Minecraft version range.
 	 */
 	public static final String SUPPORTED_MINECRAFT_VERSION_RANGE = "[1.7.10,1.8)";
+
+	/**
+	 * Defines the supported version range.
+	 *
+	 * @todo Remove snapshot version from supported version range in release version.
+	 */
+	public static final String SUPPORTED_VERSION_RANGE = "[1.0.0-SNAPSHOT],[1.0.0,1.1.0)";
+
+	/**
+	 * Defines the default version used in absence of an mcmod.info file.
+	 */
+	public static final String VERSION = "1.0.0-SNAPSHOT";
 
 	/**
 	 * Stores the modification instance.
@@ -68,13 +76,8 @@ public class BaseDefenseModification {
 	private static CommonModificationProxy proxy = null;
 
 	/**
-	 * Defines the supported version range.
-	 * @todo Remove snapshot version from supported version range in release version.
-	 */
-	public static final String SUPPORTED_VERSION_RANGE = "[1.0.0-SNAPSHOT],[1.0.0,1.1.0)";
-
-	/**
 	 * Returns the active modification proxy.
+	 *
 	 * @return The proxy.
 	 */
 	public CommonModificationProxy getProxy () {
@@ -82,23 +85,8 @@ public class BaseDefenseModification {
 	}
 
 	/**
-	 * Handles the {@link cpw.mods.fml.common.event.FMLPreInitializationEvent} event.
-	 * @param event The event.
-	 */
-	@Mod.EventHandler
-	protected void onPreInitialize (FMLPreInitializationEvent event) {
-		this.logger = event.getModLog ();
-
-		this.getLogger ().info ("Pre Initialization");
-		long startTime = System.currentTimeMillis ();
-
-		this.getProxy ().preInitialize (event);
-
-		this.getLogger ().info ("Pre Initialization End (" + (System.currentTimeMillis () - startTime) + "ms elapsed)");
-	}
-
-	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLInitializationEvent} event.
+	 *
 	 * @param event The event.
 	 */
 	@Mod.EventHandler
@@ -113,6 +101,7 @@ public class BaseDefenseModification {
 
 	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLPostInitializationEvent} event.
+	 *
 	 * @param event The event.
 	 */
 	@Mod.EventHandler
@@ -123,5 +112,22 @@ public class BaseDefenseModification {
 		this.getProxy ().postInitialize (event);
 
 		this.getLogger ().info ("Post Initialization End (" + (System.currentTimeMillis () - startTime) + "ms elapsed)");
+	}
+
+	/**
+	 * Handles the {@link cpw.mods.fml.common.event.FMLPreInitializationEvent} event.
+	 *
+	 * @param event The event.
+	 */
+	@Mod.EventHandler
+	protected void onPreInitialize (FMLPreInitializationEvent event) {
+		this.logger = event.getModLog ();
+
+		this.getLogger ().info ("Pre Initialization");
+		long startTime = System.currentTimeMillis ();
+
+		this.getProxy ().preInitialize (event);
+
+		this.getLogger ().info ("Pre Initialization End (" + (System.currentTimeMillis () - startTime) + "ms elapsed)");
 	}
 }

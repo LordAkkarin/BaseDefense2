@@ -43,6 +43,7 @@ import java.util.Set;
 
 /**
  * Provides a helper for registering game elements with annotations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class RegistrationHelper {
@@ -68,6 +69,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Constructs a new ReflectionHelper.
+	 *
 	 * @param classLoader The class loader to setup for scanning.
 	 */
 	public RegistrationHelper (ClassLoader classLoader) {
@@ -76,19 +78,21 @@ public class RegistrationHelper {
 
 	/**
 	 * Builds the reflection configuration.
+	 *
 	 * @param classLoader The parent class loader.
 	 * @return The configuration.
 	 */
 	protected Configuration buildConfiguration (ClassLoader classLoader) {
 		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder ();
 
-		configurationBuilder.setClassLoaders (new ClassLoader[]{ classLoader });
+		configurationBuilder.setClassLoaders (new ClassLoader[] { classLoader });
 
-		return configurationBuilder.build ();
+		return ConfigurationBuilder.build ();
 	}
 
 	/**
 	 * Constructs a new instance of the specified class.
+	 *
 	 * @param type The type.
 	 * @param <T> The type.
 	 * @return The instance.
@@ -107,6 +111,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Returns a collection of types annotated with the specified annotation.
+	 *
 	 * @param annotationType The annotation type.
 	 * @param type The type.
 	 * @param <T> The type.
@@ -117,7 +122,8 @@ public class RegistrationHelper {
 		Set<Class<?>> rawTypeList = this.getReflections ().getTypesAnnotatedWith (annotationType);
 
 		for (Class<?> rawType : rawTypeList) {
-			if (!type.isAssignableFrom (rawType)) throw new RuntimeException (String.format ("Type %s has annotation @%s but does not extend %s", rawType.getCanonicalName (), annotationType.getSimpleName (), type.getCanonicalName ()));
+			if (!type.isAssignableFrom (rawType))
+				throw new RuntimeException (String.format ("Type %s has annotation @%s but does not extend %s", rawType.getCanonicalName (), annotationType.getSimpleName (), type.getCanonicalName ()));
 			typeList.add (((Class<? extends T>) type.asSubclass (rawType)));
 		}
 
@@ -126,6 +132,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers a set of blocks.
+	 *
 	 * @param blockTypes The block type collection.
 	 */
 	public void registerBlock (@NonNull Collection<Class<? extends Block>> blockTypes) {
@@ -135,6 +142,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers a new block.
+	 *
 	 * @param blockType The block type.
 	 */
 	public void registerBlock (@NonNull Class<? extends Block> blockType) {
@@ -143,6 +151,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers a block type.
+	 *
 	 * @param block The block.
 	 */
 	public void registerBlock (@NonNull Block block) {
@@ -153,6 +162,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers a set of block entities.
+	 *
 	 * @param blockEntityTypes The entity type collection.
 	 */
 	public void registerBlockEntity (@NonNull Collection<Class<? extends TileEntity>> blockEntityTypes) {
@@ -162,6 +172,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers a block entity.
+	 *
 	 * @param entityType The block entity type.
 	 */
 	public void registerBlockEntity (@NonNull Class<? extends TileEntity> entityType) {
@@ -171,6 +182,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers a set of items.
+	 *
 	 * @param itemTypes The item type collection.
 	 */
 	public void registerItem (@NonNull Collection<Class<? extends Item>> itemTypes) {
@@ -180,6 +192,7 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers an item.
+	 *
 	 * @param itemType The item type.
 	 */
 	public void registerItem (@NonNull Class<? extends Item> itemType) {
@@ -188,12 +201,25 @@ public class RegistrationHelper {
 
 	/**
 	 * Registers an item.
+	 *
 	 * @param item The item.
 	 */
 	public void registerItem (@NonNull Item item) {
 		Class<? extends Item> itemType = item.getClass ();
 		Preconditions.checkArgument (itemType.isAnnotationPresent (ItemDefinition.class));
 		GameRegistry.registerItem (item, item.getClass ().getAnnotation (ItemDefinition.class).value ());
+	}
+
+	/**
+	 * Scans the current class loader for annotated classes.
+	 *
+	 * @param side The active side.
+	 */
+	public void scanAnnotations (Side side) {
+		if (side == Side.CLIENT)
+			this.scanClientAnnotations ();
+		else
+			this.scanServerAnnotations ();
 	}
 
 	/**
@@ -220,16 +246,5 @@ public class RegistrationHelper {
 		this.registerItem (this.getAnnotatedTypes (ItemDefinition.class, Item.class));
 
 		getLogger ().info ("Finished scanning in %sms", (System.currentTimeMillis () - startTime));
-	}
-
-	/**
-	 * Scans the current class loader for annotated classes.
-	 * @param side The active side.
-	 */
-	public void scanAnnotations (Side side) {
-		if (side == Side.CLIENT)
-			this.scanClientAnnotations ();
-		else
-			this.scanServerAnnotations ();
 	}
 }
