@@ -1,0 +1,68 @@
+/*
+ * Copyright 2015 Johannes Donath <johannesd@torchmind.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+configurations {
+	provided
+	compile.extendsFrom provided
+}
+
+repositories {
+	maven {
+		name 'CB Maven FS'
+		url "http://chickenbones.net/maven/"
+	}
+
+	maven {
+		name "Waila Mobius Repo"
+		url "http://mobiusstrip.eu/maven"
+	}
+
+	maven {
+		name "FireBall API Depot"
+		url "http://dl.tsr.me/artifactory/libs-release-local"
+	}
+}
+
+dependencies {
+	// compile "codechicken:ForgeMultipart:${config.version.minecraft}-${config.version.fmp}:dev"
+	compile "codechicken:CodeChickenLib:${config.version.minecraft}-${config.version.codechicken.lib}:dev"
+	compile "codechicken:CodeChickenCore:${config.version.minecraft}-${config.version.codechicken.core}:dev"
+	compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev"
+	compile "org.reflections:reflections:0.9.9"
+	provided "org.projectlombok:lombok:1.14.8"
+
+	compile ("appeng:appliedenergistics2:${config.version.ae2}:dev") {
+		// IC2 does not seem to be anywhere in our dependency repositories. Thus we will just exclude it from
+		// our builds to fix this problem
+		exclude group: 'net.industrial-craft'
+	}
+
+	// AE dependencies
+	// Provided via FireBall's repo (I hope you don't mind buddy)
+	// Note: This seems to be required as Gradle does not make us dependant to the AE dependencies automatically
+	compile (group: 'api', name: 'betterstorage', version: "1")
+	compile (group: 'api', name: 'coloredlightscore', version: "1")
+	compile (group: 'api', name: 'craftguide', version: "1")
+	compile (group: 'api', name: 'ic2', version: "1")
+	compile (group: 'api', name: 'immibis', version: "1")
+	compile (group: 'api', name: 'invtweaks', version: "1")
+	compile (group: 'api', name: 'mekansim', version: "1")
+	compile (group: 'api', name: 'mfr', version: "1")
+	compile (group: 'api', name: 'railcraft', version: "1")
+	compile (group: 'api', name: 'rblocks', version: "1")
+	compile (group: 'api', name: 'rf', version: "1")
+	compile (group: 'api', name: 'rotarycraft', version: "1")
+	compile (group: 'dev', name: 'buildcraft', version: "1")
+}
