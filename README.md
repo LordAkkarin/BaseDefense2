@@ -16,7 +16,7 @@ as a wrapper is supplied in this repository.
 
 ### Windows
 ```bash
-	gradlew build
+	gradlew.bat build
 ```
 
 Installation
