@@ -15,6 +15,9 @@
  */
 configurations {
 	provided
+	shade
+
+	compile.extendsFrom shade
 	compile.extendsFrom provided
 }
 
@@ -40,7 +43,7 @@ dependencies {
 	compile "codechicken:CodeChickenLib:${config.version.minecraft}-${config.version.codechicken.lib}:dev"
 	compile "codechicken:CodeChickenCore:${config.version.minecraft}-${config.version.codechicken.core}:dev"
 	compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev"
-	compile "org.reflections:reflections:0.9.9"
+	shade "org.reflections:reflections:0.9.9"
 	provided "org.projectlombok:lombok:1.14.8"
 
 	compile ("appeng:appliedenergistics2:${config.version.ae2}:dev") {

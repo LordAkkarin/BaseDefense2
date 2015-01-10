@@ -15,6 +15,12 @@
  */
 jar {
 	classifier = 'universal'
+
+	configurations.shade.each { dep ->
+		from (project.zipTree (dep)){
+			exclude 'META-INF', 'META-INF/**'
+		}
+	}
 }
 
 task devJar (type: Jar) {
