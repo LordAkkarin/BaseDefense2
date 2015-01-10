@@ -37,10 +37,7 @@ import rocks.spud.mc.basedefense.common.registration.annotation.ItemDefinition;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Provides a helper for registering game elements with annotations.
@@ -54,6 +51,16 @@ public class RegistrationHelper {
 	 */
 	@Getter (AccessLevel.PROTECTED)
 	private static final Logger logger = LogManager.getFormatterLogger (RegistrationHelper.class);
+
+	/**
+	 * Stores a list of initialized and registered block types.
+	 */
+	private final Map<Class<? extends Block>, Block> blockMap = new HashMap<Class<? extends Block>, Block> ();
+
+	/**
+	 * Stores a list of initialized and registered item types.
+	 */
+	private final Map<Class<? extends Item>, Item> itemMap = new HashMap<Class<? extends Item>, Item> ();
 
 	/**
 	 * Stores the active modification configuration.
@@ -164,6 +171,42 @@ public class RegistrationHelper {
 	}
 
 	/**
+	 * Returns a registered block.
+	 * @param blockType The block type.
+	 * @return The block.
+	 */
+	public Block getBlock (Class<? extends Block> blockType) {
+		return this.blockMap.get (blockType);
+	}
+
+	/**
+	 * Returns a registered item.
+	 * @param itemType The item type.
+	 * @return The item.
+	 */
+	public Item getItem (Class<? extends Item> itemType) {
+		return this.itemMap.get (itemType);
+	}
+
+	/**
+	 * Checks whether a block type has been registered.
+	 * @param blockType The block type.
+	 * @return True if registered.
+	 */
+	public boolean hasBlock (Class<? extends Block> blockType) {
+		return this.blockMap.containsKey (blockType);
+	}
+
+	/**
+	 * Checks whether an item type has been registered.
+	 * @param itemType The item type.
+	 * @return True if registered.
+	 */
+	public boolean hasItem (Class<? extends Item> itemType) {
+		return this.itemMap.containsKey (itemType);
+	}
+
+	/**
 	 * Registers a set of blocks.
 	 *
 	 * @param blockTypes The block type collection.
@@ -192,6 +235,7 @@ public class RegistrationHelper {
 		Preconditions.checkArgument (blockType.isAnnotationPresent (BlockDefinition.class), "No @BlockDefinition annotation present for Block type %s.", blockType.getCanonicalName ());
 		if (!this.checkCriteria (block)) return;
 		GameRegistry.registerBlock (block, blockType.getAnnotation (BlockDefinition.class).value ());
+		this.blockMap.put (blockType, block);
 	}
 
 	/**
@@ -244,6 +288,7 @@ public class RegistrationHelper {
 		Preconditions.checkArgument (itemType.isAnnotationPresent (ItemDefinition.class));
 		if (!this.checkCriteria (item)) return;
 		GameRegistry.registerItem (item, item.getClass ().getAnnotation (ItemDefinition.class).value ());
+		this.itemMap.put (itemType, item);
 	}
 
 	/**
