@@ -23,7 +23,9 @@ import cpw.mods.fml.relauncher.Side;
 import lombok.AccessLevel;
 import lombok.Getter;
 import net.minecraftforge.common.config.Configuration;
+import rocks.spud.mc.basedefense.BaseDefenseModification;
 import rocks.spud.mc.basedefense.common.registration.RegistrationHelper;
+import rocks.spud.mc.basedefense.common.registration.StandardCriteria;
 
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
@@ -57,7 +59,9 @@ public class CommonModificationProxy {
 	 * @param event The event.
 	 */
 	public void postInitialize (FMLPostInitializationEvent event) {
+		BaseDefenseModification.getInstance ().getLogger ().info ("Updating configuration ...");
 		this.configuration.save ();
+		BaseDefenseModification.getInstance ().getLogger ().info ("Modification configuration was written back to disk.");
 	}
 
 	/**
@@ -68,6 +72,15 @@ public class CommonModificationProxy {
 	public void preInitialize (FMLPreInitializationEvent event) {
 		this.configuration = new Configuration (event.getSuggestedConfigurationFile ());
 		this.configuration.load ();
+
+		event.getModLog ().info ("Checking standard modification criteria:");
+		for (StandardCriteria criteria : StandardCriteria.values ()) {
+			event.getModLog ().info (String.format ("\tCriteria %s was %smet.", criteria.toString (), (criteria.isMet (this.getConfiguration ()) ? "" : "not ")));
+		}
+
+		event.getModLog ().info ("Updating configuration ...");
+		this.configuration.save ();
+		event.getModLog ().info ("Modification configuration was written back to disk.");
 
 		this.registrationHelper = new RegistrationHelper (this.getConfiguration ());
 	}
