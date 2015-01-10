@@ -157,7 +157,7 @@ public class RegistrationHelper {
 		for (Class<?> rawType : rawTypeList) {
 			if (!type.isAssignableFrom (rawType))
 				throw new RuntimeException (String.format ("Type %s has annotation @%s but does not extend %s", rawType.getCanonicalName (), annotationType.getSimpleName (), type.getCanonicalName ()));
-			typeList.add (((Class<? extends T>) type.asSubclass (rawType)));
+			typeList.add (((Class<? extends T>) rawType));
 		}
 
 		return typeList;
