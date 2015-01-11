@@ -41,7 +41,7 @@ public class CommonModificationProxy {
 	/**
 	 * Provides an instance of RegistrationHelper.
 	 */
-	@Getter (AccessLevel.PROTECTED)
+	@Getter
 	private RegistrationHelper registrationHelper;
 
 	/**
