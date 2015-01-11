@@ -184,6 +184,15 @@ public class RegistrationHelper {
 	}
 
 	/**
+	 * Returns a registered renderer ID.
+	 * @param rendererType The renderer type.
+	 * @return The renderer ID.
+	 */
+	public int getBlockRendererID (Class<? extends ISimpleBlockRenderingHandler> rendererType) {
+		return this.blockRendererMap.get (rendererType);
+	}
+
+	/**
 	 * Returns a registered item.
 	 * @param itemType The item type.
 	 * @return The item.
