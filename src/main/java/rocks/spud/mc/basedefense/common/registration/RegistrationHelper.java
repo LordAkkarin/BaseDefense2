@@ -17,6 +17,8 @@
 package rocks.spud.mc.basedefense.common.registration;
 
 import com.google.common.base.Preconditions;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import lombok.AccessLevel;
@@ -30,10 +32,7 @@ import org.apache.logging.log4j.Logger;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
-import rocks.spud.mc.basedefense.common.registration.annotation.BlockDefinition;
-import rocks.spud.mc.basedefense.common.registration.annotation.BlockEntityDefinition;
-import rocks.spud.mc.basedefense.common.registration.annotation.Criteria;
-import rocks.spud.mc.basedefense.common.registration.annotation.ItemDefinition;
+import rocks.spud.mc.basedefense.common.registration.annotation.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -56,6 +55,11 @@ public class RegistrationHelper {
 	 * Stores a list of initialized and registered block types.
 	 */
 	private final Map<Class<? extends Block>, Block> blockMap = new HashMap<Class<? extends Block>, Block> ();
+
+	/**
+	 * Stores a list of initialized and registered block renderers.
+	 */
+	private final Map<Class<? extends ISimpleBlockRenderingHandler>, Integer> blockRendererMap = new HashMap<Class<? extends ISimpleBlockRenderingHandler>, Integer> ();
 
 	/**
 	 * Stores a list of initialized and registered item types.
@@ -260,6 +264,35 @@ public class RegistrationHelper {
 	}
 
 	/**
+	 * Registers a block renderer.
+	 * @param rendererTypes The renderer set.
+	 */
+	public void registerBlockRenderer (@NonNull Collection<Class<? extends ISimpleBlockRenderingHandler>> rendererTypes) {
+		for (Class<? extends ISimpleBlockRenderingHandler> rendererType : rendererTypes) this.registerBlockRenderer (rendererType);
+	}
+
+	/**
+	 * Registers a block renderer.
+	 * @param rendererType The renderer type.
+	 */
+	public void registerBlockRenderer (@NonNull Class<? extends ISimpleBlockRenderingHandler> rendererType) {
+		this.registerBlockRenderer (this.createInstance (rendererType));
+	}
+
+	/**
+	 * Registers a block renderer.
+	 * @param renderer The renderer.
+	 */
+	public void registerBlockRenderer (@NonNull ISimpleBlockRenderingHandler renderer) {
+		Class<? extends ISimpleBlockRenderingHandler> rendererType = renderer.getClass ();
+		Preconditions.checkArgument (rendererType.isAnnotationPresent (BlockRendererDefinition.class), "@BlockRendererDefinition annotation is not present for type %s", rendererType.getCanonicalName ());
+
+		int renderID = RenderingRegistry.getNextAvailableRenderId ();
+		RenderingRegistry.registerBlockHandler (renderID, renderer);
+		this.blockRendererMap.put (rendererType, renderID);
+	}
+
+	/**
 	 * Registers a set of items.
 	 *
 	 * @param itemTypes The item type collection.
@@ -310,7 +343,7 @@ public class RegistrationHelper {
 		getLogger ().info ("Scanning for client side registrations ...");
 		long startTime = System.currentTimeMillis ();
 
-		// TODO
+		this.registerBlockRenderer (this.getAnnotatedTypes (BlockRendererDefinition.class, ISimpleBlockRenderingHandler.class));
 
 		getLogger ().info ("Finished scanning in %sms", (System.currentTimeMillis () - startTime));
 	}
