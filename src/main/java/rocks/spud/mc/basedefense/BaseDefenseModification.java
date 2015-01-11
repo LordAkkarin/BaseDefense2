@@ -85,6 +85,27 @@ public class BaseDefenseModification {
 	}
 
 	/**
+	 * Builds a translation identifier.
+	 * @param prefix The prefix.
+	 * @param module The module.
+	 * @param element The element.
+	 * @return The identifier.
+	 */
+	public static String getTranslation (String prefix, String module, String element) {
+		return String.format ("%sbasedefense.%s.%s", (prefix != null ? prefix + "." : ""), module, element);
+	}
+
+	/**
+	 * Builds a translation identifier.
+	 * @param module The module.
+	 * @param element The element.
+	 * @return The identifier.
+	 */
+	public static String getTranslation (String module, String element) {
+		return getTranslation (null, module, element);
+	}
+
+	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLInitializationEvent} event.
 	 *
 	 * @param event The event.
