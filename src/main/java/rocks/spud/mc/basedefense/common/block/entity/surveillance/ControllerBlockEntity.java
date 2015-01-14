@@ -26,11 +26,18 @@ import appeng.tile.inventory.InvOperation;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+import rocks.spud.mc.basedefense.common.registration.annotation.BlockEntityDefinition;
 
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
+@BlockEntityDefinition (ControllerBlockEntity.IDENTIFIER)
 public class ControllerBlockEntity extends AENetworkPowerTile {
+
+	/**
+	 * Defines the BE identifier.
+	 */
+	public static final String IDENTIFIER = "surveillance_controller";
 
 	/**
 	 * Stores the internal stub inventory.
