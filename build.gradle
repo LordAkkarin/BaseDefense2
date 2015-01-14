@@ -52,6 +52,8 @@ version = "2.0-SNAPSHOT"
 group= "rocks.spud.mc"  // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "basedefense"
 
+if (System.getenv ()['bamboo.buildNumber']) version += '-' + System.getenv ()['bamboo.buildNumber'];
+
 minecraft {
 	version = "${config.version.minecraft}-${config.version.forge}"
 	runDir = "run"
