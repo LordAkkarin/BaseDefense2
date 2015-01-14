@@ -55,7 +55,7 @@ public class ControllerBlockRenderer implements ISimpleBlockRenderingHandler {
 				renderer.renderStandardBlock (block, x, y, z);
 				break;
 			case 2:
-				renderer.setOverrideBlockTexture (controllerBlock.getTextureActive ());
+				renderer.setOverrideBlockTexture (controllerBlock.getTextureConflict ());
 				renderer.renderStandardBlock (block, x, y, z);
 				break;
 		}
