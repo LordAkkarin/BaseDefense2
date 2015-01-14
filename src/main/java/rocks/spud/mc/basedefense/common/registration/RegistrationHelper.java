@@ -278,6 +278,7 @@ public class RegistrationHelper {
 	 */
 	public void registerBlockRenderer (@NonNull Collection<Class<? extends ISimpleBlockRenderingHandler>> rendererTypes) {
 		for (Class<? extends ISimpleBlockRenderingHandler> rendererType : rendererTypes) this.registerBlockRenderer (rendererType);
+		getLogger ().info ("Registered %s block renderers.", rendererTypes.size ());
 	}
 
 	/**
