@@ -17,8 +17,8 @@
 package rocks.spud.mc.basedefense.api.surveillance.network.event.controller;
 
 import lombok.Getter;
+import rocks.spud.mc.basedefense.api.surveillance.network.cache.SecurityControllerState;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
-import rocks.spud.mc.basedefense.common.network.cache.SecurityControllerState;
 
 /**
  * Occurs when the controller state changes.

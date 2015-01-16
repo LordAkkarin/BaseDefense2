@@ -17,7 +17,6 @@
 package rocks.spud.mc.basedefense.api.surveillance.network.cache;
 
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
-import rocks.spud.mc.basedefense.common.network.cache.SecurityControllerState;
 
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}

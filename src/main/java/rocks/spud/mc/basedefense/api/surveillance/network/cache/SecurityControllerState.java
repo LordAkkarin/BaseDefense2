@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rocks.spud.mc.basedefense.common.network.cache;
+package rocks.spud.mc.basedefense.api.surveillance.network.cache;
 
 /**
  * Provides a list of possible controller states.
