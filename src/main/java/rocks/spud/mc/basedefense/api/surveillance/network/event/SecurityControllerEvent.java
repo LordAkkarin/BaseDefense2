@@ -17,7 +17,7 @@
 package rocks.spud.mc.basedefense.api.surveillance.network.event;
 
 import lombok.Getter;
-import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISurveillanceNetworkController;
+import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
 
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
@@ -28,13 +28,13 @@ public abstract class SecurityControllerEvent extends SecurityNetworkEvent {
 	 * Stores the controller that issued the event.
 	 */
 	@Getter
-	private final ISurveillanceNetworkController controller;
+	private final ISecurityNetworkController controller;
 
 	/**
 	 * Constructs a new SecurityControllerEvent.
 	 * @param controller The controller.
 	 */
-	public SecurityControllerEvent (ISurveillanceNetworkController controller) {
+	public SecurityControllerEvent (ISecurityNetworkController controller) {
 		super ();
 
 		this.controller = controller;

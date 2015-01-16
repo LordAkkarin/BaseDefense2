@@ -20,4 +20,4 @@ package rocks.spud.mc.basedefense.api.surveillance.network.entity;
  * Defines required methods for surveillance network detectors.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public interface ISurveillanceNetworkDetector { }
+public interface ISecurityNetworkDetector { }

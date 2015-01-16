@@ -16,7 +16,7 @@
 
 package rocks.spud.mc.basedefense.api.surveillance.network.cache;
 
-import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISurveillanceNetworkController;
+import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
 import rocks.spud.mc.basedefense.common.network.cache.SecurityControllerState;
 
 /**
@@ -28,7 +28,7 @@ public interface ISecurityGridCache {
 	 * Returns the currently active controller (or null if the state is invalid).
 	 * @return The controller.
 	 */
-	public ISurveillanceNetworkController getController ();
+	public ISecurityNetworkController getController ();
 
 	/**
 	 * Returns the current controller state within the network.
