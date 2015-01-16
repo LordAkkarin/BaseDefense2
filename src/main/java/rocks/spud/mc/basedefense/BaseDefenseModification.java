@@ -34,6 +34,12 @@ import rocks.spud.mc.basedefense.common.CommonModificationProxy;
 public class BaseDefenseModification {
 
 	/**
+	 * Defines the api version.
+	 * @todo Change to correct API revision.
+	 */
+	public static final String API_VERSION = "1.0.0-SNAPSHOT";
+
+	/**
 	 * Defines the modification identifier.
 	 */
 	public static final String IDENTIFIER = "basedefense2";
@@ -147,6 +153,7 @@ public class BaseDefenseModification {
 		this.getLogger ().info ("Pre Initialization");
 		long startTime = System.currentTimeMillis ();
 
+		getLogger ().info (String.format ("Pre-Initializing BaseDefense %s running API version %s.", VERSION, API_VERSION));
 		this.getProxy ().preInitialize (event);
 
 		this.getLogger ().info ("Pre Initialization End (" + (System.currentTimeMillis () - startTime) + "ms elapsed)");
