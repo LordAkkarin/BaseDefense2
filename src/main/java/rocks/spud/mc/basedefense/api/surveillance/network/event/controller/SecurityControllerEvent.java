@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package rocks.spud.mc.basedefense.api.surveillance.network.event;
+package rocks.spud.mc.basedefense.api.surveillance.network.event.controller;
 
 import lombok.Getter;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
+import rocks.spud.mc.basedefense.api.surveillance.network.event.SecurityNetworkEvent;
 
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
