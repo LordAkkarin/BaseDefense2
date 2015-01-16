@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package rocks.spud.mc.basedefense.common.network.entity;
+package rocks.spud.mc.basedefense.api.surveillance.network.entity;
 
 /**
- * Defines required methods for network triggers.
+ * Defines methods for surveillance network dispensers.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public interface ISurveillanceNetworkTrigger { }
+public interface ISurveillanceNetworkDispenser { }
