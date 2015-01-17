@@ -391,8 +391,9 @@ public class RegistrationHelper {
 		long startTime = System.currentTimeMillis ();
 
 		this.registerBlock (this.getAnnotatedTypes (BlockDefinition.class, Block.class));
-		this.registerBlockEntity (this.getAnnotatedTypes (BlockEntityDefinition.class, TileEntity.class));
 		this.registerItem (this.getAnnotatedTypes (ItemDefinition.class, Item.class));
+		this.registerBlockEntity (this.getAnnotatedTypes (BlockEntityDefinition.class, TileEntity.class));
+		this.registerGridCache (this.getAnnotatedTypes (GridCacheDefinition.class, IGridCache.class));
 
 		getLogger ().info ("Finished scanning in %sms", (System.currentTimeMillis () - startTime));
 	}
