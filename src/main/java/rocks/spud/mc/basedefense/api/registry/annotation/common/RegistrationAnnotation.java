@@ -16,12 +16,15 @@
 
 package rocks.spud.mc.basedefense.api.registry.annotation.common;
 
+import rocks.spud.mc.basedefense.api.registry.IRegistryScanner;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Provides an annotation for automating registry scanners.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -29,8 +32,14 @@ import java.lang.annotation.Target;
 public @interface RegistrationAnnotation {
 
 	/**
+	 * Defines the scanner associated with the annotation.
+	 * @return The scanner type.
+	 */
+	public Class<? extends IRegistryScanner> value ();
+
+	/**
 	 * Defines a type restriction for a registration annotation.
 	 * @return The restriction.
 	 */
-	public Class<?> value ();
+	public Class<?> type () default Object.class;
 }
