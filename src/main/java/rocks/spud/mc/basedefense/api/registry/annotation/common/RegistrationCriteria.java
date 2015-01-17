@@ -18,10 +18,17 @@ package rocks.spud.mc.basedefense.api.registry.annotation.common;
 
 import rocks.spud.mc.basedefense.api.registry.IRegistrationCriteria;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * Provides an annotation for adding criteria chains to automatically registered components.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
+@Retention (RetentionPolicy.RUNTIME)
+@Target (ElementType.TYPE)
 public @interface RegistrationCriteria {
 
 	/**
