@@ -68,6 +68,7 @@ public class SecurityGridCache implements ISecurityGridCache {
 	 * Re-Calculates the network state.
 	 */
 	protected void calculate () {
+		this.calculationPending = false;
 		SecurityControllerState controllerState = this.controllerState;
 
 		if (this.getControllerSet ().size () == 0)
