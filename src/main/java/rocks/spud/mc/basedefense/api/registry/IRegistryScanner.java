@@ -19,6 +19,7 @@ package rocks.spud.mc.basedefense.api.registry;
 import cpw.mods.fml.relauncher.Side;
 
 /**
+ * Provides a base definition for registry scanners.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public interface IRegistryScanner {
