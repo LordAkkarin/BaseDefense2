@@ -16,12 +16,13 @@
 
 package rocks.spud.mc.basedefense.api.surveillance.network.cache;
 
+import appeng.api.networking.IGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
 
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public interface ISecurityGridCache {
+public interface ISecurityGridCache extends IGridCache {
 
 	/**
 	 * Returns the currently active controller (or null if the state is invalid).
