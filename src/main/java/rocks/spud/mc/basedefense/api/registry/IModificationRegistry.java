@@ -24,6 +24,13 @@ import java.lang.annotation.Annotation;
 public interface IModificationRegistry {
 
 	/**
+	 * Checks whether a specific criteria is met.
+	 * @param criteriaType The criteria type.
+	 * @return True if the criteria is met.
+	 */
+	public boolean checkCriteria (Class<? extends IRegistrationCriteria> criteriaType);
+
+	/**
 	 * Returns the identifier assigned to a renderer.
 	 * @return The renderer type.
 	 */
