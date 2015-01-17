@@ -19,20 +19,29 @@ package rocks.spud.mc.basedefense.common.block.entity.surveillance;
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.PowerMultiplier;
 import appeng.api.networking.GridFlags;
+import appeng.api.networking.events.MENetworkControllerChange;
+import appeng.api.networking.events.MENetworkEventSubscribe;
+import appeng.api.networking.events.MENetworkPowerStatusChange;
+import appeng.api.networking.pathing.ControllerState;
 import appeng.api.util.AECableType;
+import appeng.me.GridAccessException;
 import appeng.tile.grid.AENetworkPowerTile;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.tile.inventory.InvOperation;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+import rocks.spud.mc.basedefense.BaseDefenseModification;
+import rocks.spud.mc.basedefense.api.surveillance.network.cache.ISecurityGridCache;
+import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
+import rocks.spud.mc.basedefense.common.network.cache.SecurityGridCache;
 import rocks.spud.mc.basedefense.common.registration.annotation.BlockEntityDefinition;
 
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityDefinition (ControllerBlockEntity.IDENTIFIER)
-public class ControllerBlockEntity extends AENetworkPowerTile {
+public class ControllerBlockEntity extends AENetworkPowerTile implements ISecurityNetworkController {
 
 	/**
 	 * Defines the BE identifier.
@@ -89,5 +98,64 @@ public class ControllerBlockEntity extends AENetworkPowerTile {
 	@Override
 	public int[] getAccessibleSlotsBySide (ForgeDirection forgeDirection) {
 		return SIDES;
+	}
+
+	/**
+	 * Updates the block metadata.
+	 */
+	public void updateMetadata () {
+		int meta = 0;
+
+		try {
+			SecurityGridCache cache = this.getProxy ().getGrid ().getCache (ISecurityGridCache.class);
+
+			switch (cache.getControllerState ()) {
+				case OFFLINE:
+					meta = 0;
+					break;
+				case ONLINE:
+					meta = 1;
+					break;
+				case CONFLICT:
+					meta = 2;
+					break;
+			}
+
+			if (!this.getProxy ().isPowered () || this.getProxy ().getPath ().getControllerState () != ControllerState.CONTROLLER_ONLINE)
+				meta = 0;
+		} catch (GridAccessException ex) {
+			BaseDefenseModification.getInstance ().getLogger ().warn ("Could not access grid from block entity %s.", this.getLocation ().toString ());
+			meta = 2;
+		}
+
+		this.getWorld ().setBlockMetadataWithNotify (this.getMachineX (), this.getMachineY (), this.getMachineZ (), meta, 2);
+	}
+
+	/**
+	 * Handles controller updates.
+	 * @param event The event.
+	 */
+	@MENetworkEventSubscribe
+	public void onControllerChange (MENetworkControllerChange event) {
+		this.updateMetadata ();
+	}
+
+	/**
+	 * Handles power status updates.
+	 * @param event The event.
+	 */
+	@MENetworkEventSubscribe
+	public void onPowerStatusChange (MENetworkPowerStatusChange event) {
+		this.updateMetadata ();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onReady () {
+		super.onReady ();
+
+		this.updateMetadata ();
 	}
 }
