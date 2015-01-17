@@ -18,11 +18,13 @@ package rocks.spud.mc.basedefense.api.registry;
 
 import cpw.mods.fml.relauncher.Side;
 
+import java.lang.annotation.Annotation;
+
 /**
  * Provides a base definition for registry scanners.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public interface IRegistryScanner {
+public interface IRegistryScanner<T extends Annotation> {
 
 	/**
 	 * Returns the scanner side.
@@ -32,8 +34,9 @@ public interface IRegistryScanner {
 
 	/**
 	 * Scans a type.
+	 * @param annotation The annotation.
 	 * @param type The type.
 	 * @return An to add to the cache (or null if no caching is applied).
 	 */
-	public Object scanType (Class<?> type);
+	public Object scanType (T annotation, Class<?> type);
 }
