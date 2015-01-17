@@ -14,30 +14,28 @@
  * limitations under the License.
  */
 
-package rocks.spud.mc.basedefense.common.registration;
+package rocks.spud.mc.basedefense.api.registry.criteria;
 
 import cpw.mods.fml.common.Loader;
 import net.minecraftforge.common.config.Configuration;
+import rocks.spud.mc.basedefense.api.registry.IRegistrationCriteria;
 
 /**
- * Provides default criteria to pass to the {@link rocks.spud.mc.basedefense.common.registration.annotation.Criteria} annotation.
+ * Provides a criteria implementation for the AE2 integration.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public enum StandardCriteria implements ICriteria {
-	// Configuration
-	MODULE_SURVEILLANCE {
-		@Override
-		public boolean isMet (Configuration configuration) {
-			if (!configuration.getBoolean ("surveillance", "feature", true, "Enables surveillance features")) return false;
-			return INTEGRATION_AE2.isMet (configuration);
-		}
-	},
+public class AppliedEnergisticsIntegrationCriteria implements IRegistrationCriteria {
 
-	// Integrations
-	INTEGRATION_AE2 {
-		@Override
-		public boolean isMet (Configuration configuration) {
-			return Loader.isModLoaded ("appliedenergistics2");
-		}
+	/**
+	 * Defines the modification identifier of AE.
+	 */
+	public static final String AE_MODIFICATION_IDENTIFIER = "appliedenergistics2";
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isMet (Configuration configuration) {
+		return (configuration.getBoolean ("appliedenergistics", "integration", true, "Enables the applied energistics configuration (required by some modules)") && Loader.isModLoaded (AE_MODIFICATION_IDENTIFIER));
 	}
 }
