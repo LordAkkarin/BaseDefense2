@@ -19,6 +19,7 @@ package rocks.spud.mc.basedefense.common.registration;
 import appeng.api.AEApi;
 import appeng.api.networking.IGridCache;
 import com.google.common.base.Preconditions;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,6 +28,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import org.apache.logging.log4j.LogManager;
@@ -275,6 +277,33 @@ public class RegistrationHelper {
 	}
 
 	/**
+	 * Registers a set of block entity renderers.
+	 * @param rendererTypes The renderer types.
+	 */
+	public void registerBlockEntityRenderer (@NonNull Collection<Class<? extends TileEntitySpecialRenderer>> rendererTypes) {
+		for (Class<? extends TileEntitySpecialRenderer> rendererType : rendererTypes) this.registerBlockEntityRenderer (rendererType);
+		getLogger ().info ("Registered %s block entity renderers.", rendererTypes.size ());
+	}
+
+	/**
+	 * Registers a block entity renderer.
+	 * @param rendererType The renderer type.
+	 */
+	public void registerBlockEntityRenderer (@NonNull Class<? extends TileEntitySpecialRenderer> rendererType) {
+		this.registerBlockEntityRenderer (this.createInstance (rendererType));
+	}
+
+	/**
+	 * Registers a block entity renderer.
+	 * @param renderer The renderer type.
+	 */
+	public void registerBlockEntityRenderer (@NonNull TileEntitySpecialRenderer renderer) {
+		Class<? extends TileEntitySpecialRenderer> rendererType = renderer.getClass ();
+		Preconditions.checkArgument (rendererType.isAnnotationPresent (BlockEntityRendererDefinition.class));
+		ClientRegistry.bindTileEntitySpecialRenderer (rendererType.getAnnotation (BlockEntityRendererDefinition.class).value (), renderer);
+	}
+
+	/**
 	 * Registers a block renderer.
 	 * @param rendererTypes The renderer set.
 	 */
@@ -379,6 +408,7 @@ public class RegistrationHelper {
 		long startTime = System.currentTimeMillis ();
 
 		this.registerBlockRenderer (this.getAnnotatedTypes (BlockRendererDefinition.class, ISimpleBlockRenderingHandler.class));
+		this.registerBlockEntityRenderer (this.getAnnotatedTypes (BlockEntityRendererDefinition.class, TileEntitySpecialRenderer.class));
 
 		getLogger ().info ("Finished scanning in %sms", (System.currentTimeMillis () - startTime));
 	}
