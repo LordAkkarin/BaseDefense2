@@ -34,9 +34,10 @@ public interface IRegistryScanner<T extends Annotation> {
 
 	/**
 	 * Scans a type.
+	 * @param registry The parent registry.
 	 * @param annotation The annotation.
 	 * @param type The type.
 	 * @return An to add to the cache (or null if no caching is applied).
 	 */
-	public Object scanType (T annotation, Class<?> type);
+	public Object scanType (IModificationRegistry registry, T annotation, Class<?> type);
 }
