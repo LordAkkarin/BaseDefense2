@@ -16,6 +16,8 @@
 
 package rocks.spud.mc.basedefense.api.registry;
 
+import rocks.spud.mc.basedefense.api.error.RegistryInitializationException;
+
 import java.lang.annotation.Annotation;
 
 /**
@@ -35,8 +37,9 @@ public interface IModificationRegistry {
 	 * @param type The type.
 	 * @param <T> The type.
 	 * @return The instance.
+	 * @throws rocks.spud.mc.basedefense.api.error.RegistryInitializationException Thrown when the initialization fails.
 	 */
-	public <T> T constructInstance (Class<T> type);
+	public <T> T constructInstance (Class<T> type) throws RegistryInitializationException;
 
 	/**
 	 * Returns the identifier assigned to a renderer.

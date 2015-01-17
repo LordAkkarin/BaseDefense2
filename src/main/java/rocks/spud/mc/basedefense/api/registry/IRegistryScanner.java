@@ -17,6 +17,7 @@
 package rocks.spud.mc.basedefense.api.registry;
 
 import cpw.mods.fml.relauncher.Side;
+import rocks.spud.mc.basedefense.api.error.RegistryRegistrationException;
 
 import java.lang.annotation.Annotation;
 
@@ -38,6 +39,7 @@ public interface IRegistryScanner<T extends Annotation> {
 	 * @param annotation The annotation.
 	 * @param type The type.
 	 * @return An to add to the cache (or null if no caching is applied).
+	 * @throws rocks.spud.mc.basedefense.api.error.RegistryRegistrationException Thrown when the registration fails.
 	 */
-	public Object scanType (IModificationRegistry registry, T annotation, Class<?> type);
+	public Object scanType (IModificationRegistry registry, T annotation, Class<?> type) throws RegistryRegistrationException;
 }
