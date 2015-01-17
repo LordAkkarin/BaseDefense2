@@ -25,6 +25,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationAnno
 import java.lang.annotation.Annotation;
 
 /**
+ * Provides a scanner for annotation scanners.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class RegistryScannerTypeScanner implements IRegistryScanner<RegistrationAnnotation> {
