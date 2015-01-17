@@ -31,6 +31,14 @@ public interface IModificationRegistry {
 	public boolean checkCriteria (Class<? extends IRegistrationCriteria> criteriaType);
 
 	/**
+	 * Constructs an instance of a specific type.
+	 * @param type The type.
+	 * @param <T> The type.
+	 * @return The instance.
+	 */
+	public <T> T constructInstance (Class<T> type);
+
+	/**
 	 * Returns the identifier assigned to a renderer.
 	 * @return The renderer type.
 	 */
