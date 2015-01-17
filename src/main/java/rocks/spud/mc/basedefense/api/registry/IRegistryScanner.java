@@ -33,6 +33,7 @@ public interface IRegistryScanner {
 	/**
 	 * Scans a type.
 	 * @param type The type.
+	 * @return An to add to the cache (or null if no caching is applied).
 	 */
-	public void scanType (Class<?> type);
+	public Object scanType (Class<?> type);
 }
