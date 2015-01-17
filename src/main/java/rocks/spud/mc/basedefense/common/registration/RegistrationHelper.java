@@ -16,6 +16,8 @@
 
 package rocks.spud.mc.basedefense.common.registration;
 
+import appeng.api.AEApi;
+import appeng.api.networking.IGridCache;
 import com.google.common.base.Preconditions;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -300,6 +302,29 @@ public class RegistrationHelper {
 		int renderID = RenderingRegistry.getNextAvailableRenderId ();
 		RenderingRegistry.registerBlockHandler (renderID, renderer);
 		this.blockRendererMap.put (rendererType, renderID);
+	}
+
+	/**
+	 * Registers a set of grid caches.
+	 * @param gridCacheTypes The grid cache type collection.
+	 */
+	public void registerGridCache (@NonNull Collection<Class<? extends IGridCache>> gridCacheTypes) {
+		for (Class<? extends IGridCache> gridCacheType : gridCacheTypes) this.registerGridCache (gridCacheType);
+		getLogger ().info ("Registered %s grid cache types.", gridCacheTypes.size ());
+	}
+
+	/**
+	 * Registers a grid cache type.
+	 * @param gridCacheType The grid cache type.
+	 */
+	public void registerGridCache (@NonNull Class<? extends IGridCache> gridCacheType) {
+		Preconditions.checkArgument (gridCacheType.isAnnotationPresent (GridCacheDefinition.class));
+		if (!StandardCriteria.INTEGRATION_AE2.isMet (this.getConfiguration ())) {
+			getLogger ().info ("Skipping registration of grid cache %s: Missing AE2 installation", gridCacheType.getCanonicalName ());
+			return;
+		}
+		if (!this.checkCriteria (gridCacheType)) return;
+		AEApi.instance ().registries ().gridCache ().registerGridCache (gridCacheType.getAnnotation (GridCacheDefinition.class).value (), gridCacheType);
 	}
 
 	/**
