@@ -34,6 +34,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.ISecurityGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
+import rocks.spud.mc.basedefense.api.surveillance.network.event.controller.SecurityControllerUpdateEvent;
 import rocks.spud.mc.basedefense.common.network.cache.SecurityGridCache;
 import rocks.spud.mc.basedefense.common.registration.annotation.BlockEntityDefinition;
 
@@ -137,6 +138,15 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISecuri
 	 */
 	@MENetworkEventSubscribe
 	public void onControllerChange (MENetworkControllerChange event) {
+		this.updateMetadata ();
+	}
+
+	/**
+	 * Handles security controller updates.
+	 * @param event The event.
+	 */
+	@MENetworkEventSubscribe
+	public void onControllerChange (SecurityControllerUpdateEvent event) {
 		this.updateMetadata ();
 	}
 
