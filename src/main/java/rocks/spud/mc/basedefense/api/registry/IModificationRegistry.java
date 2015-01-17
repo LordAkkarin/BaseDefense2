@@ -58,9 +58,10 @@ public interface IModificationRegistry {
 	/**
 	 * Registers a scanner.
 	 * @param annotationType The annotation type to scan for.
+	 * @param filter The filter.
 	 * @param scanner The scanner.
 	 */
-	public void registerScanner (Class<? extends Annotation> annotationType, IRegistryScanner scanner);
+	public void registerScanner (Class<? extends Annotation> annotationType, Class<?> filter, IRegistryScanner scanner);
 
 	/**
 	 * Scans a package for classes to register.
