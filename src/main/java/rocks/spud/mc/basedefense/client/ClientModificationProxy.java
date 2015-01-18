@@ -16,21 +16,12 @@
 
 package rocks.spud.mc.basedefense.client;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.relauncher.Side;
 import rocks.spud.mc.basedefense.common.CommonModificationProxy;
 
 /**
+ * Provides a proxy implementation for the client side.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class ClientModificationProxy extends CommonModificationProxy {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize (FMLInitializationEvent event) {
-		super.initialize (event);
-		this.getRegistrationHelper ().scanAnnotations (Side.CLIENT);
-	}
 }

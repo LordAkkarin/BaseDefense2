@@ -19,15 +19,15 @@ package rocks.spud.mc.basedefense.common;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.relauncher.Side;
 import lombok.AccessLevel;
 import lombok.Getter;
 import net.minecraftforge.common.config.Configuration;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
-import rocks.spud.mc.basedefense.common.registration.RegistrationHelper;
-import rocks.spud.mc.basedefense.common.registration.StandardCriteria;
+import rocks.spud.mc.basedefense.api.registry.IModificationRegistry;
+import rocks.spud.mc.basedefense.common.registry.ModificationRegistry;
 
 /**
+ * Provides a common (server side) proxy.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class CommonModificationProxy {
@@ -39,10 +39,10 @@ public class CommonModificationProxy {
 	private Configuration configuration;
 
 	/**
-	 * Provides an instance of RegistrationHelper.
+	 * Stores the modification registry.
 	 */
 	@Getter
-	private RegistrationHelper registrationHelper;
+	private IModificationRegistry registry;
 
 	/**
 	 * Handles the {@link cpw.mods.fml.common.event.FMLInitializationEvent} event.
@@ -50,7 +50,7 @@ public class CommonModificationProxy {
 	 * @param event The event.
 	 */
 	public void initialize (FMLInitializationEvent event) {
-		this.getRegistrationHelper ().scanAnnotations (Side.SERVER);
+		this.getRegistry ().scanPackage ("rocks.spud.mc.basedefense");
 	}
 
 	/**
@@ -73,15 +73,6 @@ public class CommonModificationProxy {
 		this.configuration = new Configuration (event.getSuggestedConfigurationFile ());
 		this.configuration.load ();
 
-		event.getModLog ().info ("Checking standard modification criteria:");
-		for (StandardCriteria criteria : StandardCriteria.values ()) {
-			event.getModLog ().info (String.format ("\tCriteria %s was %smet.", criteria.toString (), (criteria.isMet (this.getConfiguration ()) ? "" : "not ")));
-		}
-
-		event.getModLog ().info ("Updating configuration ...");
-		this.configuration.save ();
-		event.getModLog ().info ("Modification configuration was written back to disk.");
-
-		this.registrationHelper = new RegistrationHelper (this.getConfiguration ());
+		this.registry = new ModificationRegistry (this.getConfiguration ());
 	}
 }
