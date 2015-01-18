@@ -18,7 +18,7 @@ package rocks.spud.mc.basedefense.api.registry.annotation.client;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationAnnotation;
-import rocks.spud.mc.basedefense.api.registry.scanner.common.BlockEntityTypeRegistryScanner;
+import rocks.spud.mc.basedefense.api.registry.scanner.client.BlockRendererRegistryScanner;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -31,5 +31,5 @@ import java.lang.annotation.Target;
  */
 @Retention (RetentionPolicy.RUNTIME)
 @Target (ElementType.TYPE)
-@RegistrationAnnotation (value = BlockEntityTypeRegistryScanner.class, type = ISimpleBlockRenderingHandler.class)
+@RegistrationAnnotation (value = BlockRendererRegistryScanner.class, type = ISimpleBlockRenderingHandler.class)
 public @interface BlockRendererType { }

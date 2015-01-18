@@ -18,7 +18,7 @@ package rocks.spud.mc.basedefense.api.registry.annotation.common;
 
 import appeng.api.networking.IGridCache;
 import rocks.spud.mc.basedefense.api.registry.criteria.AppliedEnergisticsIntegrationCriteria;
-import rocks.spud.mc.basedefense.api.registry.scanner.common.BlockTypeRegistryScanner;
+import rocks.spud.mc.basedefense.api.registry.scanner.common.GridCacheRegistryScanner;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
  */
 @Retention (RetentionPolicy.RUNTIME)
 @Target (ElementType.TYPE)
-@RegistrationAnnotation (value = BlockTypeRegistryScanner.class, type = IGridCache.class)
+@RegistrationAnnotation (value = GridCacheRegistryScanner.class, type = IGridCache.class)
 @RegistrationCriteria (AppliedEnergisticsIntegrationCriteria.class)
 public @interface GridCacheType {
 
