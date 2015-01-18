@@ -24,3 +24,8 @@ run/
 *.iml
 *.ipr
 *.iws
+
+# Blender
+#---------
+*.mtl
+*.blend1
