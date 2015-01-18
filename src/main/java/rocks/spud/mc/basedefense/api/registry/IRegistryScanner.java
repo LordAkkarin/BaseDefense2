@@ -19,13 +19,11 @@ package rocks.spud.mc.basedefense.api.registry;
 import cpw.mods.fml.relauncher.Side;
 import rocks.spud.mc.basedefense.api.error.RegistryRegistrationException;
 
-import java.lang.annotation.Annotation;
-
 /**
  * Provides a base definition for registry scanners.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public interface IRegistryScanner<T extends Annotation> {
+public interface IRegistryScanner<T> {
 
 	/**
 	 * Returns the scanner side.
