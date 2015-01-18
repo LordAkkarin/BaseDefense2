@@ -21,13 +21,14 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
+import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockRendererType;
 import rocks.spud.mc.basedefense.common.block.surveillance.ControllerBlock;
-import rocks.spud.mc.basedefense.common.registration.annotation.BlockRendererDefinition;
 
 /**
+ * Provides a renderer for the controller block.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-@BlockRendererDefinition
+@BlockRendererType
 public class ControllerBlockRenderer implements ISimpleBlockRenderingHandler {
 
 	/**
@@ -73,10 +74,10 @@ public class ControllerBlockRenderer implements ISimpleBlockRenderingHandler {
 	}
 
 	/**
-	 * {@inheritDOc}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int getRenderId () {
-		return BaseDefenseModification.getInstance ().getProxy ().getRegistrationHelper ().getBlockRendererID (this.getClass ());
+		return BaseDefenseModification.getInstance ().getProxy ().getRegistry ().getRendererIdentifier (this.getClass ());
 	}
 }

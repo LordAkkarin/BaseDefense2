@@ -32,16 +32,17 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.BlockEntityType;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.ISecurityGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
 import rocks.spud.mc.basedefense.api.surveillance.network.event.controller.SecurityControllerUpdateEvent;
 import rocks.spud.mc.basedefense.common.network.cache.SecurityGridCache;
-import rocks.spud.mc.basedefense.common.registration.annotation.BlockEntityDefinition;
 
 /**
+ * Provides a block entity for the controller block.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-@BlockEntityDefinition (ControllerBlockEntity.IDENTIFIER)
+@BlockEntityType (ControllerBlockEntity.IDENTIFIER)
 public class ControllerBlockEntity extends AENetworkPowerTile implements ISecurityNetworkController {
 
 	/**

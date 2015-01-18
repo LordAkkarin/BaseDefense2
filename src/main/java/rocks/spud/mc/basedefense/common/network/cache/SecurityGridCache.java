@@ -24,20 +24,21 @@ import com.google.common.collect.Iterables;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.GridCacheType;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.ISecurityGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.SecurityControllerState;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
 import rocks.spud.mc.basedefense.api.surveillance.network.event.controller.SecurityControllerUpdateEvent;
-import rocks.spud.mc.basedefense.common.registration.annotation.GridCacheDefinition;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Provides a grid cache for the surveillance network.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @RequiredArgsConstructor
-@GridCacheDefinition (ISecurityGridCache.class)
+@GridCacheType (ISecurityGridCache.class)
 public class SecurityGridCache implements ISecurityGridCache {
 
 	/**

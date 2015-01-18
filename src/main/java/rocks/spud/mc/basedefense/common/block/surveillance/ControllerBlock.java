@@ -26,20 +26,21 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.BlockType;
 import rocks.spud.mc.basedefense.client.renderer.block.surveillance.ControllerBlockRenderer;
 import rocks.spud.mc.basedefense.common.block.entity.surveillance.ControllerBlockEntity;
-import rocks.spud.mc.basedefense.common.registration.annotation.BlockDefinition;
 
 /**
+ * Provides a block that acts as the core of the surveillance network.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-@BlockDefinition (ControllerBlock.NAME)
+@BlockType (ControllerBlock.IDENTIFIER)
 public class ControllerBlock extends Block implements ITileEntityProvider {
 
 	/**
 	 * Defines the block name.
 	 */
-	public static final String NAME = "surveillance_controller";
+	public static final String IDENTIFIER = "surveillance_controller";
 
 	/**
 	 * Stores the normal texture (top and bottom).
@@ -89,7 +90,7 @@ public class ControllerBlock extends Block implements ITileEntityProvider {
 	 */
 	@Override
 	public int getRenderType () {
-		return BaseDefenseModification.getInstance ().getProxy ().getRegistrationHelper ().getBlockRendererID (ControllerBlockRenderer.class);
+		return BaseDefenseModification.getInstance ().getProxy ().getRegistry ().getRendererIdentifier (ControllerBlockRenderer.class);
 	}
 
 	/**
