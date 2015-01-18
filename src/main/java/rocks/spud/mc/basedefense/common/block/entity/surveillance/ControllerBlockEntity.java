@@ -130,7 +130,7 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISecuri
 			meta = 2;
 		}
 
-		this.getWorld ().setBlockMetadataWithNotify (this.getMachineX (), this.getMachineY (), this.getMachineZ (), meta, 2);
+		this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, meta, 2);
 	}
 
 	/**
