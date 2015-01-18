@@ -33,6 +33,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
 import rocks.spud.mc.basedefense.api.registry.annotation.common.BlockEntityType;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCriteria;
+import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.ISecurityGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
 import rocks.spud.mc.basedefense.api.surveillance.network.event.controller.SecurityControllerUpdateEvent;
@@ -43,6 +45,7 @@ import rocks.spud.mc.basedefense.common.network.cache.SecurityGridCache;
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityType (ControllerBlockEntity.IDENTIFIER)
+@RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class ControllerBlockEntity extends AENetworkPowerTile implements ISecurityNetworkController {
 
 	/**

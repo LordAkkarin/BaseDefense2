@@ -25,6 +25,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import rocks.spud.mc.basedefense.api.registry.annotation.common.GridCacheType;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCriteria;
+import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.ISecurityGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.SecurityControllerState;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
@@ -39,6 +41,7 @@ import java.util.Set;
  */
 @RequiredArgsConstructor
 @GridCacheType (ISecurityGridCache.class)
+@RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class SecurityGridCache implements ISecurityGridCache {
 
 	/**

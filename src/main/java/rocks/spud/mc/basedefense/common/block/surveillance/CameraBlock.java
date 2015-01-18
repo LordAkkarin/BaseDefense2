@@ -25,6 +25,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
 import rocks.spud.mc.basedefense.api.registry.annotation.common.BlockType;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCriteria;
+import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEntity;
 
 /**
@@ -32,6 +34,7 @@ import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEnt
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockType (CameraBlock.IDENTIFIER)
+@RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class CameraBlock extends Block implements ITileEntityProvider {
 
 	/**

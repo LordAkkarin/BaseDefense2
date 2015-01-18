@@ -22,6 +22,8 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
 import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockRendererType;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCriteria;
+import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.common.block.surveillance.ControllerBlock;
 
 /**
@@ -29,6 +31,7 @@ import rocks.spud.mc.basedefense.common.block.surveillance.ControllerBlock;
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockRendererType
+@RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class ControllerBlockRenderer implements ISimpleBlockRenderingHandler {
 
 	/**

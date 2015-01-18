@@ -23,6 +23,8 @@ import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockEntityRendererType;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCriteria;
+import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEntity;
 
 /**
@@ -30,6 +32,7 @@ import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEnt
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityRendererType (CameraBlockEntity.class)
+@RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class CameraBlockEntityRenderer extends TileEntitySpecialRenderer {
 
 	/**
