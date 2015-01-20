@@ -28,12 +28,13 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.BlockType;
 import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCriteria;
 import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEntity;
+import rocks.spud.mc.basedefense.common.item.block.surveillance.CameraBlockItem;
 
 /**
  * Provides a detector implementation.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-@BlockType (CameraBlock.IDENTIFIER)
+@BlockType (value = CameraBlock.IDENTIFIER, item = CameraBlockItem.class)
 @RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class CameraBlock extends Block implements ITileEntityProvider {
 
@@ -60,23 +61,20 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 	}
 
 	protected AxisAlignedBB getBoundingBox (World world, int x, int y, int z, int metadata) {
-		int direction = (metadata & 0x3);
+		int direction = (metadata >> 1);
 
 		switch (direction) {
 			case 0:
-				System.out.println ("BOUNDING BOX: 0");
-				break;
-			case 1:
-				System.out.println ("BOUNDING BOX: 1");
-				break;
 			case 2:
-				System.out.println ("BOUNDING BOX: 2");
-				break;
+				return AxisAlignedBB.getBoundingBox ((x + 0.20d), (y + 0.3d), z, (x + 0.80d), (y + 0.85d), (z + 1.0d));
+			case 1:
 			case 3:
 				return AxisAlignedBB.getBoundingBox (x, (y + 0.3d), (z + 0.20d), (x + 1.0d), (y + 0.85d), (z + 0.80d));
+			case 5:
+				return AxisAlignedBB.getBoundingBox ((x + 0.25d), (y + 0.4d), (z + 0.25d), (x + 0.75d), (y + 1.0d), (z + 0.75d));
+			default:
+				return AxisAlignedBB.getBoundingBox ((x + 0.25d), y, (z + 0.25d), (x + 0.75d), (y + 0.6d), (z + 0.75d));
 		}
-
-		return AxisAlignedBB.getBoundingBox (x, (y + 0.3d), z, (x + 1.0d), (y + 0.85d), (z + 1.0d));
 	}
 
 	/**

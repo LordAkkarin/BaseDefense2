@@ -100,6 +100,16 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	}
 
 	/**
+	 * Builds the block metadata based on the block state.
+	 * @param active Indicates whether the camera is active.
+	 * @param rotation Defines the camera orientation (5 = ceiling).
+	 * @return The metadata.
+	 */
+	public static int buildMetadata (boolean active, int rotation) {
+		return ((active ? 0x1 : 0x0) | (rotation << 0x1));
+	}
+
+	/**
 	 * Returns the camera body rotation.
 	 * @param increaseRotation Indicates whether the rotation shall be increased or not.
 	 * @return The rotation.
@@ -145,6 +155,24 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	}
 
 	/**
+	 * Returns the camera orientation.
+	 * @return The orientation.
+	 */
+	public int getRotation () {
+		int metadata = this.worldObj.getBlockMetadata (this.xCoord, this.yCoord, this.zCoord);
+		return (metadata >> 0x1);
+	}
+
+	/**
+	 * Checks whether a camera is active.
+	 * @return True if active.
+	 */
+	public boolean isActive () {
+		int metadata = this.worldObj.getBlockMetadata (this.xCoord, this.yCoord, this.zCoord);
+		return ((metadata & 0x1) == 0x1);
+	}
+
+	/**
 	 * Handles controller updates.
 	 * @param event The event.
 	 */
@@ -185,34 +213,26 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	 * Updates the block metadata.
 	 */
 	public void updateMetadata () {
-		int meta = 0;
+		boolean active = false;
 
 		try {
 			SecurityGridCache cache = this.getProxy ().getGrid ().getCache (ISecurityGridCache.class);
 
 			switch (cache.getControllerState ()) {
 				case OFFLINE:
-					meta = 0;
-					break;
+				case CONFLICT: break;
 				case ONLINE:
-					meta = 1;
-					break;
-				case CONFLICT:
-					meta = 0;
+					active = true;
 					break;
 			}
 
 			if (!this.getProxy ().isPowered () || this.getProxy ().getPath ().getControllerState () != ControllerState.CONTROLLER_ONLINE)
-				meta = 0;
+				active = false;
 		} catch (GridAccessException ex) {
 			BaseDefenseModification.getInstance ().getLogger ().warn ("Could not access grid from block entity %s.", this.getLocation ().toString ());
-			meta = 0;
+			active = false;
 		}
 
-		meta = (meta << 0x2);
-		meta |= (this.blockMetadata & 0x3);
-		System.out.println (Integer.toBinaryString (meta));
-
-		this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, meta, 2);
+		this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, buildMetadata (active, this.getRotation ()), 2);
 	}
 }

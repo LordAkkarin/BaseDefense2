@@ -16,6 +16,7 @@
 
 package rocks.spud.mc.basedefense.client.renderer.block.entity.surveillance;
 
+import lombok.Getter;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -38,13 +39,20 @@ public class CameraBlockEntityRenderer extends TileEntitySpecialRenderer {
 	/**
 	 * Stores the camera model.
 	 */
+	@Getter
 	private static final IModelCustom model;
+
+	/**
+	 * Stores the ceiling camera model.
+	 */
+	private static final IModelCustom ceilingModel;
 
 	/**
 	 * Static Initializer
 	 */
 	static {
 		model = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2:models/surveillance/camera.obj"));
+		ceilingModel = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2:models/surveillance/camera_ceiling.obj"));
 	}
 
 	/**
@@ -59,52 +67,98 @@ public class CameraBlockEntityRenderer extends TileEntitySpecialRenderer {
 			// translate to actual block position within world
 			GL11.glTranslated (p_147500_2_, p_147500_4_, p_147500_6_);
 
-			// apply general rotation
-			GL11.glTranslatef (0.5f, 0.5f, 0.5f);
-			GL11.glRotatef ((90.0f), 0.0f, 1.0f, 0.0f);
-			GL11.glTranslatef (-0.5f, -0.5f, -0.5f);
-
-			// fix model position
-			GL11.glTranslatef (0.5f, 0.5f, 1.0f);
-			GL11.glScalef (.15f, .15f, .15f);
 
 			// prepare animation variables
 			boolean textureState = ((System.currentTimeMillis () % 1000) < 500);
-			boolean active = ((camera.getWorldObj ().getBlockMetadata (camera.xCoord, camera.yCoord, camera.zCoord) & 0x4) == 0x4); // Note: We're not using the BE's cache here as it seems to desync on connect
+			boolean active = camera.isActive ();
+			int rotation = camera.getRotation ();
 
-			// draw base
-			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_mount.png"));
-			model.renderPart ("Mount_Cube04");
+			if (rotation < 5)
+				this.renderWallCamera (camera, p_147500_2_, p_147500_4_, p_147500_6_, p_147500_8_, active, textureState, rotation);
+			else
+				this.renderCeilingCamera (camera, p_147500_2_, p_147500_4_, p_147500_6_, p_147500_8_, active, textureState, rotation);
+		}
+		GL11.glPopMatrix ();
+	}
 
-			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_base.png"));
+	/**
+	 * Renders a ceiling camera.
+	 * @param camera The block entity.
+	 * @param p_147500_2_ The X-Coordinate.
+	 * @param p_147500_4_ The Y-Coordinate.
+	 * @param p_147500_6_ The Z-Coordinate.
+	 * @param p_147500_8_ Some tick nonsense.
+	 * @param active Defines whether the camera will be rendered active or not.
+	 * @param textureState Defines the texture state (e.g. the currently active frame in the active animation).
+	 * @param rotation The rotation metadata (5 = ceiling).
+	 */
+	protected void renderCeilingCamera (CameraBlockEntity camera, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_, boolean active, boolean textureState, int rotation) {
+		GL11.glTranslatef (0.5f, 0.8f, 0.5f);
+		GL11.glScalef (.2f, .2f, .2f);
+
+		// rotate around X axis for standing cameras
+		if (rotation != 5) {
+			GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
+			GL11.glTranslatef (0.0f, 3.0f, 0.0f);
+		}
+
+		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_base.png"));
+		ceilingModel.renderPart ("Base_Cube01");
+
+		if (active) {
+			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_base_active" + (textureState ? "0" : "1") +".png"));
+			ceilingModel.renderPart ("Base_Cube01");
+		}
+
+		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_lens.png"));
+		ceilingModel.renderPart ("Lens_Cube02");
+	}
+
+	/**
+	 * Renders a wall camera.
+	 * {@see rocks.spud.mc.basedefense.client.renderer.block.entity.surveillance.CameraBlockEntityRenderer#renderCeilingCamera (}
+	 */
+	protected void renderWallCamera (CameraBlockEntity camera, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_, boolean active, boolean textureState, int rotation) {
+		// apply general rotation
+		GL11.glTranslatef (0.5f, 0.5f, 0.5f);
+		GL11.glRotatef ((rotation * 90.0f), 0.0f, 1.0f, 0.0f);
+		GL11.glTranslatef (-0.5f, -0.5f, -0.5f);
+
+		// fix model position
+		GL11.glTranslatef (0.5f, 0.5f, 1.0f);
+		GL11.glScalef (.15f, .15f, .15f);
+
+		// draw base
+		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_mount.png"));
+		model.renderPart ("Mount_Cube04");
+
+		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_base.png"));
+		model.renderPart ("Base_Cube01");
+
+		if (active) {
+			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_base_active" + (textureState ? "0" : "1") + ".png"));
 			model.renderPart ("Base_Cube01");
+		}
+
+		// render body & lens
+		GL11.glPushMatrix ();
+		{
+			// animate rotation around pivot
+			GL11.glTranslatef (0.0f, 0.0f, -4.0f);
+			GL11.glRotatef (camera.getBodyRotation (active), 0.0f, -1.0f, 0.0f);
+			GL11.glTranslatef (0.0f, 0.0f, 4.0f);
+
+			// draw Body & Lens
+			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_body.png"));
+			model.renderPart ("Body_Cube02");
 
 			if (active) {
-				this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_base_active" + (textureState ? "0" : "1") + ".png"));
-				model.renderPart ("Base_Cube01");
-			}
-
-			// render body & lens
-			GL11.glPushMatrix ();
-			{
-				// animate rotation around pivot
-				GL11.glTranslatef (0.0f, 0.0f, -4.0f);
-				GL11.glRotatef (camera.getBodyRotation (active), 0.0f, -1.0f, 0.0f);
-				GL11.glTranslatef (0.0f, 0.0f, 4.0f);
-
-				// draw Body & Lens
-				this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_body.png"));
+				this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_body_active" + (textureState ? "0" : "1") + ".png"));
 				model.renderPart ("Body_Cube02");
-
-				if (active) {
-					this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_body_active" + (textureState ? "0" : "1") + ".png"));
-					model.renderPart ("Body_Cube02");
-				}
-
-				this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_lens.png"));
-				model.renderPart ("Lens_Cube03");
 			}
-			GL11.glPopMatrix ();
+
+			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_lens.png"));
+			model.renderPart ("Lens_Cube03");
 		}
 		GL11.glPopMatrix ();
 	}
