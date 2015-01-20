@@ -19,6 +19,7 @@ package rocks.spud.mc.basedefense.api.registry.scanner.common;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import rocks.spud.mc.basedefense.api.error.RegistryRegistrationException;
 import rocks.spud.mc.basedefense.api.registry.IModificationRegistry;
 import rocks.spud.mc.basedefense.api.registry.IRegistryScanner;
@@ -46,7 +47,10 @@ public class BlockTypeRegistryScanner implements IRegistryScanner<BlockType> {
 		Class<? extends Block> blockType = type.asSubclass (Block.class);
 		Block block = registry.constructInstance (blockType);
 
-		GameRegistry.registerBlock (block, annotation.value ());
+		if (ItemBlock.class.equals (annotation.item ()))
+			GameRegistry.registerBlock (block, annotation.value ());
+		else
+			GameRegistry.registerBlock (block, annotation.item (), annotation.value ());
 
 		return block;
 	}

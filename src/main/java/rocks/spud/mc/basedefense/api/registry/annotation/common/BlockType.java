@@ -17,6 +17,7 @@
 package rocks.spud.mc.basedefense.api.registry.annotation.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import rocks.spud.mc.basedefense.api.registry.scanner.common.BlockTypeRegistryScanner;
 
 import java.lang.annotation.ElementType;
@@ -38,4 +39,10 @@ public @interface BlockType {
 	 * @return The identifier.
 	 */
 	public String value ();
+
+	/**
+	 * Defines the item type.
+	 * @return The item type.
+	 */
+	public Class<? extends ItemBlock> item () default ItemBlock.class;
 }
