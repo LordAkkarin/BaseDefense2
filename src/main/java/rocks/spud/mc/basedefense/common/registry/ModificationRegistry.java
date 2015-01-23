@@ -222,7 +222,10 @@ public class ModificationRegistry implements IModificationRegistry {
 
 			// execute scanner
 			try {
-				if (scanner.getSide () == Side.SERVER || FMLCommonHandler.instance ().getEffectiveSide () == Side.CLIENT) scanner.scanType (this, type.getAnnotation (annotationType), type);
+				if (scanner.getSide () == Side.SERVER || FMLCommonHandler.instance ().getEffectiveSide () == Side.CLIENT) {
+					Object object = scanner.scanType (this, type.getAnnotation (annotationType), type);
+					if (object != null) this.objectCache.put (type, object);
+				}
 				getLogger ().info ("Registered type %s via annotation %s (scanner: %s).", type.getCanonicalName (), annotationType.getCanonicalName (), scanner.getClass ().getCanonicalName ());
 			} catch (RegistryRegistrationException ex) {
 				getLogger ().warn (String.format ("Could not register type %s: %s", type.getCanonicalName (), ex.getMessage ()), ex);
