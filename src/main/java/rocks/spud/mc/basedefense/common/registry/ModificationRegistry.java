@@ -119,6 +119,7 @@ public class ModificationRegistry implements IModificationRegistry {
 	public <T> T constructInstance (@NonNull Class<T> type) throws RegistryInitializationException {
 		try {
 			Constructor<T> constructor = type.getDeclaredConstructor ();
+			constructor.setAccessible (true);
 			return constructor.newInstance ();
 		} catch (Exception ex) {
 			throw new RegistryInitializationException (String.format ("Could not initialize type %s: %s", type.getCanonicalName (), ex.getMessage ()), ex);
