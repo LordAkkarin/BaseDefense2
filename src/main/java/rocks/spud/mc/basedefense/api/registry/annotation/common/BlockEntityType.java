@@ -17,6 +17,7 @@
 package rocks.spud.mc.basedefense.api.registry.annotation.common;
 
 import net.minecraft.tileentity.TileEntity;
+import rocks.spud.mc.basedefense.api.registry.ScannerPriorityType;
 import rocks.spud.mc.basedefense.api.registry.scanner.common.BlockEntityTypeRegistryScanner;
 
 import java.lang.annotation.ElementType;
@@ -31,6 +32,7 @@ import java.lang.annotation.Target;
 @Retention (RetentionPolicy.RUNTIME)
 @Target (ElementType.TYPE)
 @RegistrationAnnotation (value = BlockEntityTypeRegistryScanner.class, type = TileEntity.class)
+@ScannerPriority (ScannerPriorityType.HIGH)
 public @interface BlockEntityType {
 
 	/**

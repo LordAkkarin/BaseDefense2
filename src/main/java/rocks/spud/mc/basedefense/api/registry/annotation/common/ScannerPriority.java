@@ -16,10 +16,7 @@
 
 package rocks.spud.mc.basedefense.api.registry.annotation.common;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import rocks.spud.mc.basedefense.api.registry.ScannerPriorityType;
-import rocks.spud.mc.basedefense.api.registry.scanner.common.BlockTypeRegistryScanner;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -27,24 +24,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Provides an annotation for automating block registrations.
+ * Provides an annotation for defining scanner priorities.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
-@Target (ElementType.TYPE)
-@RegistrationAnnotation (value = BlockTypeRegistryScanner.class, type = Block.class)
-@ScannerPriority (ScannerPriorityType.HIGH)
-public @interface BlockType {
+@Target (ElementType.ANNOTATION_TYPE)
+public @interface ScannerPriority {
 
 	/**
-	 * Defines the block identifier.
-	 * @return The identifier.
+	 * Defines the scanner priority.
+	 * @return The priority.
 	 */
-	public String value ();
-
-	/**
-	 * Defines the item type.
-	 * @return The item type.
-	 */
-	public Class<? extends ItemBlock> item () default ItemBlock.class;
+	public ScannerPriorityType value ();
 }

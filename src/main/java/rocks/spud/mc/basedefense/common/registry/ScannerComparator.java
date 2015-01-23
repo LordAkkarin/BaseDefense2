@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-package rocks.spud.mc.basedefense.api.registry.annotation.client;
+package rocks.spud.mc.basedefense.common.registry;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import rocks.spud.mc.basedefense.api.registry.ScannerPriorityType;
-import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationAnnotation;
 import rocks.spud.mc.basedefense.api.registry.annotation.common.ScannerPriority;
-import rocks.spud.mc.basedefense.api.registry.scanner.client.BlockRendererRegistryScanner;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.Annotation;
+import java.util.Comparator;
 
 /**
- * Provides an annotation for automating block renderer registrations.
+ * Provides a comparator for scanners.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-@Retention (RetentionPolicy.RUNTIME)
-@Target (ElementType.TYPE)
-@RegistrationAnnotation (value = BlockRendererRegistryScanner.class, type = ISimpleBlockRenderingHandler.class)
-@ScannerPriority (ScannerPriorityType.LOW)
-public @interface BlockRendererType { }
+public class ScannerComparator implements Comparator<Class<? extends Annotation>> {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int compare (Class<? extends Annotation> s1, Class<? extends Annotation> s2) {
+		ScannerPriorityType p1 = (s1.isAnnotationPresent (ScannerPriority.class) ? s1.getAnnotation (ScannerPriority.class).value () : ScannerPriorityType.NORMAL);
+		ScannerPriorityType p2 = (s2.isAnnotationPresent (ScannerPriority.class) ? s2.getAnnotation (ScannerPriority.class).value () : ScannerPriorityType.NORMAL);
+
+		return (Math.max (-1, Math.min (1, (p2.numeric - p1.numeric))));
+	}
+}

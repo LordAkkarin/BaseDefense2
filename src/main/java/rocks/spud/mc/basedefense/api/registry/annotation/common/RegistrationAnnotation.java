@@ -17,6 +17,7 @@
 package rocks.spud.mc.basedefense.api.registry.annotation.common;
 
 import rocks.spud.mc.basedefense.api.registry.IRegistryScanner;
+import rocks.spud.mc.basedefense.api.registry.ScannerPriorityType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -29,6 +30,7 @@ import java.lang.annotation.Target;
  */
 @Retention (RetentionPolicy.RUNTIME)
 @Target (ElementType.ANNOTATION_TYPE)
+@ScannerPriority (ScannerPriorityType.HIGHEST)
 public @interface RegistrationAnnotation {
 
 	/**

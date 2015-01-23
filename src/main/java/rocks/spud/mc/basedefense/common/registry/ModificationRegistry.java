@@ -41,8 +41,8 @@ import rocks.spud.mc.basedefense.api.registry.scanner.common.RegistryScannerType
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 /**
@@ -81,7 +81,7 @@ public class ModificationRegistry implements IModificationRegistry {
 	/**
 	 * Stores the registry scanner map.
 	 */
-	private Map<Class<? extends Annotation>, IRegistryScanner> scannerRegistry = new LinkedHashMap<Class<? extends Annotation>, IRegistryScanner> ();
+	private Map<Class<? extends Annotation>, IRegistryScanner> scannerRegistry = new HashMap<Class<? extends Annotation>, IRegistryScanner> ();
 
 	/**
 	 * Stores the filter map.
@@ -148,7 +148,6 @@ public class ModificationRegistry implements IModificationRegistry {
 	 */
 	protected void registerDefaultScanners () {
 		this.registerScanner (RegistrationAnnotation.class, Annotation.class, new RegistryScannerTypeScanner ());
-		this.scanPackage ("rocks.spud.mc.basedefense.api.registry.annotation", RegistrationAnnotation.class);
 	}
 
 	/**
@@ -166,7 +165,19 @@ public class ModificationRegistry implements IModificationRegistry {
 	 */
 	@Override
 	public void scanPackage (String packageName) {
-		for (Map.Entry<Class<? extends Annotation>, IRegistryScanner> scannerEntry : this.scannerRegistry.entrySet ()) this.scanPackage (packageName, scannerEntry.getKey ());
+		this.scanPackage (packageName, RegistrationAnnotation.class);
+
+		// scan using custom scanners
+		PriorityQueue<Class<? extends Annotation>> annotationQueue = new PriorityQueue<Class<? extends Annotation>> (new ScannerComparator ());
+		annotationQueue.addAll (this.scannerRegistry.keySet ());
+
+		while (!annotationQueue.isEmpty ()) {
+			Class<? extends Annotation> annotationType = annotationQueue.poll ();
+			if (RegistrationAnnotation.class.equals (annotationType)) continue;
+
+			getLogger ().info ("Scanning for annotation type %s.", annotationType.getCanonicalName ());
+			this.scanPackage (packageName, annotationType);
+		}
 	}
 
 	/**
@@ -180,9 +191,11 @@ public class ModificationRegistry implements IModificationRegistry {
 		);
 
 		// cache parameters
-		Set<Class<?>> typeSet = reflections.getTypesAnnotatedWith (annotationType);
+		Set<Class<?>> typeSet = reflections.getTypesAnnotatedWith (annotationType, true);
 		IRegistryScanner scanner = this.scannerRegistry.get (annotationType);
 		Class<?> typeFilter = this.filterRegistry.get (annotationType);
+
+		getLogger ().info ("Scanning using scanner type %s.", scanner.getClass ().getCanonicalName ());
 
 		// apply scanner
 		for (Class<?> type : typeSet) {
@@ -199,6 +212,7 @@ public class ModificationRegistry implements IModificationRegistry {
 				for (Class<? extends IRegistrationCriteria> criteriaType : type.getAnnotation (RegistrationCriteria.class).value ()) {
 					if (!this.checkCriteria (criteriaType)) {
 						result = false;
+						getLogger ().info ("Type %s did not match criteria %s. Skipping registration.", type.getCanonicalName (), criteriaType.getCanonicalName ());
 						break;
 					}
 				}
@@ -212,6 +226,11 @@ public class ModificationRegistry implements IModificationRegistry {
 				getLogger ().info ("Registered type %s via annotation %s (scanner: %s).", type.getCanonicalName (), annotationType.getCanonicalName (), scanner.getClass ().getCanonicalName ());
 			} catch (RegistryRegistrationException ex) {
 				getLogger ().warn (String.format ("Could not register type %s: %s", type.getCanonicalName (), ex.getMessage ()), ex);
+			} catch (ClassCastException ex) {
+				getLogger ().fatal ("Could not cast one or more types: %s", ex.getMessage ());
+				getLogger ().fatal ("This was most likely caused by a broken annotation configuration!");
+				getLogger ().fatal ("Annotation of type %s was supplied to scanner of type %s.", annotationType.getCanonicalName (), scanner.getClass ().getCanonicalName ());
+				throw ex;
 			}
 		}
 	}
