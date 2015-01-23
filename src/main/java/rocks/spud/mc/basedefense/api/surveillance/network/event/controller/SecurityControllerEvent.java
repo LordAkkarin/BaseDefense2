@@ -21,6 +21,7 @@ import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetwor
 import rocks.spud.mc.basedefense.api.surveillance.network.event.SecurityNetworkEvent;
 
 /**
+ * Provides a base event for security controllers.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public abstract class SecurityControllerEvent extends SecurityNetworkEvent {

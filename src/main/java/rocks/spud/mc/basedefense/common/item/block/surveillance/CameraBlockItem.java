@@ -25,6 +25,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEntity;
 
 /**
+ * Provides an ItemBlock implementation that covers the specific placement mechanics of cameras.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class CameraBlockItem extends ItemBlock {

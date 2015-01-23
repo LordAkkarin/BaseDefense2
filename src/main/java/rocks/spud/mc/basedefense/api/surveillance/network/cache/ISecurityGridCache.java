@@ -20,6 +20,7 @@ import appeng.api.networking.IGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkController;
 
 /**
+ * Provides a base definition for the security grid cache.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public interface ISecurityGridCache extends IGridCache {

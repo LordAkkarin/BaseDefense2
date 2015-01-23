@@ -22,6 +22,4 @@ import rocks.spud.mc.basedefense.common.CommonModificationProxy;
  * Provides a proxy implementation for the client side.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public class ClientModificationProxy extends CommonModificationProxy {
-
-}
+public class ClientModificationProxy extends CommonModificationProxy { }

@@ -21,6 +21,7 @@ import rocks.spud.mc.basedefense.api.error.RegistryInitializationException;
 import java.lang.annotation.Annotation;
 
 /**
+ * Provides a definition for modification registries.
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public interface IModificationRegistry {
