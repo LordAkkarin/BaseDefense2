@@ -50,6 +50,7 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 		super (Material.iron);
 
 		this.setBlockName (BaseDefenseModification.getTranslation ("surveillance", "camera"));
+		this.setBlockTextureName ("basedefense2:surveillance/camera");
 	}
 
 	/**
