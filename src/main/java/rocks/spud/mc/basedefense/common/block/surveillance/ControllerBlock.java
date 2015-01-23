@@ -66,7 +66,7 @@ public class ControllerBlock extends Block implements ITileEntityProvider {
 	/**
 	 * Constructs a new ControllerBlock.
 	 */
-	public ControllerBlock () {
+	protected ControllerBlock () {
 		super (Material.iron);
 
 		this.setBlockName (BaseDefenseModification.getTranslation ("surveillance", "controller"));

@@ -46,7 +46,7 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 	/**
 	 * Constructs a new CameraBlock.
 	 */
-	public CameraBlock () {
+	protected CameraBlock () {
 		super (Material.iron);
 
 		this.setBlockName (BaseDefenseModification.getTranslation ("surveillance", "camera"));
