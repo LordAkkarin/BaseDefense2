@@ -40,20 +40,12 @@ public class CameraBlockEntityRenderer extends TileEntitySpecialRenderer {
 	 * Stores the camera model.
 	 */
 	@Getter
-	private static final IModelCustom model;
+	private static final IModelCustom model = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2", "models/surveillance/camera.obj"));
 
 	/**
 	 * Stores the ceiling camera model.
 	 */
-	private static final IModelCustom ceilingModel;
-
-	/**
-	 * Static Initializer
-	 */
-	static {
-		model = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2:models/surveillance/camera.obj"));
-		ceilingModel = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2:models/surveillance/camera_ceiling.obj"));
-	}
+	private static final IModelCustom ceilingModel = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2", "models/surveillance/camera_ceiling.obj"));
 
 	/**
 	 * {@inheritDoc}
