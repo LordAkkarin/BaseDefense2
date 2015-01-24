@@ -19,6 +19,7 @@ package rocks.spud.mc.basedefense.client.renderer.block.surveillance;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import rocks.spud.mc.basedefense.BaseDefenseModification;
 import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockRendererType;
@@ -39,7 +40,47 @@ public class ControllerBlockRenderer implements ISimpleBlockRenderingHandler {
 	 */
 	@Override
 	public void renderInventoryBlock (Block block, int metadata, int modelId, RenderBlocks renderer) {
-		renderer.renderBlockAsItem (block, 1, 0.0f);
+		if (!(block instanceof ControllerBlock)) return;
+		ControllerBlock controllerBlock = ((ControllerBlock) block);
+		Tessellator tessellator = Tessellator.instance;
+
+		tessellator.startDrawingQuads ();
+		tessellator.setNormal (-1.0f, 0.0f, 0.0f);
+		tessellator.setColorOpaque_I (0xFFFFFF);
+		renderer.renderFaceXNeg (block, 0.0d, 0.0d, 0.0d, controllerBlock.getTextureNormal ());
+		tessellator.draw ();
+
+		tessellator.startDrawingQuads ();
+		tessellator.setNormal (1.0f, 0.0f, 0.0f);
+		tessellator.setColorOpaque_I (0xFFFFFF);
+		renderer.renderFaceXPos (block, 0.0d, 0.0d, 0.0d, controllerBlock.getTextureNormal ());
+		tessellator.draw ();
+
+		tessellator.startDrawingQuads ();
+		tessellator.setNormal (0.0f, -1.0f, 0.0f);
+		tessellator.setColorOpaque_I (0xFFFFFF);
+		renderer.renderFaceYNeg (block, 0.0d, 0.0d, 0.0d, controllerBlock.getTextureNormal ());
+		tessellator.draw ();
+
+		tessellator.startDrawingQuads ();
+		tessellator.setNormal (0.0f, 1.0f, 0.0f);
+		tessellator.setColorOpaque_I (0xFFFFFF);
+		renderer.renderFaceYPos (block, 0.0d, 0.0d, 0.0d, controllerBlock.getTextureNormal ());
+		tessellator.draw ();
+
+		tessellator.startDrawingQuads ();
+		tessellator.setNormal (0.0f, 0.0f, -1.0f);
+		tessellator.setColorOpaque_I (0xFFFFFF);
+		renderer.renderFaceZNeg (block, 0.0d, 0.0d, 0.0d, controllerBlock.getTextureNormal ());
+		tessellator.draw ();
+
+		tessellator.startDrawingQuads ();
+		tessellator.setNormal (0.0f, 0.0f, 1.0f);
+		tessellator.setColorOpaque_I (0xFFFFFF);
+		renderer.renderFaceZPos (block, 0.0d, 0.0d, 0.0d, controllerBlock.getTextureNormal ());
+		tessellator.draw ();
+
+		renderer.clearOverrideBlockTexture ();
 	}
 
 	/**
@@ -73,7 +114,7 @@ public class ControllerBlockRenderer implements ISimpleBlockRenderingHandler {
 	 */
 	@Override
 	public boolean shouldRender3DInInventory (int modelId) {
-		return false;
+		return true;
 	}
 
 	/**
