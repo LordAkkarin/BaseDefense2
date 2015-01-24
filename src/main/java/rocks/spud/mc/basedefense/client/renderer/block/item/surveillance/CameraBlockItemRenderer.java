@@ -22,6 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockItemRendererType;
+import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCriteria;
+import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.client.renderer.block.entity.surveillance.CameraBlockEntityRenderer;
 import rocks.spud.mc.basedefense.common.block.surveillance.CameraBlock;
 
@@ -30,6 +32,7 @@ import rocks.spud.mc.basedefense.common.block.surveillance.CameraBlock;
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockItemRendererType (CameraBlock.class)
+@RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class CameraBlockItemRenderer implements IItemRenderer {
 
 	/**
