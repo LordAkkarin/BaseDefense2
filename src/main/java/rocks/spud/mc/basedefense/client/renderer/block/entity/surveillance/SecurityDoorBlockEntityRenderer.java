@@ -52,7 +52,7 @@ public class SecurityDoorBlockEntityRenderer extends TileEntitySpecialRenderer {
 			GL11.glScalef (0.5f, 0.5f, 0.5f);
 			GL11.glTranslatef (1f, 1f, 1f);
 
-			GL11.glRotatef (90.0f, (metadata == 2 ? 1.0f : 0.0f), (metadata == 1 ? 1.0f : 0.0f), 0.0f);
+			GL11.glRotatef (90.0f, (metadata > 4 ? 1.0f : 0.0f), (metadata > 2 && metadata < 4 ? 1.0f : 0.0f), 0.0f);
 
 			this.bindTexture (new ResourceLocation ("basedefense2", "textures/blocks/surveillance/security_door.png"));
 			getModel ().renderAll ();
