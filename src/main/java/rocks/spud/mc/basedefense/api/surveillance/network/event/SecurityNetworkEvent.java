@@ -20,6 +20,7 @@ import appeng.api.networking.events.MENetworkEvent;
 
 /**
  * Represents a security network event within the global network.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public abstract class SecurityNetworkEvent extends MENetworkEvent {

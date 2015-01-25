@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automating block entity renderer registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -40,6 +41,7 @@ public @interface BlockEntityRendererType {
 
 	/**
 	 * Defines the block entity type to register the renderer to.
+	 *
 	 * @return The tile entity type.
 	 */
 	public Class<? extends TileEntity> value ();

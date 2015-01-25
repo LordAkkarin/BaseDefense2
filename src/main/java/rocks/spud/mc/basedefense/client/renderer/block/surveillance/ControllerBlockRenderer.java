@@ -29,6 +29,7 @@ import rocks.spud.mc.basedefense.common.block.surveillance.ControllerBlock;
 
 /**
  * Provides a renderer for the controller block.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockRendererType

@@ -26,12 +26,14 @@ import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEnt
 
 /**
  * Provides an ItemBlock implementation that covers the specific placement mechanics of cameras.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class CameraBlockItem extends ItemBlock {
 
 	/**
 	 * Constructs a new CameraBlockItem.
+	 *
 	 * @param p_i45328_1_ The parent block.
 	 */
 	public CameraBlockItem (Block p_i45328_1_) {

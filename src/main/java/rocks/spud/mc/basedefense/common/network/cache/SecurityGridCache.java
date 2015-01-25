@@ -37,6 +37,7 @@ import java.util.Set;
 
 /**
  * Provides a grid cache for the surveillance network.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @RequiredArgsConstructor
@@ -82,7 +83,8 @@ public class SecurityGridCache implements ISecurityGridCache {
 		else
 			this.controllerState = SecurityControllerState.CONFLICT;
 
-		if (controllerState != this.getControllerState ()) this.getGrid ().postEvent (new SecurityControllerUpdateEvent (this.getController (), this.getControllerState ()));
+		if (controllerState != this.getControllerState ())
+			this.getGrid ().postEvent (new SecurityControllerUpdateEvent (this.getController (), this.getControllerState ()));
 	}
 
 	/**

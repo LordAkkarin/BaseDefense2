@@ -18,6 +18,7 @@ package rocks.spud.mc.basedefense.api.surveillance.network.entity;
 
 /**
  * Defines required methods for network triggers.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public interface ISecurityNetworkTrigger { }
+public interface ISecurityNetworkTrigger {}

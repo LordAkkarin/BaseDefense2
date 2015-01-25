@@ -18,6 +18,7 @@ package rocks.spud.mc.basedefense.api.surveillance.network.entity;
 
 /**
  * Defines required methods for surveillance network controllers.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-public interface ISecurityNetworkController { }
+public interface ISecurityNetworkController {}

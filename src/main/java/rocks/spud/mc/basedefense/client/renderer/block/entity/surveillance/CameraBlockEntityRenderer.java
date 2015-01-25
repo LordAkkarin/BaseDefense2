@@ -30,11 +30,17 @@ import rocks.spud.mc.basedefense.common.block.entity.surveillance.CameraBlockEnt
 
 /**
  * Provides a renderer for camera block entities.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityRendererType (CameraBlockEntity.class)
 @RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class CameraBlockEntityRenderer extends TileEntitySpecialRenderer {
+
+	/**
+	 * Stores the ceiling camera model.
+	 */
+	private static final IModelCustom ceilingModel = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2", "models/surveillance/camera_ceiling.obj"));
 
 	/**
 	 * Stores the camera model.
@@ -43,9 +49,38 @@ public class CameraBlockEntityRenderer extends TileEntitySpecialRenderer {
 	private static final IModelCustom model = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2", "models/surveillance/camera.obj"));
 
 	/**
-	 * Stores the ceiling camera model.
+	 * Renders a ceiling camera.
+	 *
+	 * @param camera The block entity.
+	 * @param p_147500_2_ The X-Coordinate.
+	 * @param p_147500_4_ The Y-Coordinate.
+	 * @param p_147500_6_ The Z-Coordinate.
+	 * @param p_147500_8_ Some tick nonsense.
+	 * @param active Defines whether the camera will be rendered active or not.
+	 * @param textureState Defines the texture state (e.g. the currently active frame in the active animation).
+	 * @param rotation The rotation metadata (5 = ceiling).
 	 */
-	private static final IModelCustom ceilingModel = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2", "models/surveillance/camera_ceiling.obj"));
+	protected void renderCeilingCamera (CameraBlockEntity camera, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_, boolean active, boolean textureState, int rotation) {
+		GL11.glTranslatef (0.5f, 0.8f, 0.5f);
+		GL11.glScalef (.2f, .2f, .2f);
+
+		// rotate around X axis for standing cameras
+		if (rotation != 5) {
+			GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
+			GL11.glTranslatef (0.0f, 3.0f, 0.0f);
+		}
+
+		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_base.png"));
+		ceilingModel.renderPart ("Base_Cube01");
+
+		if (active) {
+			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_base_active" + (textureState ? "0" : "1") + ".png"));
+			ceilingModel.renderPart ("Base_Cube01");
+		}
+
+		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_lens.png"));
+		ceilingModel.renderPart ("Lens_Cube02");
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -71,39 +106,6 @@ public class CameraBlockEntityRenderer extends TileEntitySpecialRenderer {
 				this.renderCeilingCamera (camera, p_147500_2_, p_147500_4_, p_147500_6_, p_147500_8_, active, textureState, rotation);
 		}
 		GL11.glPopMatrix ();
-	}
-
-	/**
-	 * Renders a ceiling camera.
-	 * @param camera The block entity.
-	 * @param p_147500_2_ The X-Coordinate.
-	 * @param p_147500_4_ The Y-Coordinate.
-	 * @param p_147500_6_ The Z-Coordinate.
-	 * @param p_147500_8_ Some tick nonsense.
-	 * @param active Defines whether the camera will be rendered active or not.
-	 * @param textureState Defines the texture state (e.g. the currently active frame in the active animation).
-	 * @param rotation The rotation metadata (5 = ceiling).
-	 */
-	protected void renderCeilingCamera (CameraBlockEntity camera, double p_147500_2_, double p_147500_4_, double p_147500_6_, float p_147500_8_, boolean active, boolean textureState, int rotation) {
-		GL11.glTranslatef (0.5f, 0.8f, 0.5f);
-		GL11.glScalef (.2f, .2f, .2f);
-
-		// rotate around X axis for standing cameras
-		if (rotation != 5) {
-			GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
-			GL11.glTranslatef (0.0f, 3.0f, 0.0f);
-		}
-
-		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_base.png"));
-		ceilingModel.renderPart ("Base_Cube01");
-
-		if (active) {
-			this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_base_active" + (textureState ? "0" : "1") +".png"));
-			ceilingModel.renderPart ("Base_Cube01");
-		}
-
-		this.bindTexture (new ResourceLocation ("basedefense2:textures/models/surveillance/camera_ceiling_lens.png"));
-		ceilingModel.renderPart ("Lens_Cube02");
 	}
 
 	/**

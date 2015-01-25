@@ -30,6 +30,7 @@ public class RegistryInitializationException extends RegistryRegistrationExcepti
 
 	/**
 	 * Constructs a new RegistryInitializationException.
+	 *
 	 * @param s The error message.
 	 */
 	public RegistryInitializationException (String s) {
@@ -38,6 +39,7 @@ public class RegistryInitializationException extends RegistryRegistrationExcepti
 
 	/**
 	 * Constructs a new RegistryInitializationException.
+	 *
 	 * @param s The error message.
 	 * @param throwable The error cause.
 	 */
@@ -47,6 +49,7 @@ public class RegistryInitializationException extends RegistryRegistrationExcepti
 
 	/**
 	 * Constructs a new RegistryInitializationException.
+	 *
 	 * @param throwable The error cause.
 	 */
 	public RegistryInitializationException (Throwable throwable) {

@@ -28,6 +28,7 @@ import rocks.spud.mc.basedefense.common.block.entity.surveillance.SecurityDoorBl
 
 /**
  * Provides a block entity renderer for security doors.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityRendererType (SecurityDoorBlockEntity.class)

@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for adding criteria chains to automatically registered components.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -33,6 +34,7 @@ public @interface RegistrationCriteria {
 
 	/**
 	 * Defines a list of criteria to check.
+	 *
 	 * @return The criteria array.
 	 */
 	public Class<? extends IRegistrationCriteria>[] value ();

@@ -26,6 +26,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.GridCacheType;
 
 /**
  * Provides a scanner for grid cache types.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class GridCacheRegistryScanner implements IRegistryScanner<GridCacheType> {

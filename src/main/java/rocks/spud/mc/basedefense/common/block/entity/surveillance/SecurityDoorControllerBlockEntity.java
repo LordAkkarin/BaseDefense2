@@ -79,12 +79,6 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 	private int activeCooldown = 0;
 
 	/**
-	 * Stores the entity state.
-	 */
-	@Getter
-	private boolean state = true;
-
-	/**
 	 * Defines the door cooldown.
 	 */
 	@Getter
@@ -103,6 +97,12 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 	 */
 	@Getter
 	private int extensionCount = 2;
+
+	/**
+	 * Stores the entity state.
+	 */
+	@Getter
+	private boolean state = true;
 
 	/**
 	 * Constructs a new SecurityDoorControllerBlockEntity.
@@ -164,6 +164,7 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 	/**
 	 * Builds the block metadata based on the block state.
+	 *
 	 * @param active Indicates whether the camera is active.
 	 * @param direction Defines the output direction.
 	 * @return The metadata.
@@ -173,11 +174,38 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 	}
 
 	/**
+	 * Closes the door.
+	 */
+	public void closeDoor () {
+		if (!this.state) return;
+
+		// update blocks
+		for (int i = 1; i <= this.extensionCount; i++) {
+			if (!this.setBlockRelative (i, Blocks.air, 0)) break;
+		}
+		this.state = false;
+
+		// update BE
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public AECableType getCableConnectionType (ForgeDirection dir) {
 		return AECableType.SMART;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onReady () {
+		super.onReady ();
+
+		this.updateMetadata ();
 	}
 
 	/**
@@ -204,6 +232,7 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 	/**
 	 * Returns the camera orientation.
+	 *
 	 * @return The orientation.
 	 */
 	public ForgeDirection getRotation () {
@@ -214,6 +243,7 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 	/**
 	 * Checks whether a camera is active.
+	 *
 	 * @return True if active.
 	 */
 	public boolean isActive () {
@@ -223,6 +253,7 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 	/**
 	 * Handles controller updates.
+	 *
 	 * @param event The event.
 	 */
 	@MENetworkEventSubscribe
@@ -232,6 +263,7 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 	/**
 	 * Handles security controller updates.
+	 *
 	 * @param event The event.
 	 */
 	@MENetworkEventSubscribe
@@ -241,6 +273,7 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 	/**
 	 * Handles door requests.
+	 *
 	 * @param event The event.
 	 */
 	@MENetworkEventSubscribe
@@ -255,6 +288,7 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 	/**
 	 * Handles power status updates.
+	 *
 	 * @param event The event.
 	 */
 	@MENetworkEventSubscribe
@@ -270,7 +304,8 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 		// update blocks
 		for (int i = 1; i <= this.extensionCount; i++) {
-			if (!this.setBlockRelative (i, BaseDefenseModification.getInstance ().getProxy ().getRegistry ().getInstance (SecurityDoorBlock.class), this.doorRotation)) break;
+			if (!this.setBlockRelative (i, BaseDefenseModification.getInstance ().getProxy ().getRegistry ().getInstance (SecurityDoorBlock.class), this.doorRotation))
+				break;
 		}
 		this.state = true;
 
@@ -280,34 +315,8 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 	}
 
 	/**
-	 * Closes the door.
-	 */
-	public void closeDoor () {
-		if (!this.state) return;
-
-		// update blocks
-		for (int i = 1; i <= this.extensionCount; i++) {
-			if (!this.setBlockRelative (i, Blocks.air, 0)) break;
-		}
-		this.state = false;
-
-		// update BE
-		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
-		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void onReady () {
-		super.onReady ();
-
-		this.updateMetadata ();
-	}
-
-	/**
 	 * Sets a block relative to the BE position.
+	 *
 	 * @param distance The distance.
 	 * @param blockType The block type.
 	 * @param metadata The block metadata.
@@ -338,13 +347,15 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 				break;
 		}
 
-		if (this.worldObj.isAirBlock (x, y, z) && !(this.worldObj.getBlock (x, y, z) instanceof SecurityDoorBlock)) return false;
+		if (this.worldObj.isAirBlock (x, y, z) && !(this.worldObj.getBlock (x, y, z) instanceof SecurityDoorBlock))
+			return false;
 		this.worldObj.setBlock (x, y, z, blockType, metadata, 2);
 		return true;
 	}
 
 	/**
 	 * Sets the extension count.
+	 *
 	 * @param extensionCount The extension count.
 	 */
 	public void setExtensionCount (int extensionCount) {
@@ -353,8 +364,6 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 		this.extensionCount = extensionCount;
 		if (state) this.openDoor ();
 	}
-
-
 
 	/**
 	 * Updates the block metadata.
@@ -367,7 +376,8 @@ public class SecurityDoorControllerBlockEntity extends AENetworkPowerTile {
 
 			switch (cache.getControllerState ()) {
 				case OFFLINE:
-				case CONFLICT: break;
+				case CONFLICT:
+					break;
 				case ONLINE:
 					active = true;
 					break;

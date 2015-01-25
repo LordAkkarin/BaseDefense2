@@ -25,13 +25,6 @@ import lombok.Setter;
 public class SecurityDoorRequestEvent extends SecurityDoorEvent {
 
 	/**
-	 * Stores the door state (closed = false, open = true).
-	 */
-	@Getter
-	@Setter
-	private boolean state = false;
-
-	/**
 	 * Indicates whether the door cooldown shall be honored.
 	 */
 	@Getter
@@ -39,7 +32,15 @@ public class SecurityDoorRequestEvent extends SecurityDoorEvent {
 	private boolean cooldownEnabled = true;
 
 	/**
+	 * Stores the door state (closed = false, open = true).
+	 */
+	@Getter
+	@Setter
+	private boolean state = false;
+
+	/**
 	 * Constructs a new SecurityDoorRequestEvent.
+	 *
 	 * @param groupName The group name.
 	 * @param state The state.
 	 * @param cooldownEnabled Indicates whether door cooldowns shall be honored.
@@ -53,6 +54,7 @@ public class SecurityDoorRequestEvent extends SecurityDoorEvent {
 
 	/**
 	 * Constructs a new SecurityDoorRequestEvent.
+	 *
 	 * @param groupName The group name.
 	 * @param state The state.
 	 */

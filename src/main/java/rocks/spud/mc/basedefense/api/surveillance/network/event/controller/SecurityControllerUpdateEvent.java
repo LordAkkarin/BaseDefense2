@@ -22,6 +22,7 @@ import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetwor
 
 /**
  * Occurs when the controller state changes.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class SecurityControllerUpdateEvent extends SecurityControllerEvent {
@@ -34,6 +35,7 @@ public class SecurityControllerUpdateEvent extends SecurityControllerEvent {
 
 	/**
 	 * Constructs a new SurveillanceNetworkControllerUpdateEvent
+	 *
 	 * @param controller The controller.
 	 */
 	public SecurityControllerUpdateEvent (ISecurityNetworkController controller, SecurityControllerState state) {

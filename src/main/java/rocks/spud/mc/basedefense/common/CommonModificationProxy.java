@@ -28,6 +28,7 @@ import rocks.spud.mc.basedefense.common.registry.ModificationRegistry;
 
 /**
  * Provides a common (server side) proxy.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class CommonModificationProxy {

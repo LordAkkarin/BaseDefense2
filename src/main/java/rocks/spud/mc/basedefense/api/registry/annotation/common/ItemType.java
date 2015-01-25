@@ -26,6 +26,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automatic item type registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -35,6 +36,7 @@ public @interface ItemType {
 
 	/**
 	 * Defines the item identifier.
+	 *
 	 * @return The identifier.
 	 */
 	public String value ();

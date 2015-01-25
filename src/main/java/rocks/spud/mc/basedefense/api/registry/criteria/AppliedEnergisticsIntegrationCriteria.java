@@ -22,6 +22,7 @@ import rocks.spud.mc.basedefense.api.registry.IRegistrationCriteria;
 
 /**
  * Provides a criteria implementation for the AE2 integration.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class AppliedEnergisticsIntegrationCriteria implements IRegistrationCriteria {

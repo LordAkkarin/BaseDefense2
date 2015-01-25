@@ -34,6 +34,7 @@ import rocks.spud.mc.basedefense.common.block.entity.surveillance.ControllerBloc
 
 /**
  * Provides a block that acts as the core of the surveillance network.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockType (ControllerBlock.IDENTIFIER)
@@ -46,12 +47,6 @@ public class ControllerBlock extends Block implements ITileEntityProvider {
 	public static final String IDENTIFIER = "surveillance_controller";
 
 	/**
-	 * Stores the normal texture (top and bottom).
-	 */
-	@Getter
-	private IIcon textureNormal = null;
-
-	/**
 	 * Stores the active texture (top and bottom).
 	 */
 	@Getter
@@ -62,6 +57,12 @@ public class ControllerBlock extends Block implements ITileEntityProvider {
 	 */
 	@Getter
 	private IIcon textureConflict = null;
+
+	/**
+	 * Stores the normal texture (top and bottom).
+	 */
+	@Getter
+	private IIcon textureNormal = null;
 
 	/**
 	 * Constructs a new ControllerBlock.
@@ -84,14 +85,6 @@ public class ControllerBlock extends Block implements ITileEntityProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getLightValue (IBlockAccess world, int x, int y, int z) {
-		return (world.getBlockMetadata (x, y, z) != 0 ? 13 : 0);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public int getRenderType () {
 		return BaseDefenseModification.getInstance ().getProxy ().getRegistry ().getRendererIdentifier (ControllerBlockRenderer.class);
 	}
@@ -104,5 +97,13 @@ public class ControllerBlock extends Block implements ITileEntityProvider {
 		this.textureNormal = p_149651_1_.registerIcon ("basedefense2:surveillance/controller");
 		this.textureActive = p_149651_1_.registerIcon ("basedefense2:surveillance/controller_active");
 		this.textureConflict = p_149651_1_.registerIcon ("basedefense2:surveillance/controller_conflict");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getLightValue (IBlockAccess world, int x, int y, int z) {
+		return (world.getBlockMetadata (x, y, z) != 0 ? 13 : 0);
 	}
 }

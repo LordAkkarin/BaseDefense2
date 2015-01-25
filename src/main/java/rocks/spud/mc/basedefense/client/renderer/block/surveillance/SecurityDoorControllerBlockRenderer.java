@@ -30,6 +30,7 @@ import rocks.spud.mc.basedefense.common.block.surveillance.SecurityDoorControlle
 
 /**
  * Provides a
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockRendererType

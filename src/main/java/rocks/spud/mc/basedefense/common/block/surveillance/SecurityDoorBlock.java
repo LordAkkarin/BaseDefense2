@@ -31,6 +31,7 @@ import rocks.spud.mc.basedefense.common.block.entity.surveillance.SecurityDoorBl
 
 /**
  * Provides a door implementation for
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockType (SecurityDoorBlock.IDENTIFIER)
@@ -64,6 +65,7 @@ public class SecurityDoorBlock extends Block implements ITileEntityProvider {
 
 	/**
 	 * Returns the bounding box depending on the rotation.
+	 *
 	 * @param world The world.
 	 * @param x The X-Coordinate.
 	 * @param y The Y-Coordinate.
@@ -85,8 +87,32 @@ public class SecurityDoorBlock extends Block implements ITileEntityProvider {
 			case 6:
 			case 7:
 			default:
-				return AxisAlignedBB.getBoundingBox ((x + 0.35d), y, z, (x + 0.65d), (y+ 1.0d), (z + 1.0d));
+				return AxisAlignedBB.getBoundingBox ((x + 0.35d), y, z, (x + 0.65d), (y + 1.0d), (z + 1.0d));
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean renderAsNormalBlock () {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean shouldSideBeRendered (IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_) {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isBlockSolid (IBlockAccess p_149747_1_, int p_149747_2_, int p_149747_3_, int p_149747_4_, int p_149747_5_) {
+		return false;
 	}
 
 	/**
@@ -109,31 +135,7 @@ public class SecurityDoorBlock extends Block implements ITileEntityProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean renderAsNormalBlock () {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isBlockSolid (IBlockAccess p_149747_1_, int p_149747_2_, int p_149747_3_, int p_149747_4_, int p_149747_5_) {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public boolean isOpaqueCube () {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean shouldSideBeRendered (IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_) {
 		return false;
 	}
 }

@@ -26,6 +26,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockEntityRende
 
 /**
  * Provides a scanner for block entity renderer types.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class BlockEntityRendererRegistryScanner implements IRegistryScanner<BlockEntityRendererType> {

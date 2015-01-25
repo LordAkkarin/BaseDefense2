@@ -17,8 +17,7 @@
 /**
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
-@API (owner = "basedefense2", provides = "basedefense2|api", apiVersion = BaseDefenseModification.API_VERSION)
-package rocks.spud.mc.basedefense.api;
+@API (owner = "basedefense2", provides = "basedefense2|api", apiVersion = BaseDefenseModification.API_VERSION) package rocks.spud.mc.basedefense.api;
 
 import cpw.mods.fml.common.API;
 import rocks.spud.mc.basedefense.BaseDefenseModification;

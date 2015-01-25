@@ -20,6 +20,7 @@ import rocks.spud.mc.basedefense.api.surveillance.network.event.SecurityNetworkE
 
 /**
  * Provides a base event for component communication.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public abstract class SecurityCommunicationEvent extends SecurityNetworkEvent {

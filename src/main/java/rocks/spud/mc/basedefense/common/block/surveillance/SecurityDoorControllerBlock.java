@@ -34,6 +34,7 @@ import rocks.spud.mc.basedefense.common.item.block.surveillance.SecurityDoorCont
 
 /**
  * Provides a door controller block implementation.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockType (value = SecurityDoorControllerBlock.IDENTIFIER, item = SecurityDoorControllerBlockItem.class)
@@ -46,12 +47,6 @@ public class SecurityDoorControllerBlock extends Block implements ITileEntityPro
 	public static final String IDENTIFIER = "surveillance_security_door_controller";
 
 	/**
-	 * Stores the normal texture.
-	 */
-	@Getter
-	private IIcon textureNormal = null;
-
-	/**
 	 * Stores the active texture.
 	 */
 	@Getter
@@ -62,6 +57,12 @@ public class SecurityDoorControllerBlock extends Block implements ITileEntityPro
 	 */
 	@Getter
 	private IIcon textureFace = null;
+
+	/**
+	 * Stores the normal texture.
+	 */
+	@Getter
+	private IIcon textureNormal = null;
 
 	/**
 	 * Constructs a new SecurityDoorControllerBlock.

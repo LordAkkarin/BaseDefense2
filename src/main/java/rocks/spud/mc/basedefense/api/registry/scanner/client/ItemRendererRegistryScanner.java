@@ -31,6 +31,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.client.ItemRendererType
 
 /**
  * Provides a scanner for automatically registering item render types.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class ItemRendererRegistryScanner implements IRegistryScanner<ItemRendererType> {

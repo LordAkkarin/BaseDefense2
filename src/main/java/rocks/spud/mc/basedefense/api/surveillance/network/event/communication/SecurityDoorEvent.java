@@ -22,6 +22,7 @@ import lombok.Setter;
 
 /**
  * Provides a base event for security doors.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public abstract class SecurityDoorEvent extends SecurityCommunicationEvent {
@@ -36,6 +37,7 @@ public abstract class SecurityDoorEvent extends SecurityCommunicationEvent {
 
 	/**
 	 * Constructs a new SecurityDoorEvent.
+	 *
 	 * @param groupName The door group name.
 	 */
 	public SecurityDoorEvent (String groupName) {

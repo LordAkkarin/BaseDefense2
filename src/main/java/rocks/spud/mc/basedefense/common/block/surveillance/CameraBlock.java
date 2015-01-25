@@ -32,6 +32,7 @@ import rocks.spud.mc.basedefense.common.item.block.surveillance.CameraBlockItem;
 
 /**
  * Provides a detector implementation.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockType (value = CameraBlock.IDENTIFIER, item = CameraBlockItem.class)
@@ -82,23 +83,15 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool (World p_149633_1_, int p_149633_2_, int p_149633_3_, int p_149633_4_) {
-		return this.getBoundingBox (p_149633_1_, p_149633_2_, p_149633_3_, p_149633_4_, p_149633_1_.getBlockMetadata (p_149633_2_, p_149633_3_, p_149633_4_));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool (World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
-		return this.getBoundingBox (p_149668_1_, p_149668_2_, p_149668_3_, p_149668_4_, p_149668_1_.getBlockMetadata (p_149668_2_, p_149668_3_, p_149668_4_));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public boolean renderAsNormalBlock () {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean shouldSideBeRendered (IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_) {
 		return false;
 	}
 
@@ -114,15 +107,23 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isOpaqueCube () {
-		return false;
+	public AxisAlignedBB getCollisionBoundingBoxFromPool (World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
+		return this.getBoundingBox (p_149668_1_, p_149668_2_, p_149668_3_, p_149668_4_, p_149668_1_.getBlockMetadata (p_149668_2_, p_149668_3_, p_149668_4_));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean shouldSideBeRendered (IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_) {
+	public AxisAlignedBB getSelectedBoundingBoxFromPool (World p_149633_1_, int p_149633_2_, int p_149633_3_, int p_149633_4_) {
+		return this.getBoundingBox (p_149633_1_, p_149633_2_, p_149633_3_, p_149633_4_, p_149633_1_.getBlockMetadata (p_149633_2_, p_149633_3_, p_149633_4_));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isOpaqueCube () {
 		return false;
 	}
 }

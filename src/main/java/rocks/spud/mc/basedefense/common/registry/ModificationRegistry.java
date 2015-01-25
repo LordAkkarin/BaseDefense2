@@ -47,15 +47,10 @@ import java.util.Set;
 
 /**
  * Provides a modification registry.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class ModificationRegistry implements IModificationRegistry {
-
-	/**
-	 * Stores an internal logger.
-	 */
-	@Getter (AccessLevel.PROTECTED)
-	private static final Logger logger = LogManager.getFormatterLogger (ModificationRegistry.class);
 
 	/**
 	 * Stores the active configuration instance.
@@ -67,6 +62,17 @@ public class ModificationRegistry implements IModificationRegistry {
 	 * Stores a cache for registration criteria.
 	 */
 	private Map<Class<? extends IRegistrationCriteria>, Boolean> criteriaCache = new HashMap<Class<? extends IRegistrationCriteria>, Boolean> ();
+
+	/**
+	 * Stores the filter map.
+	 */
+	private Map<Class<? extends Annotation>, Class<?>> filterRegistry = new HashMap<Class<? extends Annotation>, Class<?>> ();
+
+	/**
+	 * Stores an internal logger.
+	 */
+	@Getter (AccessLevel.PROTECTED)
+	private static final Logger logger = LogManager.getFormatterLogger (ModificationRegistry.class);
 
 	/**
 	 * Stores a cache for constructed objects.
@@ -84,12 +90,8 @@ public class ModificationRegistry implements IModificationRegistry {
 	private Map<Class<? extends Annotation>, IRegistryScanner> scannerRegistry = new HashMap<Class<? extends Annotation>, IRegistryScanner> ();
 
 	/**
-	 * Stores the filter map.
-	 */
-	private Map<Class<? extends Annotation>, Class<?>> filterRegistry = new HashMap<Class<? extends Annotation>, Class<?>> ();
-
-	/**
 	 * Constructs a new ModificationRegistry.
+	 *
 	 * @param configuration The active configuration.
 	 */
 	public ModificationRegistry (Configuration configuration) {
@@ -104,7 +106,8 @@ public class ModificationRegistry implements IModificationRegistry {
 	@Override
 	public boolean checkCriteria (@NonNull Class<? extends IRegistrationCriteria> criteriaType) {
 		try {
-			if (!this.criteriaCache.containsKey (criteriaType)) this.criteriaCache.put (criteriaType, this.constructInstance (criteriaType).isMet (this.getConfiguration ()));
+			if (!this.criteriaCache.containsKey (criteriaType))
+				this.criteriaCache.put (criteriaType, this.constructInstance (criteriaType).isMet (this.getConfiguration ()));
 			return this.criteriaCache.get (criteriaType);
 		} catch (RegistryException ex) {
 			getLogger ().info ("Could not verify criteria of type " + criteriaType.getCanonicalName () + ": " + ex.getMessage ());
@@ -130,8 +133,17 @@ public class ModificationRegistry implements IModificationRegistry {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public <T> T getInstance (@NonNull Class<T> type) {
+		return ((T) this.objectCache.get (type));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public int getRendererIdentifier (@NonNull Class<?> rendererType) {
-		if (!this.rendererIdentifierCache.containsKey (rendererType)) this.rendererIdentifierCache.put (rendererType, RenderingRegistry.getNextAvailableRenderId ());
+		if (!this.rendererIdentifierCache.containsKey (rendererType))
+			this.rendererIdentifierCache.put (rendererType, RenderingRegistry.getNextAvailableRenderId ());
 		return this.rendererIdentifierCache.get (rendererType);
 	}
 
@@ -139,23 +151,9 @@ public class ModificationRegistry implements IModificationRegistry {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public <T> T getInstance (@NonNull Class<T> type) {
-		return ((T) this.objectCache.get (type));
-	}
-
-	/**
-	 * Registers all default scanners.
-	 */
-	protected void registerDefaultScanners () {
-		this.registerScanner (RegistrationAnnotation.class, Annotation.class, new RegistryScannerTypeScanner ());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void registerScanner (@NonNull Class<? extends Annotation> annotationType, Class<?> filter, @NonNull IRegistryScanner scanner) {
-		if (this.scannerRegistry.containsKey (annotationType)) getLogger ().warn ("Scanner for type %s has already been registered. Skipping registration for %s", annotationType.getCanonicalName (), scanner.getClass ().getCanonicalName ());
+		if (this.scannerRegistry.containsKey (annotationType))
+			getLogger ().warn ("Scanner for type %s has already been registered. Skipping registration for %s", annotationType.getCanonicalName (), scanner.getClass ().getCanonicalName ());
 		this.scannerRegistry.put (annotationType, scanner);
 		if (filter != null) this.filterRegistry.put (annotationType, filter);
 	}
@@ -236,5 +234,12 @@ public class ModificationRegistry implements IModificationRegistry {
 				throw ex;
 			}
 		}
+	}
+
+	/**
+	 * Registers all default scanners.
+	 */
+	protected void registerDefaultScanners () {
+		this.registerScanner (RegistrationAnnotation.class, Annotation.class, new RegistryScannerTypeScanner ());
 	}
 }

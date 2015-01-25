@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for registering block item renderer types.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -40,6 +41,7 @@ public @interface BlockItemRendererType {
 
 	/**
 	 * Defines the block to assign the renderer to.
+	 *
 	 * @return The block class.
 	 */
 	public Class<? extends Block> value ();

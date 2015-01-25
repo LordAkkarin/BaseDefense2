@@ -44,16 +44,12 @@ import rocks.spud.mc.basedefense.common.network.cache.SecurityGridCache;
 
 /**
  * Provides a block entity for the camera block.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityType (CameraBlockEntity.IDENTIFIER)
 @RegistrationCriteria (SurveillanceFeatureCriteria.class)
 public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNetworkDetector {
-
-	/**
-	 * Defines the block entity identifier.
-	 */
-	public static final String IDENTIFIER = "surveillance_camera";
 
 	/**
 	 * Defines the animation rotation max.
@@ -64,6 +60,11 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	 * Defines the animation speed.
 	 */
 	public static final float ANIMATION_ROTATION_SPEED = 0.005f;
+
+	/**
+	 * Defines the block entity identifier.
+	 */
+	public static final String IDENTIFIER = "surveillance_camera";
 
 	/**
 	 * Stores the internal stub inventory.
@@ -101,6 +102,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 	/**
 	 * Builds the block metadata based on the block state.
+	 *
 	 * @param active Indicates whether the camera is active.
 	 * @param rotation Defines the camera orientation (5 = ceiling).
 	 * @return The metadata.
@@ -111,6 +113,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 	/**
 	 * Returns the camera body rotation.
+	 *
 	 * @param increaseRotation Indicates whether the rotation shall be increased or not.
 	 * @return The rotation.
 	 */
@@ -130,6 +133,16 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	@Override
 	public AECableType getCableConnectionType (ForgeDirection dir) {
 		return AECableType.SMART;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onReady () {
+		super.onReady ();
+
+		this.updateMetadata ();
 	}
 
 	/**
@@ -156,6 +169,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 	/**
 	 * Returns the camera orientation.
+	 *
 	 * @return The orientation.
 	 */
 	public int getRotation () {
@@ -165,6 +179,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 	/**
 	 * Checks whether a camera is active.
+	 *
 	 * @return True if active.
 	 */
 	public boolean isActive () {
@@ -174,6 +189,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 	/**
 	 * Handles controller updates.
+	 *
 	 * @param event The event.
 	 */
 	@MENetworkEventSubscribe
@@ -183,6 +199,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 	/**
 	 * Handles security controller updates.
+	 *
 	 * @param event The event.
 	 */
 	@MENetworkEventSubscribe
@@ -192,20 +209,11 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 	/**
 	 * Handles power status updates.
+	 *
 	 * @param event The event.
 	 */
 	@MENetworkEventSubscribe
 	public void onPowerStatusChange (MENetworkPowerStatusChange event) {
-		this.updateMetadata ();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void onReady () {
-		super.onReady ();
-
 		this.updateMetadata ();
 	}
 
@@ -220,7 +228,8 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 
 			switch (cache.getControllerState ()) {
 				case OFFLINE:
-				case CONFLICT: break;
+				case CONFLICT:
+					break;
 				case ONLINE:
 					active = true;
 					break;

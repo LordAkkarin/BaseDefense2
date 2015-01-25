@@ -29,6 +29,7 @@ import java.util.Random;
 
 /**
  * Provides a dummy block entity for security doors.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityType (SecurityDoorBlockEntity.IDENTIFIER)

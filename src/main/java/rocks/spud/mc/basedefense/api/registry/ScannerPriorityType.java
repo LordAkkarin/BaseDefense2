@@ -33,6 +33,7 @@ public enum ScannerPriorityType {
 
 	/**
 	 * Constructs a new ScannerPriorityType.
+	 *
 	 * @param numeric The numeric.
 	 */
 	private ScannerPriorityType (int numeric) {

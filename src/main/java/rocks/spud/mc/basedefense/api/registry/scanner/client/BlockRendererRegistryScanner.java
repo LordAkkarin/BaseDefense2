@@ -26,6 +26,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockRendererTyp
 
 /**
  * Provides a scanner for block renderer registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class BlockRendererRegistryScanner implements IRegistryScanner<BlockRendererType> {

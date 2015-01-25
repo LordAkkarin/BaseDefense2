@@ -18,6 +18,7 @@ package rocks.spud.mc.basedefense.api.error;
 
 /**
  * Provides a base exception for registry error cases.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public abstract class RegistryException extends BaseDefenseException {
@@ -31,6 +32,7 @@ public abstract class RegistryException extends BaseDefenseException {
 
 	/**
 	 * Constructs a new RegistryException.
+	 *
 	 * @param s The error message.
 	 */
 	public RegistryException (String s) {
@@ -39,6 +41,7 @@ public abstract class RegistryException extends BaseDefenseException {
 
 	/**
 	 * Constructs a new RegistryException.
+	 *
 	 * @param s The error message.
 	 * @param throwable The error cause.
 	 */
@@ -48,6 +51,7 @@ public abstract class RegistryException extends BaseDefenseException {
 
 	/**
 	 * Constructs a new RegistryException.
+	 *
 	 * @param throwable The error cause.
 	 */
 	public RegistryException (Throwable throwable) {

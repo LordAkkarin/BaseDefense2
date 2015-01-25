@@ -23,18 +23,21 @@ import java.lang.annotation.Annotation;
 
 /**
  * Provides a base definition for registry scanners.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public interface IRegistryScanner<T extends Annotation> {
 
 	/**
 	 * Returns the scanner side.
+	 *
 	 * @return The side.
 	 */
 	public Side getSide ();
 
 	/**
 	 * Scans a type.
+	 *
 	 * @param registry The parent registry.
 	 * @param annotation The annotation.
 	 * @param type The type.

@@ -42,6 +42,7 @@ import rocks.spud.mc.basedefense.common.network.cache.SecurityGridCache;
 
 /**
  * Provides a block entity for the controller block.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @BlockEntityType (ControllerBlockEntity.IDENTIFIER)
@@ -87,6 +88,16 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISecuri
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void onReady () {
+		super.onReady ();
+
+		this.updateMetadata ();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public IInventory getInternalInventory () {
 		return INVENTORY;
 	}
@@ -103,6 +114,36 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISecuri
 	@Override
 	public int[] getAccessibleSlotsBySide (ForgeDirection forgeDirection) {
 		return SIDES;
+	}
+
+	/**
+	 * Handles controller updates.
+	 *
+	 * @param event The event.
+	 */
+	@MENetworkEventSubscribe
+	public void onControllerChange (MENetworkControllerChange event) {
+		this.updateMetadata ();
+	}
+
+	/**
+	 * Handles security controller updates.
+	 *
+	 * @param event The event.
+	 */
+	@MENetworkEventSubscribe
+	public void onControllerChange (SecurityControllerUpdateEvent event) {
+		this.updateMetadata ();
+	}
+
+	/**
+	 * Handles power status updates.
+	 *
+	 * @param event The event.
+	 */
+	@MENetworkEventSubscribe
+	public void onPowerStatusChange (MENetworkPowerStatusChange event) {
+		this.updateMetadata ();
 	}
 
 	/**
@@ -134,42 +175,5 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISecuri
 		}
 
 		this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, meta, 2);
-	}
-
-	/**
-	 * Handles controller updates.
-	 * @param event The event.
-	 */
-	@MENetworkEventSubscribe
-	public void onControllerChange (MENetworkControllerChange event) {
-		this.updateMetadata ();
-	}
-
-	/**
-	 * Handles security controller updates.
-	 * @param event The event.
-	 */
-	@MENetworkEventSubscribe
-	public void onControllerChange (SecurityControllerUpdateEvent event) {
-		this.updateMetadata ();
-	}
-
-	/**
-	 * Handles power status updates.
-	 * @param event The event.
-	 */
-	@MENetworkEventSubscribe
-	public void onPowerStatusChange (MENetworkPowerStatusChange event) {
-		this.updateMetadata ();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void onReady () {
-		super.onReady ();
-
-		this.updateMetadata ();
 	}
 }

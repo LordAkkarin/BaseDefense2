@@ -27,6 +27,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automating block entity registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -37,6 +38,7 @@ public @interface BlockEntityType {
 
 	/**
 	 * Defines the block entity identifier.
+	 *
 	 * @return The identifier.
 	 */
 	public String value ();

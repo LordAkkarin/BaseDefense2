@@ -26,6 +26,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.BlockEntityType;
 
 /**
  * Provides a registry scanner for block entities.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class BlockEntityTypeRegistryScanner implements IRegistryScanner<BlockEntityType> {

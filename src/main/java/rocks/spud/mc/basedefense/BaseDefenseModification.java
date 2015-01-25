@@ -35,6 +35,7 @@ public class BaseDefenseModification {
 
 	/**
 	 * Defines the api version.
+	 *
 	 * @todo Change to correct API revision.
 	 */
 	public static final String API_VERSION = "1.0.0-SNAPSHOT";
@@ -92,6 +93,7 @@ public class BaseDefenseModification {
 
 	/**
 	 * Builds a translation identifier.
+	 *
 	 * @param prefix The prefix.
 	 * @param module The module.
 	 * @param element The element.
@@ -103,6 +105,7 @@ public class BaseDefenseModification {
 
 	/**
 	 * Builds a translation identifier.
+	 *
 	 * @param module The module.
 	 * @param element The element.
 	 * @return The identifier.

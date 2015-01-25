@@ -29,6 +29,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.client.BlockItemRendere
 
 /**
  * Provides a scanner for block item specific renderers.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class BlockItemRendererRegistryScanner implements IRegistryScanner<BlockItemRendererType> {

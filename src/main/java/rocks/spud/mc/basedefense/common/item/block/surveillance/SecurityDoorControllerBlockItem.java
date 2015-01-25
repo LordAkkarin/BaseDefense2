@@ -31,6 +31,7 @@ public class SecurityDoorControllerBlockItem extends ItemBlock {
 
 	/**
 	 * Constructs a new SecurityDoorControllerBlockItem.
+	 *
 	 * @param p_i45328_1_ The parent block.
 	 */
 	public SecurityDoorControllerBlockItem (Block p_i45328_1_) {

@@ -28,6 +28,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automating block registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -37,14 +38,16 @@ import java.lang.annotation.Target;
 public @interface BlockType {
 
 	/**
-	 * Defines the block identifier.
-	 * @return The identifier.
-	 */
-	public String value ();
-
-	/**
 	 * Defines the item type.
+	 *
 	 * @return The item type.
 	 */
 	public Class<? extends ItemBlock> item () default ItemBlock.class;
+
+	/**
+	 * Defines the block identifier.
+	 *
+	 * @return The identifier.
+	 */
+	public String value ();
 }

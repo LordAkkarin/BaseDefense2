@@ -18,6 +18,7 @@ package rocks.spud.mc.basedefense.api.surveillance.network.cache;
 
 /**
  * Provides a list of possible controller states.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public enum SecurityControllerState {

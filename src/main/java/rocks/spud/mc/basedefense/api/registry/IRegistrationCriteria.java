@@ -20,12 +20,14 @@ import net.minecraftforge.common.config.Configuration;
 
 /**
  * Provides a definition fo registration criteria that is checked by registries before performing any actions.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public interface IRegistrationCriteria {
 
 	/**
 	 * Checks whether a specific criteria is met.
+	 *
 	 * @param configuration The configuration.
 	 * @return True if criteria is met.
 	 */

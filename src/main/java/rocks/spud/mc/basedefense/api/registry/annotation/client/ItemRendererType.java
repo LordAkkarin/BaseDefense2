@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automated render type registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -40,6 +41,7 @@ public @interface ItemRendererType {
 
 	/**
 	 * Defines the item type.
+	 *
 	 * @return The item type.
 	 */
 	public Class<? extends Item> value ();

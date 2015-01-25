@@ -18,6 +18,7 @@ package rocks.spud.mc.basedefense.api.error;
 
 /**
  * Provides an exception for registry registration error cases.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class RegistryRegistrationException extends RegistryException {
@@ -31,6 +32,7 @@ public class RegistryRegistrationException extends RegistryException {
 
 	/**
 	 * Constructs a new RegistryRegistrationException.
+	 *
 	 * @param s The error message.
 	 */
 	public RegistryRegistrationException (String s) {
@@ -39,6 +41,7 @@ public class RegistryRegistrationException extends RegistryException {
 
 	/**
 	 * Constructs a new RegistryRegistrationException.
+	 *
 	 * @param s The error message.
 	 * @param throwable The error cause.
 	 */
@@ -48,6 +51,7 @@ public class RegistryRegistrationException extends RegistryException {
 
 	/**
 	 * Constructs a new RegistryRegistrationException.
+	 *
 	 * @param throwable The error cause.
 	 */
 	public RegistryRegistrationException (Throwable throwable) {

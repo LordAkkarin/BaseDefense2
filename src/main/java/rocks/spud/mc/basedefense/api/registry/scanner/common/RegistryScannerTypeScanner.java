@@ -26,6 +26,7 @@ import java.lang.annotation.Annotation;
 
 /**
  * Provides a scanner for annotation scanners.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class RegistryScannerTypeScanner implements IRegistryScanner<RegistrationAnnotation> {

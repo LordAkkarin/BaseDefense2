@@ -26,6 +26,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.ItemType;
 
 /**
  * Provides an annotation scanner for item types.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class ItemTypeRegistryScanner implements IRegistryScanner<ItemType> {

@@ -29,10 +29,11 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automating block renderer registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
 @Target (ElementType.TYPE)
 @RegistrationAnnotation (value = BlockRendererRegistryScanner.class, type = ISimpleBlockRenderingHandler.class)
 @ScannerPriority (ScannerPriorityType.LOW)
-public @interface BlockRendererType { }
+public @interface BlockRendererType {}

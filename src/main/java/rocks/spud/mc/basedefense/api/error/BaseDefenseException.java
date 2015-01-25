@@ -18,6 +18,7 @@ package rocks.spud.mc.basedefense.api.error;
 
 /**
  * Provides a base exception for all modification error cases.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public abstract class BaseDefenseException extends Exception {
@@ -31,6 +32,7 @@ public abstract class BaseDefenseException extends Exception {
 
 	/**
 	 * Constructs a new BaseDefenseException.
+	 *
 	 * @param s The error message.
 	 */
 	public BaseDefenseException (String s) {
@@ -39,6 +41,7 @@ public abstract class BaseDefenseException extends Exception {
 
 	/**
 	 * Constructs a new BaseDefenseException.
+	 *
 	 * @param s The error message.
 	 * @param throwable The error cause.
 	 */
@@ -48,6 +51,7 @@ public abstract class BaseDefenseException extends Exception {
 
 	/**
 	 * Constructs a new BaseDefenseException.
+	 *
 	 * @param throwable The error cause.
 	 */
 	public BaseDefenseException (Throwable throwable) {

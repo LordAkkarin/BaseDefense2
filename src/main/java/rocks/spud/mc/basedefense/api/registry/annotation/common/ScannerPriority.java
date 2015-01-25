@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for defining scanner priorities.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -33,6 +34,7 @@ public @interface ScannerPriority {
 
 	/**
 	 * Defines the scanner priority.
+	 *
 	 * @return The priority.
 	 */
 	public ScannerPriorityType value ();

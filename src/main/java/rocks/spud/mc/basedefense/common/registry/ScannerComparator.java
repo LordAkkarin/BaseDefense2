@@ -24,6 +24,7 @@ import java.util.Comparator;
 
 /**
  * Provides a comparator for scanners.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class ScannerComparator implements Comparator<Class<? extends Annotation>> {

@@ -27,6 +27,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.BlockType;
 
 /**
  * Provides a registry scanner for block type definitions.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public class BlockTypeRegistryScanner implements IRegistryScanner<BlockType> {

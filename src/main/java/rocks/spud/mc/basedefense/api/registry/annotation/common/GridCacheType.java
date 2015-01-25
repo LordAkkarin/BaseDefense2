@@ -27,6 +27,7 @@ import java.lang.annotation.Target;
 
 /**
  * Provides an annotation for automated grid cache registrations.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @Retention (RetentionPolicy.RUNTIME)
@@ -37,6 +38,7 @@ public @interface GridCacheType {
 
 	/**
 	 * Defines the parent interface.
+	 *
 	 * @return The interface.
 	 */
 	public Class<? extends IGridCache> value ();

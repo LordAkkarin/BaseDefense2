@@ -21,18 +21,21 @@ import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetwor
 
 /**
  * Provides a base definition for the security grid cache.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 public interface ISecurityGridCache extends IGridCache {
 
 	/**
 	 * Returns the currently active controller (or null if the state is invalid).
+	 *
 	 * @return The controller.
 	 */
 	public ISecurityNetworkController getController ();
 
 	/**
 	 * Returns the current controller state within the network.
+	 *
 	 * @return The controller state.
 	 */
 	public SecurityControllerState getControllerState ();

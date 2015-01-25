@@ -22,6 +22,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCrit
 
 /**
  * Provides a criteria implementation for the surveillance module.
+ *
  * @author {@literal Johannes Donath <johannesd@torchmind.com>}
  */
 @RegistrationCriteria (AppliedEnergisticsIntegrationCriteria.class)
