@@ -50,6 +50,8 @@ public class SecurityDoorBlock extends Block implements ITileEntityProvider {
 
 		this.setBlockName (BaseDefenseModification.getTranslation ("surveillance", "security_door"));
 		this.setBlockTextureName ("basedefense2:surveillance/security_door");
+		this.setResistance (6000);
+		this.setHardness (-1);
 	}
 
 	/**
@@ -73,10 +75,15 @@ public class SecurityDoorBlock extends Block implements ITileEntityProvider {
 
 		switch (rotation) {
 			case 0:
+			case 1:
 				return AxisAlignedBB.getBoundingBox (x, y, (z + 0.35d), (x + 1.0d), (y + 1.0d), (z + 0.65d));
 			case 2:
+			case 3:
 				return AxisAlignedBB.getBoundingBox (x, (y + 0.65d), z, (x + 1.0d), (y + 0.65d), (z + 0.1d));
-			case 1:
+			case 4:
+			case 5:
+			case 6:
+			case 7:
 			default:
 				return AxisAlignedBB.getBoundingBox ((x + 0.35d), y, z, (x + 0.65d), (y+ 1.0d), (z + 1.0d));
 		}
