@@ -234,7 +234,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 		this.forcedOffline = force;
 
 		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
-		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
+		this.updateMetadata ();
 	}
 
 	/**
