@@ -31,7 +31,6 @@ import appeng.tile.inventory.InvOperation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lombok.Getter;
-import lombok.Setter;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -41,6 +40,7 @@ import rocks.spud.mc.basedefense.api.registry.annotation.common.RegistrationCrit
 import rocks.spud.mc.basedefense.api.registry.criteria.SurveillanceFeatureCriteria;
 import rocks.spud.mc.basedefense.api.surveillance.network.cache.ISecurityGridCache;
 import rocks.spud.mc.basedefense.api.surveillance.network.entity.ISecurityNetworkDetector;
+import rocks.spud.mc.basedefense.api.surveillance.network.event.communication.CameraForceOfflineRequestEvent;
 import rocks.spud.mc.basedefense.api.surveillance.network.event.controller.SecurityControllerUpdateEvent;
 import rocks.spud.mc.basedefense.common.network.cache.SecurityGridCache;
 
@@ -81,7 +81,6 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	/**
 	 * Stores the active camera state.
 	 */
-	@Setter
 	@Getter
 	private boolean forcedOffline = false;
 
@@ -96,6 +95,12 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	 */
 	@SideOnly (Side.CLIENT)
 	private int bodyRotationDirection = 1;
+
+	/**
+	 * Stores the camera group name.
+	 */
+	@Getter
+	private String groupName = null;
 
 	/**
 	 * Constructs a new CameraBlockEntity.
@@ -217,6 +222,16 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	}
 
 	/**
+	 * Handles force offline requests.
+	 * @param event The event.
+	 */
+	@MENetworkEventSubscribe
+	public void onForceOfflineRequest (CameraForceOfflineRequestEvent event) {
+		if (!event.getGroupName ().equalsIgnoreCase (this.groupName)) return;
+		this.setForcedOffline (event.isForceOffline ());
+	}
+
+	/**
 	 * Handles power status updates.
 	 *
 	 * @param event The event.
@@ -230,11 +245,23 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	 * Sets whether the camera is forced to be offline.
 	 * @param force The force value.
 	 */
-	public void setForceOffline (boolean force) {
+	public void setForcedOffline (boolean force) {
 		this.forcedOffline = force;
 
 		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
 		this.updateMetadata ();
+	}
+
+	/**
+	 * Sets a new camera group name.
+	 * @param groupName The group name.
+	 */
+	public void setGroupName (String groupName) {
+		if (groupName != null && groupName.isEmpty ()) groupName = null;
+		this.groupName = groupName;
+
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
 	}
 
 	/**
