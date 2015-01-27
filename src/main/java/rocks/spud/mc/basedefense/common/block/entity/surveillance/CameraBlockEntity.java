@@ -31,6 +31,7 @@ import appeng.tile.inventory.InvOperation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lombok.Getter;
+import lombok.NonNull;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -100,7 +101,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	 * Stores the camera group name.
 	 */
 	@Getter
-	private String groupName = null;
+	private String groupName = "";
 
 	/**
 	 * Constructs a new CameraBlockEntity.
@@ -256,8 +257,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	 * Sets a new camera group name.
 	 * @param groupName The group name.
 	 */
-	public void setGroupName (String groupName) {
-		if (groupName != null && groupName.isEmpty ()) groupName = null;
+	public void setGroupName (@NonNull String groupName) {
 		this.groupName = groupName;
 
 		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
