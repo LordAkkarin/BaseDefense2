@@ -30,6 +30,8 @@ import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.tile.inventory.InvOperation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -75,6 +77,13 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	 * Stores the internal stub inventory slots.
 	 */
 	public static final int[] SIDES = new int[0];
+
+	/**
+	 * Stores the active camera state.
+	 */
+	@Setter
+	@Getter
+	private boolean forcedOffline = false;
 
 	/**
 	 * Stores the body rotation.
@@ -218,6 +227,17 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 	}
 
 	/**
+	 * Sets whether the camera is forced to be offline.
+	 * @param force The force value.
+	 */
+	public void setForceOffline (boolean force) {
+		this.forcedOffline = force;
+
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
+	}
+
+	/**
 	 * Updates the block metadata.
 	 */
 	public void updateMetadata () {
@@ -242,6 +262,7 @@ public class CameraBlockEntity extends AENetworkPowerTile implements ISecurityNe
 			active = false;
 		}
 
+		if (this.forcedOffline) active = false;
 		this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, buildMetadata (active, this.getRotation ()), 2);
 	}
 }
