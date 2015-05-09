@@ -1,0 +1,114 @@
+/*
+ * Copyright 2015 Johannes Donath <johannesd@torchmind.com>
+ * and other copyright owners as documented in the project's IP log.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* === Build Script Configuration === */
+apply plugin: 'forge'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'wrapper'
+
+buildscript {
+        repositories {
+                mavenCentral ()
+                maven {
+                        name = "forge"
+                        url = "http://files.minecraftforge.net/maven"
+                }
+                maven {
+                        name = "sonatype"
+                        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+                }
+        }
+        dependencies {
+                classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        }
+}
+
+sourceSets {
+        main {
+                java {
+                        srcDirs += 'src/api/java'
+                        srcDirs += 'src/main/java'
+                }
+
+                resources {
+                        srcDir "src/main/resources"
+                        include "assets/basedefense2/recipes/*.recipe",
+                                "assets/basedefense2/lang/*.lang",
+                                "assets/basedefense2/textures/blocks/*",
+                                "assets/basedefense2/textures/guis/*",
+                                "assets/basedefense2/textures/models/*",
+                                "assets/basedefense2/textures/items/*",
+                                "assets/basedefense2/meta/*",
+                                "mcmod.info",
+                                "pack.mcmeta"
+                }
+        }
+
+        api {
+                java {
+                        srcDirs += 'src/api/java'
+                }
+        }
+}
+
+apply from: 'gradle/config.gradle'
+apply from: 'gradle/dependencies.gradle'
+apply from: 'gradle/artifacts.gradle'
+apply from: 'gradle/ide.gradle'
+
+/* === Project Configuration === */
+version = "${config.version.modification}"
+group = "io.github.lordakkarin" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "basedefense"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+/* === Forge Configuration === */
+minecraft {
+        version = "${config.version.minecraft}-${config.version.forge}"
+        runDir = "run"
+}
+
+/* === Jar & Source Configuration === */
+jar {
+        manifest {
+                attributes 'FMLCorePlugin': 'basedefense.core.BaseDefenseCoreModification'
+                attributes 'FMLCorePluginContainsFMLMod': 'true'
+        }
+
+        include "basedefense/**"
+        include "assets/**"
+        include "mcmod.info"
+        include "pack.mcmeta"
+}
+
+/* === Resource Configuration === */
+processResources {
+        inputs.property "version", project.version
+        inputs.property "mcversion", project.minecraft.version
+
+        from (sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+                expand 'version': project.version, 'mcversion': project.minecraft.version
+        }
+
+        from (sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+        }
+}
