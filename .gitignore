@@ -1,0 +1,19 @@
+#=========#
+# Project #
+#=========#
+.gradle/
+build/
+run/
+
+#==========#
+# IntelliJ #
+#==========#
+*.iml
+*.ipr
+*.iws
+
+#=========#
+# Blender #
+#=========#
+*.mtl
+*.blend1
