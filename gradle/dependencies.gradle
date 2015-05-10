@@ -40,9 +40,9 @@ repositories {
 }
 
 dependencies {
-        compile "codechicken:ForgeMultipart:${config.version.minecraft}-${config.version.fmp}:dev"
-        compile "codechicken:CodeChickenLib:${config.version.minecraft}-${config.version.codechicken.lib}:dev"
+        // compile "codechicken:ForgeMultipart:${config.version.minecraft}-${config.version.fmp}:dev"
+        /* compile "codechicken:CodeChickenLib:${config.version.minecraft}-${config.version.codechicken.lib}:dev"
         compile "codechicken:CodeChickenCore:${config.version.minecraft}-${config.version.codechicken.core}:dev"
-        compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev"
+        compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev" */
         provided "org.projectlombok:lombok:1.14.8"
 }
