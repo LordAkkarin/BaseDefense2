@@ -104,20 +104,18 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
                 getModel ().renderPart ("Needle_Cube");
 
                 VialType vialType = DNANeedleItem.getVialType (itemStack);
-
-                switch (vialType) {
-                        case NONE: break;
-                        case PLAYER:
-                                Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_player.png"));
-                                getModel ().renderPart ("Vial_Content_Cube.002");
-                                break;
-                        case ENTITY:
-                                Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_mob.png"));
-                                getModel ().renderPart ("Vial_Content_Cube.002");
-                                break;
-                }
-
                 if (vialType == VialType.EMPTY || vialType == VialType.PLAYER || vialType == VialType.ENTITY) {
+                        switch (vialType) {
+                                case PLAYER:
+                                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_player.png"));
+                                        break;
+                                case ENTITY:
+                                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_mob.png"));
+                                        break;
+                        }
+
+                        if (vialType != VialType.EMPTY) getModel ().renderPart ("Vial_Content_Cube.002");
+
                         Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle.png"));
                         getModel ().renderPart ("Vial_Cube.001");
                 }
