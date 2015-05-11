@@ -98,6 +98,8 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
          * @param itemStack The item stack.
          */
         private void renderModel (ItemStack itemStack) {
+                GL11.glEnable (GL11.GL_BLEND);
+
                 Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle.png"));
                 getModel ().renderPart ("Needle_Cube");
 
@@ -119,5 +121,7 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
                         Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle.png"));
                         getModel ().renderPart ("Vial_Cube.001");
                 }
+
+                GL11.glDisable (GL11.GL_BLEND);
         }
 }
