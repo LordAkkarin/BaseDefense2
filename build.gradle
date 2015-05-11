@@ -54,6 +54,7 @@ sourceSets {
                                 "assets/basedefense2/textures/models/*",
                                 "assets/basedefense2/textures/items/*",
                                 "assets/basedefense2/meta/*",
+                                "assets/basedefense2/models/*.obj",
                                 "mcmod.info",
                                 "pack.mcmeta"
                 }
