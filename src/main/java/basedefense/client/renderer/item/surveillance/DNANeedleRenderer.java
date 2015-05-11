@@ -52,7 +52,6 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
         @Override
         protected void renderInventory (ItemStack itemStack, Object... data) {
                 GL11.glScalef (0.125f, 0.125f, 0.125f);
-                GL11.glTranslatef (0.0f, 1f, 0.0f);
                 this.renderModel (itemStack);
         }
 
