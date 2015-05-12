@@ -68,23 +68,35 @@ public class BaseDefenseModification {
                 this.getLogger ().info ("Version Check");
                 long initializationTime = System.currentTimeMillis ();
 
-                this.latestVersion = (new ModificationVersionCheck ()).check ();
-                this.latestVersion.ifPresent (v -> {
-                        if (v.equalsIgnoreCase (this.getVersion ()) || Boolean.getBoolean (System.getProperty ("iKnowThatIAmRunningAnOutdatedUnsupportedVersion"))) return;
 
-                        this.getLogger ().warn ("+--------------------------------+");
-                        this.getLogger ().warn ("+          Base Defense          +");
-                        this.getLogger ().warn ("+          is outdated!          +");
-                        this.getLogger ().warn ("+--------------------------------+");
-                        this.getLogger ().warn ("+  The support for this version  +");
-                        this.getLogger ().warn ("+  Has been discontinued.        +");
-                        this.getLogger ().warn ("+  Please update to a newer      +");
-                        this.getLogger ().warn ("+  release!                      +");
-                        this.getLogger ().warn ("+--------------------------------+");
-                        this.getLogger ().warn ("+  Installed: " + StringUtils.rightPad (this.getVersion (), 17) + "  +");
-                        this.getLogger ().warn ("+  Latest:    " + StringUtils.rightPad (v, 17) + "  +");
-                        this.getLogger ().warn ("+--------------------------------+");
-                });
+                if (!Boolean.valueOf (System.getProperty ("basedefense.disableVersionCheck", "false"))) {
+                        this.latestVersion = (new ModificationVersionCheck ()).check ();
+                        this.latestVersion.ifPresent (v -> {
+                                if (v.equalsIgnoreCase (this.getVersion ())) return;
+
+                                this.getLogger ().warn ("+--------------------------------+");
+                                this.getLogger ().warn ("+          Base Defense          +");
+                                this.getLogger ().warn ("+          is outdated!          +");
+                                this.getLogger ().warn ("+--------------------------------+");
+                                this.getLogger ().warn ("+  The support for this version  +");
+                                this.getLogger ().warn ("+  has been discontinued.        +");
+                                this.getLogger ().warn ("+  Please update to a newer      +");
+                                this.getLogger ().warn ("+  release!                      +");
+                                this.getLogger ().warn ("+--------------------------------+");
+                                this.getLogger ().warn ("+  Installed: " + StringUtils.rightPad (this.getVersion (), 17) + "  +");
+                                this.getLogger ().warn ("+  Latest:    " + StringUtils.rightPad (v, 17) + "  +");
+                                this.getLogger ().warn ("+--------------------------------+");
+                        });
+                } else {
+                        this.latestVersion = Optional.empty ();
+
+                        this.getLogger ().warn ("+---------------------------------+");
+                        this.getLogger ().warn ("+          VERSION CHECK          +");
+                        this.getLogger ().warn ("+             DISABLED            +");
+                        this.getLogger ().warn ("+---------------------------------+");
+                        this.getLogger ().warn ("+  Installed: " + StringUtils.rightPad (this.getVersion (), 18) + "  +");
+                        this.getLogger ().warn ("+---------------------------------+");
+                }
 
                 this.getLogger ().info ("Version Check ended (took " + (System.currentTimeMillis () - initializationTime) + " ms)");
         }
