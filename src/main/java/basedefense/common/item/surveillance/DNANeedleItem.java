@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 /**
+ * Provides an item for acquiring DNA vials from players and living entities.
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class DNANeedleItem extends Item {

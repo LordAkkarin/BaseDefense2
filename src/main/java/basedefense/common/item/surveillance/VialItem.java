@@ -29,6 +29,7 @@ import net.minecraft.util.IIcon;
 import java.util.List;
 
 /**
+ * Provides an item for storing player and living entity DNA samples.
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class VialItem extends Item {

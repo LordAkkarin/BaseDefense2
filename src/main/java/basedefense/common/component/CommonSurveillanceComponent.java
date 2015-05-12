@@ -24,6 +24,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.config.Configuration;
 
 /**
+ * Provides an {@link ICommonComponent} implementation for surveillance related gameplay elements.
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class CommonSurveillanceComponent extends AbstractCommonComponent {

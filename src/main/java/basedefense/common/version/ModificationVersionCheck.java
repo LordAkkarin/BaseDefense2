@@ -33,6 +33,7 @@ import java.io.InputStreamReader;
 import java.util.Optional;
 
 /**
+ * Provides a simple utility class for retrieving version information.
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ModificationVersionCheck {

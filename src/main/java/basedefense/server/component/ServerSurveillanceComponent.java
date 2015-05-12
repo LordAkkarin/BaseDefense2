@@ -20,6 +20,7 @@ import basedefense.common.component.CommonSurveillanceComponent;
 import basedefense.common.component.ComponentManager;
 
 /**
+ * Provides a server side implementation of {@link CommonSurveillanceComponent}.
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ServerSurveillanceComponent extends CommonSurveillanceComponent implements IServerComponent {
