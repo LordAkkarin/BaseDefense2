@@ -45,4 +45,11 @@ dependencies {
         compile "codechicken:CodeChickenCore:${config.version.minecraft}-${config.version.codechicken.core}:dev"
         compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev" */
         provided "org.projectlombok:lombok:1.14.8"
+
+        // == Applied Energistics 2 ==
+        compile ("appeng:appliedenergistics2:${config.version.ae2}:dev") {
+                // IC2 does not seem to be anywhere in our dependency repositories. Thus we will just exclude it from
+                // our builds to fix this problem
+                exclude group: 'net.industrial-craft'
+        }
 }
