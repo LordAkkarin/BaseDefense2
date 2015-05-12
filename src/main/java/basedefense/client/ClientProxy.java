@@ -16,9 +16,13 @@
  */
 package basedefense.client;
 
-import basedefense.common.CommonProxy;
+import basedefense.BaseDefenseModification;
 import basedefense.client.component.IClientComponent;
+import basedefense.client.renderer.gui.OutdatedVersionGUIRenderer;
+import basedefense.common.CommonProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Handles the {@link cpw.mods.fml.relauncher.Side#CLIENT} initialization.
@@ -39,6 +43,19 @@ public class ClientProxy extends CommonProxy {
                         component.registerBlockRenderers ();
                         component.registerItemRenderers ();
                         component.registerBlockEntityRenderers ();
+                });
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void onPostInitialization (FMLPostInitializationEvent event) {
+                super.onPostInitialization (event);
+
+                BaseDefenseModification.getInstance ().getLatestVersion ().ifPresent (v -> {
+                        if (v.equalsIgnoreCase (BaseDefenseModification.getInstance ().getVersion ())) return;
+                        MinecraftForge.EVENT_BUS.register (new OutdatedVersionGUIRenderer (BaseDefenseModification.getInstance ().getVersion (), v));
                 });
         }
 }
