@@ -18,6 +18,7 @@ package basedefense.common.component;
 
 import basedefense.common.item.surveillance.DNANeedleItem;
 import basedefense.common.item.surveillance.VialItem;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.config.Configuration;
@@ -36,7 +37,7 @@ public abstract class CommonSurveillanceComponent extends AbstractCommonComponen
          */
         @Override
         public boolean isActivated (FMLPreInitializationEvent event, Configuration configuration) {
-                return configuration.getBoolean ("surveillance", "feature", true, "Enables surveillance features (cameras, security bots, etc).");
+                return configuration.getBoolean ("surveillance", "feature", true, "Enables surveillance features (cameras, security bots, etc).") && Loader.isModLoaded ("appliedenergistics2");
         }
 
         /**
