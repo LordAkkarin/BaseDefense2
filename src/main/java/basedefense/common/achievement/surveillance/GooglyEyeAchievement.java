@@ -33,6 +33,7 @@ import java.util.Map;
 
 /**
  * Provides an achievement for acquiring the {@link basedefense.common.item.surveillance.GooglyGlassesItem} item.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class GooglyEyeAchievement extends AbstractAchievement {
@@ -51,6 +52,20 @@ public class GooglyEyeAchievement extends AbstractAchievement {
          * {@inheritDoc}
          */
         @SuppressWarnings ("unchecked")
+        @Override
+        public void award (@NonNull EntityPlayer player) {
+                if (player.worldObj.isRemote) {
+                        BaseDefenseAchievementPage.PAGE.addAchievement (this);
+                        AchievementList.achievementList.add (this);
+                }
+
+                super.award (player);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @SuppressWarnings ("unchecked")
         @SneakyThrows
         @Override
         public Achievement registerStat () {
@@ -61,19 +76,5 @@ public class GooglyEyeAchievement extends AbstractAchievement {
                 Map map = ((Map) oneShotStats.get (null));
                 map.put (this.statId, this);
                 return this;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @SuppressWarnings ("unchecked")
-        @Override
-        public void award (@NonNull EntityPlayer player) {
-                if (player.worldObj.isRemote) {
-                        BaseDefenseAchievementPage.PAGE.addAchievement (this);
-                        AchievementList.achievementList.add (this);
-                }
-
-                super.award (player);
         }
 }

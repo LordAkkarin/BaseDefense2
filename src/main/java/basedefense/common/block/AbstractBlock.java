@@ -22,6 +22,7 @@ import net.minecraft.block.material.Material;
 
 /**
  * Provides an abstract implementation of {@link Block}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class AbstractBlock extends Block {
@@ -34,19 +35,20 @@ public abstract class AbstractBlock extends Block {
         }
 
         /**
-         * Registers a new render handler.
-         * @return The render handler.
-         */
-        protected ISimpleBlockRenderingHandler registerRenderType () {
-                return null;
-        }
-
-        /**
          * {@inheritDoc}
          */
         @Override
         public int getRenderType () {
                 if (this.renderType == null) return super.getRenderType ();
                 return this.renderType.getRenderId ();
+        }
+
+        /**
+         * Registers a new render handler.
+         *
+         * @return The render handler.
+         */
+        protected ISimpleBlockRenderingHandler registerRenderType () {
+                return null;
         }
 }

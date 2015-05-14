@@ -22,6 +22,7 @@ import basedefense.util.RegistrationUtility;
 
 /**
  * Provides an achievement for acquiring the {@link basedefense.common.item.surveillance.DNANeedleItem} item.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class NeedlerAchievement extends AbstractAchievement {

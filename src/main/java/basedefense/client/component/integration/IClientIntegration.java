@@ -20,6 +20,7 @@ import basedefense.common.component.integration.ICommonIntegration;
 
 /**
  * Provides a client side version of {@link ICommonIntegration}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public interface IClientIntegration extends ICommonIntegration {

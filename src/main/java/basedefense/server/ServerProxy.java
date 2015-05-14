@@ -20,6 +20,7 @@ import basedefense.common.CommonProxy;
 
 /**
  * Handles the {@link cpw.mods.fml.relauncher.Side#SERVER} initialization.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ServerProxy extends CommonProxy {

@@ -25,6 +25,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Provides a client side implementation of {@link CommonNotEnoughItemsIntegration}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ClientNotEnoughItemsIntegration extends CommonNotEnoughItemsIntegration implements IClientIntegration {

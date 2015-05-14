@@ -30,10 +30,11 @@ import net.minecraftforge.common.util.EnumHelper;
 
 /**
  * Provides a pair of glasses ... ...
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class GooglyGlassesItem extends ItemArmor {
-        private static final ArmorMaterial MATERIAL = EnumHelper.addArmorMaterial ("googly", 33, new int[]{ 1, 3, 2, 1 }, 0);
+        private static final ArmorMaterial MATERIAL = EnumHelper.addArmorMaterial ("googly", 33, new int[]{1, 3, 2, 1}, 0);
         public static final GooglyGlassesItem ITEM = new GooglyGlassesItem ();
         public static final String NAME = RegistrationUtility.getName ("surveillance", "googly_glasses");
 
@@ -55,6 +56,7 @@ public class GooglyGlassesItem extends ItemArmor {
 
         /**
          * Checks whether the local player is wearing the glasses.
+         *
          * @return True if wearing.
          */
         @SideOnly (Side.CLIENT)

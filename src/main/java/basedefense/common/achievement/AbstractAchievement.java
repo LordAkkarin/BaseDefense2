@@ -16,7 +16,6 @@
  */
 package basedefense.common.achievement;
 
-import basedefense.common.achievement.BaseDefenseAchievementPage;
 import lombok.NonNull;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +25,7 @@ import net.minecraft.stats.Achievement;
 
 /**
  * Provides an abstract implementation of {@link Achievement}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class AbstractAchievement extends Achievement {
@@ -43,6 +43,15 @@ public abstract class AbstractAchievement extends Achievement {
         }
 
         /**
+         * Awards the achievement to a player.
+         *
+         * @param player The player.
+         */
+        public void award (@NonNull EntityPlayer player) {
+                player.addStat (this, 1);
+        }
+
+        /**
          * {@inheritDoc}
          */
         @Override
@@ -50,13 +59,5 @@ public abstract class AbstractAchievement extends Achievement {
                 super.registerStat ();
                 BaseDefenseAchievementPage.PAGE.addAchievement (this);
                 return this;
-        }
-
-        /**
-         * Awards the achievement to a player.
-         * @param player The player.
-         */
-        public void award (@NonNull EntityPlayer player) {
-                player.addStat (this, 1);
         }
 }

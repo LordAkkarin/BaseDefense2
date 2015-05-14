@@ -29,6 +29,7 @@ import org.lwjgl.opengl.GL11;
 
 /**
  * Provides a renderer for {@link basedefense.common.item.surveillance.DNANeedleItem}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class DNANeedleRenderer extends AbstractItemRenderer {
@@ -50,8 +51,7 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
          * {@inheritDoc}
          */
         @Override
-        protected void renderInventory (ItemStack itemStack, Object... data) {
-                GL11.glScalef (0.125f, 0.125f, 0.125f);
+        protected void renderEquipped (ItemRenderType type, ItemStack itemStack, Object... data) {
                 this.renderModel (itemStack);
         }
 
@@ -59,8 +59,40 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
          * {@inheritDoc}
          */
         @Override
-        protected void renderEquipped (ItemRenderType type, ItemStack itemStack, Object... data) {
+        protected void renderInventory (ItemStack itemStack, Object... data) {
+                GL11.glScalef (0.125f, 0.125f, 0.125f);
                 this.renderModel (itemStack);
+        }
+
+        /**
+         * Renders the needle model based on item attributes.
+         *
+         * @param itemStack The item stack.
+         */
+        private void renderModel (ItemStack itemStack) {
+                GL11.glEnable (GL11.GL_BLEND);
+
+                Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle.png"));
+                getModel ().renderPart ("Needle_Cube");
+
+                VialType vialType = DNANeedleItem.getVialType (itemStack);
+                if (vialType == VialType.EMPTY || vialType == VialType.PLAYER || vialType == VialType.ENTITY) {
+                        switch (vialType) {
+                                case PLAYER:
+                                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_player.png"));
+                                        break;
+                                case ENTITY:
+                                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_mob.png"));
+                                        break;
+                        }
+
+                        if (vialType != VialType.EMPTY) getModel ().renderPart ("Vial_Content_Cube.002");
+
+                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle.png"));
+                        getModel ().renderPart ("Vial_Cube.001");
+                }
+
+                GL11.glDisable (GL11.GL_BLEND);
         }
 
         /**
@@ -90,35 +122,5 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
         protected void setupEquippedFirstPerson (ItemStack itemStack, Object... data) {
                 GL11.glRotatef (-65, 0.0f, 1.0f, 0.0f);
                 GL11.glTranslatef (-2.5f, 3.0f, 1.0f);
-        }
-
-        /**
-         * Renders the needle model based on item attributes.
-         * @param itemStack The item stack.
-         */
-        private void renderModel (ItemStack itemStack) {
-                GL11.glEnable (GL11.GL_BLEND);
-
-                Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle.png"));
-                getModel ().renderPart ("Needle_Cube");
-
-                VialType vialType = DNANeedleItem.getVialType (itemStack);
-                if (vialType == VialType.EMPTY || vialType == VialType.PLAYER || vialType == VialType.ENTITY) {
-                        switch (vialType) {
-                                case PLAYER:
-                                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_player.png"));
-                                        break;
-                                case ENTITY:
-                                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle_mob.png"));
-                                        break;
-                        }
-
-                        if (vialType != VialType.EMPTY) getModel ().renderPart ("Vial_Content_Cube.002");
-
-                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/dna_needle.png"));
-                        getModel ().renderPart ("Vial_Cube.001");
-                }
-
-                GL11.glDisable (GL11.GL_BLEND);
         }
 }

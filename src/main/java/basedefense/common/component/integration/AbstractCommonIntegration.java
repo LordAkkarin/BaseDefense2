@@ -21,6 +21,7 @@ import lombok.Getter;
 
 /**
  * Provides an abstract implementation of {@link ICommonIntegration}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class AbstractCommonIntegration implements ICommonIntegration {

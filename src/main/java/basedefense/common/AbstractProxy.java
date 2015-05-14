@@ -26,6 +26,7 @@ import net.minecraftforge.common.AchievementPage;
 
 /**
  * Provides a base proxy implementation.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class AbstractProxy {
@@ -38,15 +39,8 @@ public abstract class AbstractProxy {
         }
 
         /**
-         * Handles the modification pre-initialization.
-         * @param event The event.
-         */
-        public void onPreInitialization (FMLPreInitializationEvent event) {
-                this.componentManager.activateComponents (event);
-        }
-
-        /**
          * Handles the modification initialization.
+         *
          * @param event The event.
          */
         public void onInitialization (FMLInitializationEvent event) {
@@ -66,10 +60,20 @@ public abstract class AbstractProxy {
 
         /**
          * Handles the modification post-initialization.
+         *
          * @param event The event.
          */
         public void onPostInitialization (FMLPostInitializationEvent event) {
                 this.componentManager.activateIntegrations (event);
+        }
+
+        /**
+         * Handles the modification pre-initialization.
+         *
+         * @param event The event.
+         */
+        public void onPreInitialization (FMLPreInitializationEvent event) {
+                this.componentManager.activateComponents (event);
         }
 
         /**

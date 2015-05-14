@@ -35,6 +35,7 @@ import java.util.List;
 
 /**
  * Provides an item for acquiring DNA vials from players and living entities.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class DNANeedleItem extends Item {
@@ -67,7 +68,8 @@ public class DNANeedleItem extends Item {
                 NBTTagCompound compound = p_77624_1_.getTagCompound ();
 
                 switch (type) {
-                        case NONE: break;
+                        case NONE:
+                                break;
                         case EMPTY:
                                 p_77624_3_.add (LanguageRegistry.instance ().getStringLocalization ("basedefense.gui.surveillance.dna_needle.empty"));
                                 break;
@@ -81,7 +83,25 @@ public class DNANeedleItem extends Item {
         }
 
         /**
+         * {@inheritDoc}
+         */
+        @SuppressWarnings ("unchecked")
+        @Override
+        public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
+                super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
+
+                ItemStack itemStack = new ItemStack (p_150895_1_, 1, 0);
+                NBTTagCompound compound = itemStack.getTagCompound ();
+                if (compound == null) compound = new NBTTagCompound ();
+                compound.setBoolean ("vial", true);
+                itemStack.setTagCompound (compound);
+
+                p_150895_3_.add (itemStack);
+        }
+
+        /**
          * Retrieves the type of vial attached to the item.
+         *
          * @param itemStack The item stack.
          * @return The vial type.
          */
@@ -96,17 +116,8 @@ public class DNANeedleItem extends Item {
         }
 
         /**
-         * Checks whether a needle item has an empty vial attached to it.
-         * @param itemStack The item stack.
-         * @return True if an empty vial is present.
-         */
-        public static boolean isVialEmpty (@NonNull ItemStack itemStack) {
-                NBTTagCompound compound = itemStack.getTagCompound ();
-                return compound != null && !(compound.hasKey ("playerID") || compound.hasKey ("entityID"));
-        }
-
-        /**
          * Checks whether a needle item has a vial attached to it.
+         *
          * @param itemStack The item stack.
          * @return True if a vial is present.
          */
@@ -135,6 +146,17 @@ public class DNANeedleItem extends Item {
                         p_77644_1_.damageItem (1, p_77644_2_);
 
                 return true;
+        }
+
+        /**
+         * Checks whether a needle item has an empty vial attached to it.
+         *
+         * @param itemStack The item stack.
+         * @return True if an empty vial is present.
+         */
+        public static boolean isVialEmpty (@NonNull ItemStack itemStack) {
+                NBTTagCompound compound = itemStack.getTagCompound ();
+                return compound != null && !(compound.hasKey ("playerID") || compound.hasKey ("entityID"));
         }
 
         /**
@@ -178,7 +200,8 @@ public class DNANeedleItem extends Item {
 
                         for (int i = 0; i < InventoryPlayer.getHotbarSize (); i++) {
                                 ItemStack stack = p_77659_3_.inventory.mainInventory[i];
-                                if (stack == null || stack.getItem () != vialStack.getItem () || stack.getItemDamage () != vialStack.getItemDamage ()) continue;
+                                if (stack == null || stack.getItem () != vialStack.getItem () || stack.getItemDamage () != vialStack.getItemDamage ())
+                                        continue;
                                 stack.stackSize--;
 
                                 if (stack.stackSize == 0) p_77659_3_.inventory.mainInventory[i] = null;
@@ -190,23 +213,6 @@ public class DNANeedleItem extends Item {
 
                 p_77659_1_.setTagCompound (sourceCompound);
                 return p_77659_1_;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @SuppressWarnings ("unchecked")
-        @Override
-        public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
-                super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
-
-                ItemStack itemStack = new ItemStack (p_150895_1_, 1, 0);
-                NBTTagCompound compound = itemStack.getTagCompound ();
-                if (compound == null) compound = new NBTTagCompound ();
-                compound.setBoolean ("vial", true);
-                itemStack.setTagCompound (compound);
-
-                p_150895_3_.add (itemStack);
         }
 
         /**

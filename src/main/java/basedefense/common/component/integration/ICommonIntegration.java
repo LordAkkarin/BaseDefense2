@@ -21,20 +21,22 @@ import net.minecraftforge.common.config.Configuration;
 
 /**
  * Provides a base interface for modification integrations.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public interface ICommonIntegration {
 
         /**
+         * Activates the integration.
+         */
+        void activate ();
+
+        /**
          * Checks whether an integration is available.
-         * @param event The initialization event.
+         *
+         * @param event         The initialization event.
          * @param configuration The configuration.
          * @return True if available.
          */
         boolean isAvailable (FMLPostInitializationEvent event, Configuration configuration);
-
-        /**
-         * Activates the integration.
-         */
-        void activate ();
 }

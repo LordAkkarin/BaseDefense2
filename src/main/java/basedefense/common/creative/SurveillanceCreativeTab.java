@@ -23,6 +23,7 @@ import net.minecraft.item.Item;
 
 /**
  * Provides a creative tab for surveillance blocks and items.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class SurveillanceCreativeTab extends CreativeTabs {

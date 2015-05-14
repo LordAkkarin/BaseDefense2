@@ -32,6 +32,7 @@ import java.util.Optional;
 
 /**
  * Provides a modification entry point for Forge.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 @Mod (modid = BaseDefenseModification.IDENTIFIER, useMetadata = true, acceptedMinecraftVersions = "1.7.10", canBeDeactivated = false)
@@ -52,14 +53,6 @@ public class BaseDefenseModification {
         private String version = null;
         @Getter
         private Optional<String> latestVersion = null;
-
-        /**
-         * Stores the component manager.
-         * @return The manager.
-         */
-        public ComponentManager getComponentManager () {
-                return getProxy ().getComponentManager ();
-        }
 
         /**
          * Executes a version check using GitHub's API.
@@ -102,23 +95,17 @@ public class BaseDefenseModification {
         }
 
         /**
-         * Handles the {@link FMLPreInitializationEvent} event.
-         * @param event The event.
+         * Stores the component manager.
+         *
+         * @return The manager.
          */
-        @Mod.EventHandler
-        private void onPreInitialization (FMLPreInitializationEvent event) {
-                this.logger = event.getModLog ();
-                this.version = event.getModMetadata ().version;
-                this.executeVersionCheck ();
-
-                this.getLogger ().info ("Pre Initialization");
-                long initializationTime = System.currentTimeMillis ();
-                getProxy ().onPreInitialization (event);
-                this.getLogger ().info ("Pre Initialization ended (took " + (System.currentTimeMillis () - initializationTime) + " ms)");
+        public ComponentManager getComponentManager () {
+                return getProxy ().getComponentManager ();
         }
 
         /**
          * Handles the {@link FMLInitializationEvent} event.
+         *
          * @param event The event.
          */
         @Mod.EventHandler
@@ -131,6 +118,7 @@ public class BaseDefenseModification {
 
         /**
          * Handles the {@link FMLPostInitializationEvent} event.
+         *
          * @param event The event.
          */
         @Mod.EventHandler
@@ -139,5 +127,22 @@ public class BaseDefenseModification {
                 long initializationTime = System.currentTimeMillis ();
                 getProxy ().onPostInitialization (event);
                 this.getLogger ().info ("Post Initialization ended (took " + (System.currentTimeMillis () - initializationTime) + " ms)");
+        }
+
+        /**
+         * Handles the {@link FMLPreInitializationEvent} event.
+         *
+         * @param event The event.
+         */
+        @Mod.EventHandler
+        private void onPreInitialization (FMLPreInitializationEvent event) {
+                this.logger = event.getModLog ();
+                this.version = event.getModMetadata ().version;
+                this.executeVersionCheck ();
+
+                this.getLogger ().info ("Pre Initialization");
+                long initializationTime = System.currentTimeMillis ();
+                getProxy ().onPreInitialization (event);
+                this.getLogger ().info ("Pre Initialization ended (took " + (System.currentTimeMillis () - initializationTime) + " ms)");
         }
 }

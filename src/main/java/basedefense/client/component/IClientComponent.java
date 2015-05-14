@@ -20,19 +20,20 @@ import basedefense.common.component.ICommonComponent;
 
 /**
  * Provides a component definition for {@link cpw.mods.fml.relauncher.Side#CLIENT} components.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public interface IClientComponent extends ICommonComponent {
 
         /**
-         * Registers a set of {@link cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler} implementations.
-         */
-        void registerBlockRenderers ();
-
-        /**
          * Registers a set of {@link net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer} implementations.
          */
         void registerBlockEntityRenderers ();
+
+        /**
+         * Registers a set of {@link cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler} implementations.
+         */
+        void registerBlockRenderers ();
 
         /**
          * Registers a set of {@link net.minecraftforge.client.IItemRenderer} implementations.

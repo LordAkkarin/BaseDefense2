@@ -20,6 +20,7 @@ import basedefense.common.component.ICommonComponent;
 
 /**
  * Provides a component definition for {@link cpw.mods.fml.relauncher.Side#SERVER} components.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
-public interface IServerComponent extends ICommonComponent { }
+public interface IServerComponent extends ICommonComponent {}

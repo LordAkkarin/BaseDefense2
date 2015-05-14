@@ -21,6 +21,7 @@ import basedefense.common.component.integration.CommonNotEnoughItemsIntegration;
 
 /**
  * Provides a server side implementation of {@link CommonNotEnoughItemsIntegration}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ServerNotEnoughItemsIntegration extends CommonNotEnoughItemsIntegration implements IServerIntegration {

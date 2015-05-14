@@ -27,6 +27,7 @@ import java.lang.reflect.Constructor;
 
 /**
  * Provides utility methods for registering game elements.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class RegistrationUtility {
@@ -34,8 +35,9 @@ public class RegistrationUtility {
 
         /**
          * Retrieves a registration name.
+         *
          * @param category The category.
-         * @param name The name.
+         * @param name     The name.
          * @return The name.
          */
         public static String getName (String category, @NonNull String name) {
@@ -45,8 +47,9 @@ public class RegistrationUtility {
 
         /**
          * Retrieves a stat name.
+         *
          * @param category The category.
-         * @param name The name.
+         * @param name     The name.
          * @return The stat name.
          */
         public static String getStatName (String category, @NonNull String name) {
@@ -56,8 +59,9 @@ public class RegistrationUtility {
 
         /**
          * Retrieves a translation name.
+         *
          * @param category The category.
-         * @param name The name.
+         * @param name     The name.
          * @return The translation name.
          */
         public static String getTranslation (String category, @NonNull String name) {
@@ -67,6 +71,7 @@ public class RegistrationUtility {
 
         /**
          * Registers a block renderer.
+         *
          * @param blockRenderingHandler The rendering handler.
          * @return The render type identifier.
          */

@@ -40,6 +40,7 @@ public class GooglyEyeRenderer {
 
         /**
          * Handles {@link RenderLivingEvent}.
+         *
          * @param event The event.
          */
         @SubscribeEvent
@@ -72,8 +73,9 @@ public class GooglyEyeRenderer {
 
         /**
          * Renders the model at a certain distance from the center.
+         *
          * @param distance The distance.
-         * @param scale The model scale.
+         * @param scale    The model scale.
          */
         private void renderModel (float distance, float scale) {
                 GL11.glPushMatrix ();
@@ -218,13 +220,17 @@ public class GooglyEyeRenderer {
                         this.entityType = entityType;
                 }
 
-                public abstract float getRotationCenterY ();
                 public abstract float getEyeOffsetX ();
+
                 public abstract float getEyeOffsetY ();
+
                 public abstract float getEyeOffsetZ ();
+
                 public float getEyeScale () {
                         return 0.1f;
                 }
+
+                public abstract float getRotationCenterY ();
 
                 public static EntityConfiguration valueOf (Class<? extends EntityLivingBase> entityType) {
                         return entityMap.get (entityType);

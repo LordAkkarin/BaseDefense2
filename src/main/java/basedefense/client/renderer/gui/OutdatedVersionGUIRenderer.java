@@ -28,6 +28,7 @@ import net.minecraftforge.common.ForgeVersion.Status;
 
 /**
  * Provides an event listener used for rendering outdated version notices.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 @AllArgsConstructor
@@ -38,6 +39,7 @@ public class OutdatedVersionGUIRenderer {
 
         /**
          * Handles {@link net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent}.
+         *
          * @param event The event.
          */
         @SubscribeEvent
@@ -51,5 +53,5 @@ public class OutdatedVersionGUIRenderer {
 
                 int lineWidth = font.getStringWidth (line);
                 mainMenu.drawString (font, line, ((mainMenu.width / 2) - (lineWidth / 2)), ((mainMenu.width - lineWidth) > 400 ? (mainMenu.height - font.FONT_HEIGHT - 1) : 1), -1);
-}
+        }
 }

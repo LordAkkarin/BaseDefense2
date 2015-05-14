@@ -23,6 +23,7 @@ import basedefense.server.component.integration.ServerNotEnoughItemsIntegration;
 
 /**
  * Provides instructions required on both {@link cpw.mods.fml.relauncher.Side#CLIENT} and {@link cpw.mods.fml.relauncher.Side#SERVER}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class CommonProxy extends AbstractProxy {

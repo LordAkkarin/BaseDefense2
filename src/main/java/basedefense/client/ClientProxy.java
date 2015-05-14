@@ -26,6 +26,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Handles the {@link cpw.mods.fml.relauncher.Side#CLIENT} initialization.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ClientProxy extends CommonProxy {

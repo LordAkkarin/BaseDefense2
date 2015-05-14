@@ -21,13 +21,15 @@ import net.minecraftforge.common.config.Configuration;
 
 /**
  * Provides a base definition for components.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public interface ICommonComponent {
 
         /**
          * Checks whether a component is activated.
-         * @param event The event.
+         *
+         * @param event         The event.
          * @param configuration The modification configuration.
          * @return True if activated.
          */
@@ -39,14 +41,14 @@ public interface ICommonComponent {
         void registerAchievements ();
 
         /**
-         * Registers a set of {@link net.minecraft.block.Block} implementations.
-         */
-        void registerBlocks ();
-
-        /**
          * Registers a set of {@link net.minecraft.tileentity.TileEntity} implementations.
          */
         void registerBlockEntities ();
+
+        /**
+         * Registers a set of {@link net.minecraft.block.Block} implementations.
+         */
+        void registerBlocks ();
 
         /**
          * Registers dungeon loot hooks.

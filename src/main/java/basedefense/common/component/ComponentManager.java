@@ -39,6 +39,7 @@ import java.util.stream.Stream;
 
 /**
  * Provides a simple manager for {@link ICommonComponent} instances.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 @RequiredArgsConstructor
@@ -53,6 +54,7 @@ public class ComponentManager {
 
         /**
          * Activates all supported and enabled components.
+         *
          * @param event The event.
          */
         @SuppressWarnings ("unchecked")
@@ -64,16 +66,17 @@ public class ComponentManager {
 
                 componentStream
                         .filter (c -> c.isActivated (event, this.configuration))
-                                .forEach (c -> {
-                                        componentBuilder.put (c.getClass ().getSuperclass ().asSubclass (ICommonComponent.class), c);
-                                        event.getModLog ().info ("Loaded " + c.getClass ().getCanonicalName () + " component.");
-                                });
+                        .forEach (c -> {
+                                componentBuilder.put (c.getClass ().getSuperclass ().asSubclass (ICommonComponent.class), c);
+                                event.getModLog ().info ("Loaded " + c.getClass ().getCanonicalName () + " component.");
+                        });
 
                 this.activeComponents = componentBuilder.build ();
         }
 
         /**
          * Activates all supported and enabled integrations.
+         *
          * @param event The event.
          */
         @SuppressWarnings ("unchecked")
@@ -84,12 +87,12 @@ public class ComponentManager {
 
                 integrationStream
                         .filter (i -> i.isAvailable (event, this.configuration))
-                                .forEach (i -> {
-                                        i.activate ();
+                        .forEach (i -> {
+                                i.activate ();
 
-                                        integrationBuilder.put (i.getClass ().getSuperclass ().asSubclass (ICommonIntegration.class), i);
-                                        BaseDefenseModification.getInstance ().getLogger ().info ("Loaded " + i.getClass ().getCanonicalName () + " integration.");
-                                });
+                                integrationBuilder.put (i.getClass ().getSuperclass ().asSubclass (ICommonIntegration.class), i);
+                                BaseDefenseModification.getInstance ().getLogger ().info ("Loaded " + i.getClass ().getCanonicalName () + " integration.");
+                        });
 
                 this.activeIntegrations = integrationBuilder.build ();
                 this.configuration.save ();
@@ -97,6 +100,7 @@ public class ComponentManager {
 
         /**
          * Initializes a component class.
+         *
          * @param component The type.
          * @return The instance.
          */
@@ -108,6 +112,7 @@ public class ComponentManager {
 
         /**
          * Initializes a set of components.
+         *
          * @param classStream The class stream.
          * @return The instance set.
          */
@@ -119,6 +124,7 @@ public class ComponentManager {
 
         /**
          * Initializes an integration class.
+         *
          * @param integration The type.
          * @return The instance.
          */
@@ -130,6 +136,7 @@ public class ComponentManager {
 
         /**
          * Initializes a set of integrations.
+         *
          * @param classStream The class stream.
          * @return The instance set.
          */
@@ -141,6 +148,7 @@ public class ComponentManager {
 
         /**
          * Registers a component.
+         *
          * @param serverComponent The server-side component.
          * @param clientComponent The client-side component.
          */
@@ -151,6 +159,7 @@ public class ComponentManager {
 
         /**
          * Registers a client integration.
+         *
          * @param serverIntegration The server-side integration.
          * @param clientIntegration The client-side integration.
          */
@@ -161,6 +170,7 @@ public class ComponentManager {
 
         /**
          * Executes a method on all active components.
+         *
          * @param consumer The consumer.
          */
         public void run (@NonNull Consumer<ICommonComponent> consumer) {

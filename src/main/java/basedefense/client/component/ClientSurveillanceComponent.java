@@ -26,6 +26,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Provides a client side implementation of {@link CommonSurveillanceComponent}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ClientSurveillanceComponent extends CommonSurveillanceComponent implements IClientComponent {
@@ -38,7 +39,7 @@ public class ClientSurveillanceComponent extends CommonSurveillanceComponent imp
          * {@inheritDoc}
          */
         @Override
-        public void registerBlockRenderers () {
+        public void registerBlockEntityRenderers () {
 
         }
 
@@ -46,7 +47,7 @@ public class ClientSurveillanceComponent extends CommonSurveillanceComponent imp
          * {@inheritDoc}
          */
         @Override
-        public void registerBlockEntityRenderers () {
+        public void registerBlockRenderers () {
 
         }
 

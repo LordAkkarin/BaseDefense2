@@ -22,6 +22,7 @@ import org.lwjgl.opengl.GL11;
 
 /**
  * Provides a base implementation of {@link IItemRenderer}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class AbstractItemRenderer implements IItemRenderer {
@@ -35,12 +36,29 @@ public abstract class AbstractItemRenderer implements IItemRenderer {
         }
 
         /**
-         * {@inheritDoc}
+         * Renders the entity version of an item.
+         *
+         * @param itemStack The item stack.
+         * @param data      Additional data.
          */
-        @Override
-        public boolean shouldUseRenderHelper (ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-                return true;
-        }
+        protected abstract void renderEntity (ItemStack itemStack, Object... data);
+
+        /**
+         * Renders the equipped version of an item.
+         *
+         * @param type      The render type.
+         * @param itemStack The item stack.
+         * @param data      Additional data.
+         */
+        protected abstract void renderEquipped (ItemRenderType type, ItemStack itemStack, Object... data);
+
+        /**
+         * Renders the inventory version of an item.
+         *
+         * @param itemStack The item stack.
+         * @param data      Additional data.
+         */
+        protected abstract void renderInventory (ItemStack itemStack, Object... data);
 
         /**
          * {@inheritDoc}
@@ -72,45 +90,34 @@ public abstract class AbstractItemRenderer implements IItemRenderer {
         }
 
         /**
-         * Renders the entity version of an item.
-         * @param itemStack The item stack.
-         * @param data Additional data.
-         */
-        protected abstract void renderEntity (ItemStack itemStack, Object... data);
-
-        /**
-         * Renders the inventory version of an item.
-         * @param itemStack The item stack.
-         * @param data Additional data.
-         */
-        protected abstract void renderInventory (ItemStack itemStack, Object... data);
-
-        /**
-         * Renders the equipped version of an item.
-         * @param type The render type.
-         * @param itemStack The item stack.
-         * @param data Additional data.
-         */
-        protected abstract void renderEquipped (ItemRenderType type, ItemStack itemStack, Object... data);
-
-        /**
          * Prepares the matrix for equipped renders.
+         *
          * @param itemStack The item stack.
-         * @param data Additional data.
+         * @param data      Additional data.
          */
         protected void setupEquipped (ItemStack itemStack, Object... data) { }
 
         /**
          * Prepares the matrix for equpped render types.
+         *
          * @param itemStack The item stack.
-         * @param data Additional data.
+         * @param data      Additional data.
          */
         protected void setupEquippedCommon (ItemStack itemStack, Object... data) { }
 
         /**
          * Prepares the matrix for equipped (first person) renders.
+         *
          * @param itemStack The item stack.
-         * @param data Additional data.
+         * @param data      Additional data.
          */
         protected void setupEquippedFirstPerson (ItemStack itemStack, Object... data) { }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean shouldUseRenderHelper (ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+                return true;
+        }
 }

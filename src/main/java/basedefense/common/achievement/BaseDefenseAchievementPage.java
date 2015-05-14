@@ -32,6 +32,7 @@ public class BaseDefenseAchievementPage extends AchievementPage {
 
         /**
          * Adds an achievement to the page.
+         *
          * @param achievement The achievement.
          */
         public void addAchievement (Achievement achievement) {

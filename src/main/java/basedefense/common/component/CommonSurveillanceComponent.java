@@ -31,6 +31,7 @@ import net.minecraftforge.common.config.Configuration;
 
 /**
  * Provides an {@link ICommonComponent} implementation for surveillance related gameplay elements.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class CommonSurveillanceComponent extends AbstractCommonComponent {
@@ -60,7 +61,7 @@ public abstract class CommonSurveillanceComponent extends AbstractCommonComponen
          * {@inheritDoc}
          */
         @Override
-        public void registerBlocks () {
+        public void registerBlockEntities () {
 
         }
 
@@ -68,7 +69,7 @@ public abstract class CommonSurveillanceComponent extends AbstractCommonComponen
          * {@inheritDoc}
          */
         @Override
-        public void registerBlockEntities () {
+        public void registerBlocks () {
 
         }
 

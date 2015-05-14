@@ -23,6 +23,7 @@ import net.minecraftforge.common.config.Configuration;
 
 /**
  * Provides a modification integration for Not Enough Items (NEI).
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class CommonNotEnoughItemsIntegration extends AbstractCommonIntegration {
@@ -35,13 +36,13 @@ public abstract class CommonNotEnoughItemsIntegration extends AbstractCommonInte
          * {@inheritDoc}
          */
         @Override
-        public boolean isAvailable (FMLPostInitializationEvent event, Configuration configuration) {
-                return configuration.getBoolean ("nei", "integration", true, "Enables integration with NEI (Not Enough Items)") && Loader.isModLoaded ("NotEnoughItems");
-        }
+        public void activate () { }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public void activate () { }
+        public boolean isAvailable (FMLPostInitializationEvent event, Configuration configuration) {
+                return configuration.getBoolean ("nei", "integration", true, "Enables integration with NEI (Not Enough Items)") && Loader.isModLoaded ("NotEnoughItems");
+        }
 }

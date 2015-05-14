@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * Provides an abstract implementation of {@link ICommonComponent}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 @RequiredArgsConstructor
