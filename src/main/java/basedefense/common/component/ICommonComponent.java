@@ -44,6 +44,11 @@ public interface ICommonComponent {
         void registerBlockEntities ();
 
         /**
+         * Registers dungeon loot hooks.
+         */
+        void registerDungeonLoot ();
+
+        /**
          * Registers a set of {@link net.minecraft.entity.Entity} implementations.
          */
         void registerEntities ();

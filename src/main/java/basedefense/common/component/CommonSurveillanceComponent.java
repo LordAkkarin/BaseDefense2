@@ -17,10 +17,14 @@
 package basedefense.common.component;
 
 import basedefense.common.item.surveillance.DNANeedleItem;
+import basedefense.common.item.surveillance.GooglyGlassesItem;
 import basedefense.common.item.surveillance.VialItem;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.config.Configuration;
 
 /**
@@ -61,6 +65,20 @@ public abstract class CommonSurveillanceComponent extends AbstractCommonComponen
          * {@inheritDoc}
          */
         @Override
+        public void registerDungeonLoot () {
+                ChestGenHooks.addItem (ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent (new ItemStack (GooglyGlassesItem.ITEM, 1), 1, 1, 7));
+                ChestGenHooks.addItem (ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent (new ItemStack (GooglyGlassesItem.ITEM, 1), 1, 2, 10));
+                ChestGenHooks.addItem (ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent (new ItemStack (GooglyGlassesItem.ITEM, 1), 1, 1, 5));
+                ChestGenHooks.addItem (ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent (new ItemStack (GooglyGlassesItem.ITEM, 1), 1, 1, 5));
+                ChestGenHooks.addItem (ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent (new ItemStack (GooglyGlassesItem.ITEM, 1), 1, 1, 5));
+                ChestGenHooks.addItem (ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent (new ItemStack (GooglyGlassesItem.ITEM, 1), 1, 2, 10));
+                ChestGenHooks.addItem (ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent (new ItemStack (GooglyGlassesItem.ITEM, 1), 1, 1, 2));
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public void registerEntities () {
 
         }
@@ -72,5 +90,6 @@ public abstract class CommonSurveillanceComponent extends AbstractCommonComponen
         public void registerItems () {
                 GameRegistry.registerItem (VialItem.ITEM, VialItem.NAME);
                 GameRegistry.registerItem (DNANeedleItem.ITEM, DNANeedleItem.NAME);
+                GameRegistry.registerItem (GooglyGlassesItem.ITEM, GooglyGlassesItem.NAME);
         }
 }

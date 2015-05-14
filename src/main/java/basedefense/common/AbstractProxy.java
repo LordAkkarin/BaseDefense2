@@ -53,6 +53,8 @@ public abstract class AbstractProxy {
 
                         c.registerBlockEntities ();
                         c.registerEntities ();
+
+                        c.registerDungeonLoot ();
                 });
         }
 

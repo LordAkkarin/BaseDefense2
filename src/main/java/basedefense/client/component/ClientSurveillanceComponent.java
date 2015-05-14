@@ -17,10 +17,12 @@
 package basedefense.client.component;
 
 import basedefense.client.renderer.item.surveillance.DNANeedleRenderer;
+import basedefense.client.renderer.item.surveillance.GooglyEyeRenderer;
 import basedefense.common.component.CommonSurveillanceComponent;
 import basedefense.common.component.ComponentManager;
 import basedefense.common.item.surveillance.DNANeedleItem;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Provides a client side implementation of {@link CommonSurveillanceComponent}.
@@ -54,5 +56,7 @@ public class ClientSurveillanceComponent extends CommonSurveillanceComponent imp
         @Override
         public void registerItemRenderers () {
                 MinecraftForgeClient.registerItemRenderer (DNANeedleItem.ITEM, new DNANeedleRenderer ());
+
+                MinecraftForge.EVENT_BUS.register (new GooglyEyeRenderer ());
         }
 }
