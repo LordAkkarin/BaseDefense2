@@ -22,7 +22,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -48,7 +47,6 @@ public class VialItem extends Item {
 
                 this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "vial"));
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
-                this.setHasSubtypes (true);
 
                 this.setMaxStackSize (1);
                 this.setMaxDamage (0);
@@ -76,18 +74,6 @@ public class VialItem extends Item {
                                 p_77624_3_.add (LanguageRegistry.instance ().getStringLocalization ("basedefense.gui.surveillance.vial.entity"));
                                 break;
                 }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @SuppressWarnings ("unchecked")
-        @Override
-        public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
-                super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
-
-                p_150895_3_.add (new ItemStack (p_150895_1_, 1, 1));
-                p_150895_3_.add (new ItemStack (p_150895_1_, 1, 2));
         }
 
         /**
