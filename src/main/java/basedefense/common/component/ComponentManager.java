@@ -147,6 +147,24 @@ public class ComponentManager {
         }
 
         /**
+         * Checks whether a certain component is active.
+         * @param componentType The type.
+         * @return True if active.
+         */
+        public boolean isComponentActive (Class<? extends ICommonComponent> componentType) {
+                return this.activeComponents.containsKey (componentType);
+        }
+
+        /**
+         * Checks whether a certain integration is active.
+         * @param integrationType The type.
+         * @return True if active.
+         */
+        public boolean isIntegrationActive (Class<? extends ICommonIntegration> integrationType) {
+                return this.activeIntegrations.containsKey (integrationType);
+        }
+
+        /**
          * Registers a component.
          *
          * @param serverComponent The server-side component.
