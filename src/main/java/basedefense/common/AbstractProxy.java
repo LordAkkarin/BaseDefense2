@@ -32,6 +32,7 @@ public abstract class AbstractProxy {
 
         public AbstractProxy () {
                 this.registerComponents ();
+                this.registerIntegrations ();
         }
 
         /**
@@ -63,11 +64,16 @@ public abstract class AbstractProxy {
          * @param event The event.
          */
         public void onPostInitialization (FMLPostInitializationEvent event) {
-
+                this.componentManager.activateIntegrations (event);
         }
 
         /**
          * Registers all modification components.
          */
         protected abstract void registerComponents ();
+
+        /**
+         * Registers all modification integrations.
+         */
+        protected abstract void registerIntegrations ();
 }

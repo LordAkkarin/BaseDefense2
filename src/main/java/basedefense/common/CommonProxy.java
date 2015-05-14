@@ -17,7 +17,9 @@
 package basedefense.common;
 
 import basedefense.client.component.ClientSurveillanceComponent;
+import basedefense.client.component.integration.ClientNotEnoughItemsIntegration;
 import basedefense.server.component.ServerSurveillanceComponent;
+import basedefense.server.component.integration.ServerNotEnoughItemsIntegration;
 
 /**
  * Provides instructions required on both {@link cpw.mods.fml.relauncher.Side#CLIENT} and {@link cpw.mods.fml.relauncher.Side#SERVER}.
@@ -31,5 +33,13 @@ public class CommonProxy extends AbstractProxy {
         @Override
         protected void registerComponents () {
                 this.getComponentManager ().registerComponent (ServerSurveillanceComponent.class, ClientSurveillanceComponent.class);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void registerIntegrations () {
+                this.getComponentManager ().registerIntegration (ServerNotEnoughItemsIntegration.class, ClientNotEnoughItemsIntegration.class);
         }
 }
