@@ -18,6 +18,8 @@ package basedefense.common.item.surveillance;
 
 import basedefense.common.creative.SurveillanceCreativeTab;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -56,6 +58,7 @@ public class VialItem extends Item {
         /**
          * {@inheritDoc}
          */
+        @SideOnly (Side.CLIENT)
         @SuppressWarnings ("unchecked")
         @Override
         public void addInformation (ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_) {
