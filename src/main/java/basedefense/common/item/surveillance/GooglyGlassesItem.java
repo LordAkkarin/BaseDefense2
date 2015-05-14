@@ -16,12 +16,15 @@
  */
 package basedefense.common.item.surveillance;
 
+import basedefense.common.achievement.surveillance.GooglyEyeAchievement;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 /**
@@ -58,5 +61,15 @@ public class GooglyGlassesItem extends ItemArmor {
         public boolean isPlayerWearing () {
                 ItemStack itemStack = FMLClientHandler.instance ().getClientPlayerEntity ().inventory.armorItemInSlot (3);
                 return (itemStack != null && itemStack.getItem () == this);
+        }
+
+        @Override
+        public void onUpdate (ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
+                super.onUpdate (p_77663_1_, p_77663_2_, p_77663_3_, p_77663_4_, p_77663_5_);
+
+                if (p_77663_3_ instanceof EntityPlayer) {
+                        EntityPlayer player = ((EntityPlayer) p_77663_3_);
+                        GooglyEyeAchievement.ACHIEVEMENT.award (player);
+                }
         }
 }

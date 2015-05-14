@@ -16,6 +16,7 @@
  */
 package basedefense.common.component;
 
+import basedefense.common.achievement.surveillance.GooglyEyeAchievement;
 import basedefense.common.item.surveillance.DNANeedleItem;
 import basedefense.common.item.surveillance.GooglyGlassesItem;
 import basedefense.common.item.surveillance.VialItem;
@@ -43,6 +44,14 @@ public abstract class CommonSurveillanceComponent extends AbstractCommonComponen
         @Override
         public boolean isActivated (FMLPreInitializationEvent event, Configuration configuration) {
                 return configuration.getBoolean ("surveillance", "feature", true, "Enables surveillance features (cameras, security bots, etc).") && Loader.isModLoaded ("appliedenergistics2");
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void registerAchievements () {
+                GooglyEyeAchievement.ACHIEVEMENT.registerStat ();
         }
 
         /**
