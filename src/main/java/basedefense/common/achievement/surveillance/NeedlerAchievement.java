@@ -18,6 +18,7 @@ package basedefense.common.achievement.surveillance;
 
 import basedefense.common.achievement.AbstractAchievement;
 import basedefense.common.item.surveillance.DNANeedleItem;
+import basedefense.util.RegistrationUtility;
 
 /**
  * Provides an achievement for acquiring the {@link basedefense.common.item.surveillance.DNANeedleItem} item.
@@ -29,6 +30,6 @@ public class NeedlerAchievement extends AbstractAchievement {
         public static final NeedlerAchievement ACHIEVEMENT = new NeedlerAchievement ();
 
         public NeedlerAchievement () {
-                super (NAME, TRANSLATION, 0, 0, DNANeedleItem.ITEM, null);
+                super (RegistrationUtility.getStatName ("surveillance", "needler"), RegistrationUtility.getTranslation ("surveillance", "needler"), 0, 0, DNANeedleItem.ITEM, null);
         }
 }

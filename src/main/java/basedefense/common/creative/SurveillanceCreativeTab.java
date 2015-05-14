@@ -16,6 +16,7 @@
  */
 package basedefense.common.creative;
 
+import basedefense.util.RegistrationUtility;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -25,11 +26,10 @@ import net.minecraft.item.Item;
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class SurveillanceCreativeTab extends CreativeTabs {
-        public static final String NAME = "basedefense.surveillance";
         public static final SurveillanceCreativeTab TAB = new SurveillanceCreativeTab ();
 
         protected SurveillanceCreativeTab () {
-                super (NAME);
+                super (RegistrationUtility.getTranslation (null, "surveillance"));
         }
 
         /**

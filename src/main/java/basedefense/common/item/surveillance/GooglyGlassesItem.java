@@ -17,6 +17,7 @@
 package basedefense.common.item.surveillance;
 
 import basedefense.common.achievement.surveillance.GooglyEyeAchievement;
+import basedefense.util.RegistrationUtility;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,13 +35,12 @@ import net.minecraftforge.common.util.EnumHelper;
 public class GooglyGlassesItem extends ItemArmor {
         private static final ArmorMaterial MATERIAL = EnumHelper.addArmorMaterial ("googly", 33, new int[]{ 1, 3, 2, 1 }, 0);
         public static final GooglyGlassesItem ITEM = new GooglyGlassesItem ();
-        public static final String NAME = "surveillance_googly_glasses";
-        public static final String TRANSLATION = "surveillance.googly_glasses";
+        public static final String NAME = RegistrationUtility.getName ("surveillance", "googly_glasses");
 
         protected GooglyGlassesItem () {
                 super (MATERIAL, 4, 0);
 
-                this.setUnlocalizedName (TRANSLATION);
+                this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "googly_glasses"));
                 this.setTextureName ("basedefense2:googly_eye_glasses");
                 this.setMaxStackSize (1);
         }

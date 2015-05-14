@@ -17,6 +17,7 @@
 package basedefense.common.item.surveillance;
 
 import basedefense.common.creative.SurveillanceCreativeTab;
+import basedefense.util.RegistrationUtility;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,13 +39,12 @@ import java.util.List;
  */
 public class DNANeedleItem extends Item {
         public static final DNANeedleItem ITEM = new DNANeedleItem ();
-        public static final String NAME = "surveillance_dna_needle";
-        public static final String TRANSLATION = "basedefense.surveillance.dna_needle";
+        public static final String NAME = RegistrationUtility.getName ("surveillance", "dna_needle");
 
         protected DNANeedleItem () {
                 super ();
 
-                this.setUnlocalizedName (TRANSLATION);
+                this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "dna_needle"));
                 this.setTextureName ("basedefense2:dna_needle");
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
                 this.setHasSubtypes (true);

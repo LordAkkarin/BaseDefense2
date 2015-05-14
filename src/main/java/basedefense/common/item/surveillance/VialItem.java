@@ -17,6 +17,7 @@
 package basedefense.common.item.surveillance;
 
 import basedefense.common.creative.SurveillanceCreativeTab;
+import basedefense.util.RegistrationUtility;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -36,8 +37,7 @@ import java.util.List;
  */
 public class VialItem extends Item {
         public static final VialItem ITEM = new VialItem ();
-        public static final String NAME = "surveillance_vial";
-        public static final String TRANSLATION = "basedefense.surveillance.vial";
+        public static final String NAME = RegistrationUtility.getName ("surveillance", "vial");
 
         private IIcon icon_empty;
         private IIcon icon_player;
@@ -46,7 +46,7 @@ public class VialItem extends Item {
         private VialItem () {
                 super ();
 
-                this.setUnlocalizedName (TRANSLATION);
+                this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "vial"));
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
                 this.setHasSubtypes (true);
 

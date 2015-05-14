@@ -19,6 +19,7 @@ package basedefense.common.achievement.surveillance;
 import basedefense.common.achievement.AbstractAchievement;
 import basedefense.common.achievement.BaseDefenseAchievementPage;
 import basedefense.common.item.surveillance.GooglyGlassesItem;
+import basedefense.util.RegistrationUtility;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -35,12 +36,10 @@ import java.util.Map;
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class GooglyEyeAchievement extends AbstractAchievement {
-        public static final String NAME = "surveillance_googly_eyes";
-        public static final String TRANSLATION = "basedefense.surveillance.googly_eyes";
         public static final GooglyEyeAchievement ACHIEVEMENT = new GooglyEyeAchievement ();
 
         public GooglyEyeAchievement () {
-                super (NAME, TRANSLATION, -2, -2, GooglyGlassesItem.ITEM, null);
+                super (RegistrationUtility.getStatName ("surveillance", "googly_eye"), RegistrationUtility.getTranslation ("surveillance", "googly_eyes"), -2, -2, GooglyGlassesItem.ITEM, null);
 
                 this.initIndependentStat ();
                 this.setSpecial ();
