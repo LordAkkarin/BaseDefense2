@@ -16,9 +16,11 @@
  */
 package basedefense.common.achievement.surveillance;
 
+import basedefense.common.achievement.AbstractAchievement;
 import basedefense.common.achievement.BaseDefenseAchievementPage;
 import basedefense.common.item.surveillance.GooglyGlassesItem;
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import lombok.NonNull;
 import lombok.SneakyThrows;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.stats.Achievement;
@@ -32,7 +34,7 @@ import java.util.Map;
  * Provides an achievement for acquiring the {@link basedefense.common.item.surveillance.GooglyGlassesItem} item.
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
-public class GooglyEyeAchievement extends Achievement {
+public class GooglyEyeAchievement extends AbstractAchievement {
         public static final String NAME = "surveillance_googly_eyes";
         public static final String TRANSLATION = "basedefense.surveillance.googly_eyes";
         public static final GooglyEyeAchievement ACHIEVEMENT = new GooglyEyeAchievement ();
@@ -63,16 +65,16 @@ public class GooglyEyeAchievement extends Achievement {
         }
 
         /**
-         * Awards the achievement.
-         * @param player The player.
+         * {@inheritDoc}
          */
         @SuppressWarnings ("unchecked")
-        public void award (EntityPlayer player) {
+        @Override
+        public void award (@NonNull EntityPlayer player) {
                 if (player.worldObj.isRemote) {
                         BaseDefenseAchievementPage.PAGE.addAchievement (this);
                         AchievementList.achievementList.add (this);
                 }
 
-                player.addStat (this, 1);
+                super.award (player);
         }
 }
