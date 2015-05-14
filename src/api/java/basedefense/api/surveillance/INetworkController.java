@@ -20,4 +20,19 @@ package basedefense.api.surveillance;
  * Represents a surveillance network controller.
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
-public interface INetworkController { }
+public interface INetworkController {
+
+        /**
+         * Retrieves the controller type.
+         * @return The type.
+         */
+        ControllerType getControllerType ();
+
+        /**
+         * Provides a list of valid controller types.
+         */
+        enum ControllerType {
+                PRIMITIVE,
+                FACE_RECOGNITION
+        }
+}
