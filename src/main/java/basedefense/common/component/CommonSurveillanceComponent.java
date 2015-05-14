@@ -17,6 +17,7 @@
 package basedefense.common.component;
 
 import basedefense.common.achievement.surveillance.GooglyEyeAchievement;
+import basedefense.common.achievement.surveillance.NeedlerAchievement;
 import basedefense.common.item.surveillance.DNANeedleItem;
 import basedefense.common.item.surveillance.GooglyGlassesItem;
 import basedefense.common.item.surveillance.VialItem;
@@ -52,6 +53,7 @@ public abstract class CommonSurveillanceComponent extends AbstractCommonComponen
         @Override
         public void registerAchievements () {
                 GooglyEyeAchievement.ACHIEVEMENT.registerStat ();
+                NeedlerAchievement.ACHIEVEMENT.registerStat ();
         }
 
         /**
