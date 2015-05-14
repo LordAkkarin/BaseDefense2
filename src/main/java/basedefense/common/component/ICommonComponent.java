@@ -34,6 +34,11 @@ public interface ICommonComponent {
         boolean isActivated (FMLPreInitializationEvent event, Configuration configuration);
 
         /**
+         * Registers a set of {@link net.minecraft.stats.Achievement} implementations.
+         */
+        void registerAchievements ();
+
+        /**
          * Registers a set of {@link net.minecraft.block.Block} implementations.
          */
         void registerBlocks ();

@@ -16,11 +16,13 @@
  */
 package basedefense.common;
 
+import basedefense.common.achievement.BaseDefenseAchievementPage;
 import basedefense.common.component.ComponentManager;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import lombok.Getter;
+import net.minecraftforge.common.AchievementPage;
 
 /**
  * Provides a base proxy implementation.
@@ -55,8 +57,11 @@ public abstract class AbstractProxy {
                         c.registerBlockEntities ();
                         c.registerEntities ();
 
+                        c.registerAchievements ();
                         c.registerDungeonLoot ();
                 });
+
+                AchievementPage.registerAchievementPage (BaseDefenseAchievementPage.PAGE);
         }
 
         /**
