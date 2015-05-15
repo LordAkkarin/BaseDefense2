@@ -37,18 +37,22 @@ License
 
 * Base Defense 2 API
   - Copyright (C) 2015 Johannes "Akkarin" Donath
+  and other copyright owners as documented in the project's IP log.
   - [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 * Base Defense 2
   - Copyright (C) 2015 Johannes "Akkarin" Donath
+  and other copyright owners as documented in the project's IP log.
   - [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 * Textures & Models
   - Copyright (C) 2015 Johannes "Akkarin" Donath
+  and other copyright owners as documented in the project's IP log.
   - [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 * Promotional Material
   - Copyright (C) 2015 Johannes "Akkarin" Donath
   - [![License](https://img.shields.io/badge/License-CC%20BY--SA-red.svg?style=flat-square)](http://creativecommons.org/licenses/by-sa/4.0/)
 * Text & Translations
   - Copyright (C) 2015 Johannes "Akkarin" Donath
+  and other copyright owners as documented in the project's IP log.
   - [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
 Downloads
