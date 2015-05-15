@@ -1,0 +1,17 @@
+[
+	{
+		"modid":		"basedefense",
+		"name":			"Base Defense 2",
+		"description":		"Protection for mad scientists!",
+		"version":		"${version}",
+		"mcversion":		"${mcversion}",
+		"url":			"http://mcbd.spud.rocks",
+		"updateUrl":		"",
+		"authorList":		[
+			"Akkarin"
+		],
+		"credits":		"Akkarin",
+		"logoFile":		"",
+		"screenshots":		[ ]
+	}
+]
