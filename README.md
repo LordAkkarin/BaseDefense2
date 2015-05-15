@@ -97,7 +97,7 @@ To prepare a development environment you will need to run these additional comma
 1. ```./gradlew setupDecompWorkspace``` (or ```./gradlew.bat setupDecompWorkspace``` on Windows)
 1. ```./gradlew idea``` (or ```./gradlew.bat idea```) for IntelliJ users and ```./gradlew eclipse``` (or ```./gradlew.bat eclipse``` on Windows) for Eclipse users
 
-Contribution
+Contributing
 ------------
 
 Before you add any major changes to the modification you may want to discuss them with us (see [Contact](#contact)) as
