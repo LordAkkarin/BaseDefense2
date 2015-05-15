@@ -29,10 +29,31 @@ public interface ISurveillanceNetworkController {
         ControllerType getControllerType ();
 
         /**
+         * Retrieves the system state.
+         * @return The state.
+         */
+        SystemState getSystemState ();
+
+        /**
+         * Updates the system state.
+         * @param state The state.
+         */
+        void setSystemState (SystemState state);
+
+        /**
          * Provides a list of valid controller types.
          */
         enum ControllerType {
                 PRIMITIVE,
                 FACE_RECOGNITION
+        }
+
+        /**
+         * Provides a list of valid system states.
+         */
+        enum SystemState {
+                ALERT,
+                ARMED,
+                DISABLED
         }
 }

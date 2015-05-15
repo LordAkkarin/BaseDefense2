@@ -23,18 +23,22 @@ import appeng.api.networking.events.MENetworkControllerChange;
 import appeng.api.networking.events.MENetworkEventSubscribe;
 import appeng.api.networking.events.MENetworkPowerStatusChange;
 import appeng.me.GridAccessException;
+import appeng.tile.TileEvent;
+import appeng.tile.events.TileEventType;
 import appeng.tile.grid.AENetworkPowerTile;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.tile.inventory.InvOperation;
 import basedefense.BaseDefenseModification;
-import basedefense.api.surveillance.ISurveillanceNetworkController;
 import basedefense.api.surveillance.ISurveillanceGridCache;
 import basedefense.api.surveillance.ISurveillanceGridCache.ControllerState;
+import basedefense.api.surveillance.ISurveillanceNetworkController;
 import basedefense.api.surveillance.event.SurveillanceControllerChange;
+import basedefense.api.surveillance.event.SurveillanceSystemStateChange;
 import basedefense.common.block.surveillance.ControllerBlock;
 import basedefense.util.RegistrationUtility;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -45,6 +49,9 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
         public static final AppEngInternalInventory INVENTORY = new AppEngInternalInventory (null, 0);
         public static final String NAME = RegistrationUtility.getName ("surveillance", "controller");
         public static final int[] SIDES = new int[0];
+
+        private SystemState systemState = SystemState.ARMED;
+        private long alertTimeout = 0;
 
         public ControllerBlockEntity () {
                 super ();
@@ -69,6 +76,27 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
         @Override
         public ControllerType getControllerType () {
                 return ((this.worldObj.getBlockMetadata (this.xCoord, this.yCoord, this.zCoord) & 0x4) == 0x4 ? ControllerType.FACE_RECOGNITION : ControllerType.PRIMITIVE);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SystemState getSystemState () {
+                return this.systemState;
+        }
+
+        @Override
+        public void setSystemState (SystemState state) {
+                if (this.systemState != state) {
+                        this.systemState = state;
+
+                        try {
+                                this.getProxy ().getGrid ().postEvent (new SurveillanceSystemStateChange (this, state));
+                        } catch (GridAccessException ex) {
+                                BaseDefenseModification.getInstance ().getLogger ().error ("Could not access grid: " + ex.getMessage (), ex);
+                        }
+                }
         }
 
         /**
@@ -105,6 +133,15 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
         }
 
         /**
+         * Handles block entity updates.
+         */
+        @TileEvent (TileEventType.TICK)
+        protected void update () {
+                this.alertTimeout = Math.max (0, (this.alertTimeout - 1));
+                if (this.getSystemState () == SystemState.ALERT && this.alertTimeout == 0) this.setSystemState (SystemState.ARMED);
+        }
+
+        /**
          * Updates the block metadata.
          */
         protected void updateMetadata () {
@@ -130,6 +167,26 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
                         metadata = ControllerBlock.BLOCK.buildState (state, metadata);
                         this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, metadata, 2);
                 }
+        }
+
+        /**
+         * Writes the NBT data.
+         * @param compound The tag compound.
+         */
+        @TileEvent (TileEventType.WORLD_NBT_WRITE)
+        protected void Controller_writeToNBT (NBTTagCompound compound) {
+                compound.setString ("systemState", this.getSystemState ().name ());
+                compound.setLong ("alertTimeout", this.alertTimeout);
+        }
+
+        /**
+         * Reads the NBT data.
+         * @param compound The tag compound.
+         */
+        @TileEvent (TileEventType.WORLD_NBT_READ)
+        protected void Controller_readFromNBT (NBTTagCompound compound) {
+                this.systemState = SystemState.valueOf (compound.getString ("systemState"));
+                this.alertTimeout = compound.getLong ("alertTimeout");
         }
 
         /**
