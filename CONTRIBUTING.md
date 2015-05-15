@@ -33,8 +33,10 @@ Submitting Changes
 
 Code Guidelines
 ---------------
+* **Charset:** UTF-8
 * **Indentation:** 8 Spaces
 * **New Lines:** UNIX Line Endings; One extra newline at the end of the file
+* **Trailing Whitespaces** are removed
 * **Braces:** On the same line where possible
 * **Simple Statements** may be on one line
 * **Less levels** are preferred (use return, break and continue frequently)
