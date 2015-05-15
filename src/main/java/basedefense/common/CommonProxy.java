@@ -17,8 +17,10 @@
 package basedefense.common;
 
 import basedefense.client.component.ClientSurveillanceComponent;
+import basedefense.client.component.integration.ClientAppliedEnergisticsIntegration;
 import basedefense.client.component.integration.ClientNotEnoughItemsIntegration;
 import basedefense.server.component.ServerSurveillanceComponent;
+import basedefense.server.component.integration.ServerAppliedEnergisticsIntegration;
 import basedefense.server.component.integration.ServerNotEnoughItemsIntegration;
 
 /**
@@ -41,6 +43,7 @@ public class CommonProxy extends AbstractProxy {
          */
         @Override
         protected void registerIntegrations () {
+                this.getComponentManager ().registerIntegration (ServerAppliedEnergisticsIntegration.class, ClientAppliedEnergisticsIntegration.class);
                 this.getComponentManager ().registerIntegration (ServerNotEnoughItemsIntegration.class, ClientNotEnoughItemsIntegration.class);
         }
 }
