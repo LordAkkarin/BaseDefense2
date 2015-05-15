@@ -43,6 +43,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Provides a {@link net.minecraft.tileentity.TileEntity} implementation for {@link basedefense.common.block.surveillance.ControllerBlock}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ControllerBlockEntity extends AENetworkPowerTile implements ISurveillanceNetworkController {
@@ -63,11 +64,33 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
         }
 
         /**
+         * Reads the NBT data.
+         *
+         * @param compound The tag compound.
+         */
+        @TileEvent (TileEventType.WORLD_NBT_READ)
+        protected void Controller_readFromNBT (NBTTagCompound compound) {
+                this.systemState = SystemState.valueOf (compound.getString ("systemState"));
+                this.alertTimeout = compound.getLong ("alertTimeout");
+        }
+
+        /**
+         * Writes the NBT data.
+         *
+         * @param compound The tag compound.
+         */
+        @TileEvent (TileEventType.WORLD_NBT_WRITE)
+        protected void Controller_writeToNBT (NBTTagCompound compound) {
+                compound.setString ("systemState", this.getSystemState ().name ());
+                compound.setLong ("alertTimeout", this.alertTimeout);
+        }
+
+        /**
          * {@inheritDoc}
          */
         @Override
-        public IInventory getInternalInventory () {
-                return INVENTORY;
+        public int[] getAccessibleSlotsBySide (ForgeDirection forgeDirection) {
+                return SIDES;
         }
 
         /**
@@ -76,6 +99,14 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
         @Override
         public ControllerType getControllerType () {
                 return ((this.worldObj.getBlockMetadata (this.xCoord, this.yCoord, this.zCoord) & 0x4) == 0x4 ? ControllerType.FACE_RECOGNITION : ControllerType.PRIMITIVE);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public IInventory getInternalInventory () {
+                return INVENTORY;
         }
 
         /**
@@ -107,6 +138,7 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
 
         /**
          * Handles the {@link MENetworkControllerChange} event.
+         *
          * @param event The event.
          */
         @MENetworkEventSubscribe
@@ -115,20 +147,22 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
         }
 
         /**
-         * handles the {@link SurveillanceControllerChange} event.
-         * @param event The event.
-         */
-        @MENetworkEventSubscribe
-        public void onSurveillanceControllerChange (SurveillanceControllerChange event) {
-                this.updateMetadata ();
-        }
-
-        /**
          * Handles the {@link MENetworkPowerStatusChange} event.
+         *
          * @param event The event.
          */
         @MENetworkEventSubscribe
         public void onPowerStatusChange (MENetworkPowerStatusChange event) {
+                this.updateMetadata ();
+        }
+
+        /**
+         * handles the {@link SurveillanceControllerChange} event.
+         *
+         * @param event The event.
+         */
+        @MENetworkEventSubscribe
+        public void onSurveillanceControllerChange (SurveillanceControllerChange event) {
                 this.updateMetadata ();
         }
 
@@ -138,7 +172,8 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
         @TileEvent (TileEventType.TICK)
         protected void update () {
                 this.alertTimeout = Math.max (0, (this.alertTimeout - 1));
-                if (this.getSystemState () == SystemState.ALERT && this.alertTimeout == 0) this.setSystemState (SystemState.ARMED);
+                if (this.getSystemState () == SystemState.ALERT && this.alertTimeout == 0)
+                        this.setSystemState (SystemState.ARMED);
         }
 
         /**
@@ -167,33 +202,5 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
                         metadata = ControllerBlock.BLOCK.buildState (state, metadata);
                         this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, metadata, 2);
                 }
-        }
-
-        /**
-         * Writes the NBT data.
-         * @param compound The tag compound.
-         */
-        @TileEvent (TileEventType.WORLD_NBT_WRITE)
-        protected void Controller_writeToNBT (NBTTagCompound compound) {
-                compound.setString ("systemState", this.getSystemState ().name ());
-                compound.setLong ("alertTimeout", this.alertTimeout);
-        }
-
-        /**
-         * Reads the NBT data.
-         * @param compound The tag compound.
-         */
-        @TileEvent (TileEventType.WORLD_NBT_READ)
-        protected void Controller_readFromNBT (NBTTagCompound compound) {
-                this.systemState = SystemState.valueOf (compound.getString ("systemState"));
-                this.alertTimeout = compound.getLong ("alertTimeout");
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int[] getAccessibleSlotsBySide (ForgeDirection forgeDirection) {
-                return SIDES;
         }
 }

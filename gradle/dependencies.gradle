@@ -48,7 +48,7 @@ repositories {
                 url = "http://maven.tterrag.com/"
         }
 
-        maven  {
+        maven {
                 name = "RX14 Proxy"
                 url = "http://mvn.rx14.co.uk/repo/"
         }

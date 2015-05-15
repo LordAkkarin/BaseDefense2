@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * Provides an event that occurs when updating the surveillance system state.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 @RequiredArgsConstructor

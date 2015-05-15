@@ -17,9 +17,9 @@
 
 /**
  * Provides an API for accessing BaseDefense functionality.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
-@API (owner = "basedefense", provides = "basedefense:api", apiVersion = "2.0")
-package basedefense.api;
+@API (owner = "basedefense", provides = "basedefense:api", apiVersion = "2.0") package basedefense.api;
 
 import cpw.mods.fml.common.API;

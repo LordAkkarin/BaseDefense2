@@ -26,6 +26,7 @@ import net.minecraft.world.IBlockAccess;
 
 /**
  * Provides a block renderer implementation for {@link ControllerBlock}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ControllerBlockRenderer extends AbstractBlockRenderer {

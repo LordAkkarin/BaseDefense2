@@ -18,24 +18,28 @@ package basedefense.api.surveillance;
 
 /**
  * Represents a surveillance network controller.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public interface ISurveillanceNetworkController {
 
         /**
          * Retrieves the controller type.
+         *
          * @return The type.
          */
         ControllerType getControllerType ();
 
         /**
          * Retrieves the system state.
+         *
          * @return The state.
          */
         SystemState getSystemState ();
 
         /**
          * Updates the system state.
+         *
          * @param state The state.
          */
         void setSystemState (SystemState state);

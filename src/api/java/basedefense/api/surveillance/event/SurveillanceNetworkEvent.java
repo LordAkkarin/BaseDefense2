@@ -20,6 +20,7 @@ import appeng.api.networking.events.MENetworkEvent;
 
 /**
  * Provides an abstract implementation of {@link MENetworkEvent}
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class SurveillanceNetworkEvent extends MENetworkEvent {

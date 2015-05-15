@@ -27,6 +27,7 @@ import net.minecraftforge.common.config.Configuration;
 
 /**
  * Provides an integration for Applied Energistics 2.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class CommonAppliedEnergisticsIntegration extends AbstractCommonIntegration {

@@ -20,18 +20,21 @@ import appeng.api.networking.IGridCache;
 
 /**
  * Provides a grid cache used for managing the surveillance network.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public interface ISurveillanceGridCache extends IGridCache {
 
         /**
          * Retrieves the active controller.
+         *
          * @return The controller.
          */
         ISurveillanceNetworkController getController ();
 
         /**
          * Retrieves the controller state.
+         *
          * @return The state.
          */
         ControllerState getControllerState ();

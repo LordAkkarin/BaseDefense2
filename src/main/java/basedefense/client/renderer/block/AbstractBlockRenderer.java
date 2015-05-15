@@ -20,6 +20,7 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 /**
  * Provides an abstract implementation of {@link ISimpleBlockRenderingHandler}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public abstract class AbstractBlockRenderer implements ISimpleBlockRenderingHandler {

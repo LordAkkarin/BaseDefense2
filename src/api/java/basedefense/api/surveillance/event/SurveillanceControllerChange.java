@@ -23,6 +23,7 @@ import lombok.NonNull;
 
 /**
  * Provides an event for updates to the {@link ISurveillanceNetworkController}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class SurveillanceControllerChange extends SurveillanceNetworkEvent {

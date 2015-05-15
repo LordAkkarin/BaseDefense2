@@ -148,6 +148,7 @@ public class ComponentManager {
 
         /**
          * Checks whether a certain component is active.
+         *
          * @param componentType The type.
          * @return True if active.
          */
@@ -157,6 +158,7 @@ public class ComponentManager {
 
         /**
          * Checks whether a certain integration is active.
+         *
          * @param integrationType The type.
          * @return True if active.
          */

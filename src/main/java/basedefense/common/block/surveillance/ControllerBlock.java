@@ -59,7 +59,8 @@ public class ControllerBlock extends AbstractBlock implements ITileEntityProvide
 
         /**
          * Builds the metadata value based on the current controller state.
-         * @param state The state.
+         *
+         * @param state    The state.
          * @param metadata The previous metadata (for retaining the actual controller type).
          * @return The state.
          */
@@ -85,6 +86,7 @@ public class ControllerBlock extends AbstractBlock implements ITileEntityProvide
 
         /**
          * Retrieves the controller state.
+         *
          * @param metadata The metadata.
          * @return The state.
          */
@@ -96,6 +98,7 @@ public class ControllerBlock extends AbstractBlock implements ITileEntityProvide
 
         /**
          * Retrieves the controller type.
+         *
          * @param metadata The metadata.
          * @return The type.
          */
@@ -107,20 +110,20 @@ public class ControllerBlock extends AbstractBlock implements ITileEntityProvide
         /**
          * {@inheritDoc}
          */
-        @SideOnly (Side.CLIENT)
-        @Override
-        protected ISimpleBlockRenderingHandler registerRenderType () {
-                return RegistrationUtility.registerBlockRenderer (ControllerBlockRenderer.class);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public void registerBlockIcons (IIconRegister p_149651_1_) {
                 this.baseTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller");
                 this.activePrimitiveTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller_active");
                 this.activeFacialRecognitionTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller_active_facial");
                 this.conflictTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller_conflict");
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @SideOnly (Side.CLIENT)
+        @Override
+        protected ISimpleBlockRenderingHandler registerRenderType () {
+                return RegistrationUtility.registerBlockRenderer (ControllerBlockRenderer.class);
         }
 }

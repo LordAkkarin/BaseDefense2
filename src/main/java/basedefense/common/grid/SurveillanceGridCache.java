@@ -20,10 +20,10 @@ import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridHost;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridStorage;
-import basedefense.api.surveillance.event.SurveillanceControllerChange;
+import basedefense.api.surveillance.ISurveillanceGridCache;
 import basedefense.api.surveillance.ISurveillanceNetworkController;
 import basedefense.api.surveillance.ISurveillanceNetworkController.ControllerType;
-import basedefense.api.surveillance.ISurveillanceGridCache;
+import basedefense.api.surveillance.event.SurveillanceControllerChange;
 import com.google.common.collect.Iterables;
 import lombok.RequiredArgsConstructor;
 
@@ -32,6 +32,7 @@ import java.util.Set;
 
 /**
  * Provides an implementation of {@link ISurveillanceGridCache}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 @RequiredArgsConstructor
@@ -40,6 +41,17 @@ public class SurveillanceGridCache implements ISurveillanceGridCache {
         private final Set<ISurveillanceNetworkController> controllerSet = new HashSet<ISurveillanceNetworkController> ();
         private ControllerState state = ControllerState.OFFLINE;
         private boolean updatePending = false;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void addNode (IGridNode iGridNode, IGridHost iGridHost) {
+                if (!(iGridHost instanceof ISurveillanceNetworkController)) return;
+                this.controllerSet.add (((ISurveillanceNetworkController) iGridHost));
+
+                this.updatePending = true;
+        }
 
         /**
          * {@inheritDoc}
@@ -61,6 +73,18 @@ public class SurveillanceGridCache implements ISurveillanceGridCache {
          * {@inheritDoc}
          */
         @Override
+        public void onJoin (IGridStorage iGridStorage) { }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void onSplit (IGridStorage iGridStorage) { }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public void onUpdateTick () {
                 if (!this.updatePending) return;
                 ControllerState oldState = this.getControllerState ();
@@ -75,9 +99,16 @@ public class SurveillanceGridCache implements ISurveillanceGridCache {
                         this.state = (controller.getControllerType () == ControllerType.FACE_RECOGNITION ? ControllerState.ACTIVE_FACE_RECOGNITION : ControllerState.ACTIVE_PRIMITIVE);
                 }
 
-                if (this.state != oldState) this.grid.postEvent (new SurveillanceControllerChange (this.getController (), this.state));
+                if (this.state != oldState)
+                        this.grid.postEvent (new SurveillanceControllerChange (this.getController (), this.state));
                 this.updatePending = false;
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void populateGridStorage (IGridStorage iGridStorage) { }
 
         /**
          * {@inheritDoc}
@@ -89,33 +120,4 @@ public class SurveillanceGridCache implements ISurveillanceGridCache {
 
                 this.updatePending = true;
         }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void addNode (IGridNode iGridNode, IGridHost iGridHost) {
-                if (!(iGridHost instanceof ISurveillanceNetworkController)) return;
-                this.controllerSet.add (((ISurveillanceNetworkController) iGridHost));
-
-                this.updatePending = true;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void onSplit (IGridStorage iGridStorage) { }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void onJoin (IGridStorage iGridStorage) { }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void populateGridStorage (IGridStorage iGridStorage) { }
 }

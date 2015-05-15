@@ -21,6 +21,7 @@ import basedefense.common.component.integration.CommonAppliedEnergisticsIntegrat
 
 /**
  * Provides a server-side implementation of {@link CommonAppliedEnergisticsIntegration}.
+ *
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ServerAppliedEnergisticsIntegration extends CommonAppliedEnergisticsIntegration implements IServerIntegration {
