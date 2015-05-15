@@ -108,8 +108,6 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
          * Updates the block metadata.
          */
         protected void updateMetadata () {
-                System.out.println ("UPDATE!");
-
                 int metadata = this.worldObj.getBlockMetadata (this.xCoord, this.yCoord, this.zCoord);
                 ControllerState oldState = ControllerBlock.BLOCK.getState (metadata);
                 ControllerState state;
@@ -128,11 +126,8 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
                         state = ControllerState.OFFLINE;
                 }
 
-                System.out.println ("Transitioning from " + oldState + " to " + state);
-
                 if (state != oldState) {
                         metadata = ControllerBlock.BLOCK.buildState (state, metadata);
-                        System.out.println ("METADATA: " + metadata);
                         this.worldObj.setBlockMetadataWithNotify (this.xCoord, this.yCoord, this.zCoord, metadata, 2);
                 }
         }
