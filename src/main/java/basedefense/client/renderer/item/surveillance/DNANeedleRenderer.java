@@ -70,13 +70,13 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
          * @param itemStack The item stack.
          */
         private void renderModel (ItemStack itemStack) {
-                GL11.glEnable (GL11.GL_BLEND);
-
                 Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/surveillance_dna_needle.png"));
                 getModel ().renderPart ("Needle_Cube");
 
                 VialType vialType = DNANeedleItem.getVialType (itemStack);
                 if (vialType == VialType.EMPTY || vialType == VialType.PLAYER || vialType == VialType.ENTITY) {
+                        GL11.glEnable (GL11.GL_BLEND);
+
                         switch (vialType) {
                                 case PLAYER:
                                         Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/surveillance_dna_needle_player.png"));
@@ -90,9 +90,9 @@ public class DNANeedleRenderer extends AbstractItemRenderer {
 
                         Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/items/surveillance_dna_needle.png"));
                         getModel ().renderPart ("Vial_Cube.001");
-                }
 
-                GL11.glDisable (GL11.GL_BLEND);
+                        GL11.glDisable (GL11.GL_BLEND);
+                }
         }
 
         /**
