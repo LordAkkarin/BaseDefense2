@@ -53,7 +53,7 @@ public class ControllerBlock extends AbstractBlock implements ITileEntityProvide
                 super (Material.iron);
 
                 this.setBlockName (RegistrationUtility.getTranslation ("surveillance", "controller"));
-                this.setBlockTextureName ("basedefense2:controller");
+                this.setBlockTextureName ("basedefense2:surveillance_controller");
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
         }
 
@@ -118,9 +118,9 @@ public class ControllerBlock extends AbstractBlock implements ITileEntityProvide
          */
         @Override
         public void registerBlockIcons (IIconRegister p_149651_1_) {
-                this.baseTexture = p_149651_1_.registerIcon ("basedefense2:controller");
-                this.activePrimitiveTexture = p_149651_1_.registerIcon ("basedefense2:controller_active");
-                this.activeFacialRecognitionTexture = p_149651_1_.registerIcon ("basedefense2:controller_active_facial");
-                this.conflictTexture = p_149651_1_.registerIcon ("basedefense2:controller_conflict");
+                this.baseTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller");
+                this.activePrimitiveTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller_active");
+                this.activeFacialRecognitionTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller_active_facial");
+                this.conflictTexture = p_149651_1_.registerIcon ("basedefense2:surveillance_controller_conflict");
         }
 }

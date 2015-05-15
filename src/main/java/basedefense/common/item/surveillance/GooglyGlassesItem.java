@@ -42,7 +42,7 @@ public class GooglyGlassesItem extends ItemArmor {
                 super (MATERIAL, 4, 0);
 
                 this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "googly_glasses"));
-                this.setTextureName ("basedefense2:googly_eye_glasses");
+                this.setTextureName ("basedefense2:surveillance_googly_eye_glasses");
                 this.setMaxStackSize (1);
         }
 
@@ -51,7 +51,7 @@ public class GooglyGlassesItem extends ItemArmor {
          */
         @Override
         public String getArmorTexture (ItemStack stack, Entity entity, int slot, String type) {
-                return "basedefense2:textures/items/googly_eye_glasses_layer1.png";
+                return "basedefense2:textures/items/surveillance_googly_eye_glasses_layer1.png";
         }
 
         /**

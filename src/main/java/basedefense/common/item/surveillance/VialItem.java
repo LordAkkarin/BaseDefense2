@@ -105,8 +105,8 @@ public class VialItem extends Item {
          */
         @Override
         public void registerIcons (IIconRegister p_94581_1_) {
-                this.icon_empty = p_94581_1_.registerIcon ("basedefense2:vial_empty");
-                this.icon_player = p_94581_1_.registerIcon ("basedefense2:vial_dna_player");
-                this.icon_entity = p_94581_1_.registerIcon ("basedefense2:vial_dna_mob");
+                this.icon_empty = p_94581_1_.registerIcon ("basedefense2:surveillance_vial_empty");
+                this.icon_player = p_94581_1_.registerIcon ("basedefense2:surveillance_vial_dna_player");
+                this.icon_entity = p_94581_1_.registerIcon ("basedefense2:surveillance_vial_dna_mob");
         }
 }

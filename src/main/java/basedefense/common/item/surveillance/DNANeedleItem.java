@@ -46,7 +46,7 @@ public class DNANeedleItem extends Item {
                 super ();
 
                 this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "dna_needle"));
-                this.setTextureName ("basedefense2:dna_needle");
+                this.setTextureName ("basedefense2:surveillance_dna_needle");
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
                 this.setHasSubtypes (true);
 

@@ -36,7 +36,7 @@ import org.lwjgl.opengl.GL11;
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class GooglyEyeRenderer {
-        private static final IModelCustom EYE_MODEL = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2", "models/googly_eye.obj"));
+        private static final IModelCustom EYE_MODEL = AdvancedModelLoader.loadModel (new ResourceLocation ("basedefense2", "models/surveillance_googly_eye.obj"));
 
         /**
          * Handles {@link RenderLivingEvent}.
@@ -83,7 +83,7 @@ public class GooglyEyeRenderer {
                         GL11.glTranslatef (distance, 0.0f, 0.0f);
                         GL11.glScalef (scale, scale, scale);
 
-                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/models/googly_eye.png"));
+                        Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("basedefense2", "textures/models/surveillance_googly_eye.png"));
                         EYE_MODEL.renderAll ();
                 }
                 GL11.glPopMatrix ();
