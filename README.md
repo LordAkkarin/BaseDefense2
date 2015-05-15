@@ -103,7 +103,7 @@ Contributing
 Before you add any major changes to the modification you may want to discuss them with us (see [Contact](#contact)) as
 we may choose to reject your changes for various reasons. All contributions are applied via [Pull-Requests](https://help.github.com/articles/creating-a-pull-request).
 Patches will not be accepted. Also be aware that all of your contributions are made available under the terms of the
-[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt). Please read the (Contribution Guidelines)(Contributing.md)
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt). Please read the [Contribution Guidelines](Contributing.md)
 for more information.
 
 API
