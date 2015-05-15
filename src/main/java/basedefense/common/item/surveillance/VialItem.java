@@ -18,6 +18,7 @@ package basedefense.common.item.surveillance;
 
 import basedefense.common.creative.SurveillanceCreativeTab;
 import basedefense.util.RegistrationUtility;
+import basedefense.util.TranslationUtility;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,7 +47,7 @@ public class VialItem extends Item {
         private VialItem () {
                 super ();
 
-                this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "vial"));
+                this.setUnlocalizedName (TranslationUtility.getComponentTranslation ("surveillance", "vial"));
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
 
                 this.setMaxStackSize (1);

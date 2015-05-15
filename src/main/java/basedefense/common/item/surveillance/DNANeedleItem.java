@@ -18,6 +18,7 @@ package basedefense.common.item.surveillance;
 
 import basedefense.common.creative.SurveillanceCreativeTab;
 import basedefense.util.RegistrationUtility;
+import basedefense.util.TranslationUtility;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -45,7 +46,7 @@ public class DNANeedleItem extends Item {
         protected DNANeedleItem () {
                 super ();
 
-                this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "dna_needle"));
+                this.setUnlocalizedName (TranslationUtility.getComponentTranslation ("surveillance", "dna_needle"));
                 this.setTextureName ("basedefense2:surveillance_dna_needle");
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
                 this.setHasSubtypes (true);

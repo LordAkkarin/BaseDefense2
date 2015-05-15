@@ -58,18 +58,6 @@ public class RegistrationUtility {
         }
 
         /**
-         * Retrieves a translation name.
-         *
-         * @param category The category.
-         * @param name     The name.
-         * @return The translation name.
-         */
-        public static String getTranslation (String category, @NonNull String name) {
-                if (category == null) return "basedefense." + name;
-                return "basedefense." + category + "." + name;
-        }
-
-        /**
          * Registers a block renderer.
          *
          * @param blockRenderingHandler The rendering handler.

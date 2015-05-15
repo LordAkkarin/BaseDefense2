@@ -18,6 +18,7 @@ package basedefense.common.item.surveillance;
 
 import basedefense.common.achievement.surveillance.GooglyEyeAchievement;
 import basedefense.util.RegistrationUtility;
+import basedefense.util.TranslationUtility;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,7 +42,7 @@ public class GooglyGlassesItem extends ItemArmor {
         protected GooglyGlassesItem () {
                 super (MATERIAL, 4, 0);
 
-                this.setUnlocalizedName (RegistrationUtility.getTranslation ("surveillance", "googly_glasses"));
+                this.setUnlocalizedName (TranslationUtility.getComponentTranslation ("surveillance", "googly_glasses"));
                 this.setTextureName ("basedefense2:surveillance_googly_eye_glasses");
                 this.setMaxStackSize (1);
         }
