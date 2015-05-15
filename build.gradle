@@ -88,6 +88,8 @@ minecraft {
 
 /* === Jar & Source Configuration === */
 jar {
+        classifier = "universal"
+
         include "basedefense/**"
         include "assets/**"
         include "mcmod.info"
