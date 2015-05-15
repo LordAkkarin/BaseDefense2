@@ -42,3 +42,26 @@ Code Guidelines
 * **Less levels** are preferred (use return, break and continue frequently)
 
 Note: Most of these guidelines can be automatically applied via [EditorConfig](http://editorconfig.org/).
+
+License Header
+--------------
+All new files are **REQUIRED** to include the following license header:
+
+```java
+/*
+ * Copyright YYYY Your Name <your@email.address>
+ * and other copyright owners as documented in the project's IP log.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+```
