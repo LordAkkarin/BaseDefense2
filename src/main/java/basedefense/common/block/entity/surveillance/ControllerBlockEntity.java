@@ -115,8 +115,14 @@ public class ControllerBlockEntity extends AENetworkPowerTile implements ISurvei
                 ControllerState state;
 
                 try {
-                        ISurveillanceGridCache cache = this.getProxy ().getGrid ().getCache (ISurveillanceGridCache.class);
-                        state = cache.getControllerState ();
+                        if (!this.getProxy ().isPowered ())
+                                state = ControllerState.OFFLINE;
+                        else if (this.getProxy ().getPath ().getControllerState () != appeng.api.networking.pathing.ControllerState.CONTROLLER_ONLINE)
+                                state = ControllerState.OFFLINE;
+                        else {
+                                ISurveillanceGridCache cache = this.getProxy ().getGrid ().getCache (ISurveillanceGridCache.class);
+                                state = cache.getControllerState ();
+                        }
                 } catch (GridAccessException ex) {
                         BaseDefenseModification.getInstance ().getLogger ().error ("Cannot access grid: " + ex.getMessage (), ex);
                         state = ControllerState.OFFLINE;
