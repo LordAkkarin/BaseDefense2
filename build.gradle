@@ -88,11 +88,6 @@ minecraft {
 
 /* === Jar & Source Configuration === */
 jar {
-        manifest {
-                attributes 'FMLCorePlugin': 'basedefense.core.BaseDefenseCoreModification'
-                attributes 'FMLCorePluginContainsFMLMod': 'true'
-        }
-
         include "basedefense/**"
         include "assets/**"
         include "mcmod.info"
