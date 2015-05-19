@@ -1,0 +1,96 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+/*
+ * Copyright 2015 Johannes Donath <johannesd@torchmind.com>
+ * and other copyright owners as documented in the project's IP log.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@charset "utf-8";
+
+$brand-color: #205081;
+$highlight-factor: 20%;
+
+body {
+
+        &,
+        & a {
+                color: $brand-color;
+        }
+
+        a:hover {
+                color: lighten($brand-color, $highlight-factor);
+        }
+}
+
+#page-header,
+#page-footer {
+        .nav > li {
+                > a:focus,
+                > a:hover {
+                        background-color:               transparent;
+                }
+        }
+}
+
+#page-header {
+        background-size:        cover;
+        background:             url(../images/background.jpg) center -200px;
+        border-bottom:          2px solid darken($brand-color, 50%);
+
+        &,
+        a {
+                color: #FFFFFF;
+        }
+
+        .jumbo {
+                padding:                150px;
+
+                h1 {
+                        font-size:              5em;
+                        margin-bottom:          0;
+                }
+
+                h2 {
+                        margin-top:             0;
+                        margin-bottom:          25px;
+                }
+        }
+
+        .nav > li > a {
+                color:                          #FFFFFF;
+
+                &:focus,
+                &:hover {
+                        color:                          darken(#FFFFFF, $highlight-factor);
+                }
+        }
+}
+
+#page-footer {
+        border-top:             1px solid;
+
+        .copyright {
+                padding:        10px 15px;
+        }
+}
+
+.btn-outline {
+        border:                 2px solid #FFFFFF;
+
+        &:hover {
+                border-color:                   darken(#FFFFFF, $highlight-factor);
+                color:                          darken(#FFFFFF, $highlight-factor) !important;
+        }
+}

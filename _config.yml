@@ -1,0 +1,10 @@
+# Site settings
+title: Base Defense 2
+description: A Minecraft modification for mad scientists!
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://mcbd.spud.rocks" # the base hostname & protocol for your site
+twitter_username: jekyllrb
+github_username:  jekyll
+
+# Build settings
+markdown: kramdown
