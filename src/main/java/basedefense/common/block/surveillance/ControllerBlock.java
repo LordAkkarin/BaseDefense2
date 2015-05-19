@@ -22,6 +22,7 @@ import basedefense.common.block.AbstractBlock;
 import basedefense.common.block.entity.surveillance.ControllerBlockEntity;
 import basedefense.common.creative.SurveillanceCreativeTab;
 import basedefense.util.RegistrationUtility;
+import basedefense.util.TranslationUtility;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -52,7 +53,7 @@ public class ControllerBlock extends AbstractBlock implements ITileEntityProvide
         protected ControllerBlock () {
                 super (Material.iron);
 
-                this.setBlockName (RegistrationUtility.getTranslation ("surveillance", "controller"));
+                this.setBlockName (TranslationUtility.getComponentTranslation ("surveillance", "controller"));
                 this.setBlockTextureName ("basedefense2:surveillance_controller");
                 this.setCreativeTab (SurveillanceCreativeTab.TAB);
         }
