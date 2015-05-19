@@ -19,10 +19,15 @@ package basedefense.client;
 import basedefense.BaseDefenseModification;
 import basedefense.client.component.IClientComponent;
 import basedefense.client.renderer.gui.OutdatedVersionGUIRenderer;
+import basedefense.client.version.ModificationVersionCheck;
 import basedefense.common.CommonProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Optional;
 
 /**
  * Handles the {@link cpw.mods.fml.relauncher.Side#CLIENT} initialization.
@@ -30,6 +35,57 @@ import net.minecraftforge.common.MinecraftForge;
  * @author Johannes Donath <a href="mailto:johannesd@torchmind.com">johannesd@torchmind.com</a>
  */
 public class ClientProxy extends CommonProxy {
+        private Optional<String> latestVersion;
+
+        /**
+         * Executes a version check using GitHub's API.
+         */
+        private void executeVersionCheck () {
+                BaseDefenseModification.getInstance ().getLogger ().info ("Version Check");
+                long initializationTime = System.currentTimeMillis ();
+
+
+                if (!Boolean.valueOf (System.getProperty ("basedefense.disableVersionCheck", "false"))) {
+                        this.latestVersion = (new ModificationVersionCheck ()).check ();
+                        this.latestVersion.ifPresent (v -> {
+                                if (v.equalsIgnoreCase (BaseDefenseModification.getInstance ().getVersion ())) return;
+
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+--------------------------------+");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+          Base Defense          +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+          is outdated!          +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+--------------------------------+");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+  The support for this version  +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+  has been discontinued.        +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+  Please update to a newer      +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+  release!                      +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+--------------------------------+");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+  Installed: " + StringUtils.rightPad (BaseDefenseModification.getInstance ().getVersion (), 17) + "  +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+  Latest:    " + StringUtils.rightPad (v, 17) + "  +");
+                                BaseDefenseModification.getInstance ().getLogger ().warn ("+--------------------------------+");
+                        });
+                } else {
+                        this.latestVersion = Optional.empty ();
+
+                        BaseDefenseModification.getInstance ().getLogger ().warn ("+---------------------------------+");
+                        BaseDefenseModification.getInstance ().getLogger ().warn ("+          VERSION CHECK          +");
+                        BaseDefenseModification.getInstance ().getLogger ().warn ("+             DISABLED            +");
+                        BaseDefenseModification.getInstance ().getLogger ().warn ("+---------------------------------+");
+                        BaseDefenseModification.getInstance ().getLogger ().warn ("+  Installed: " + StringUtils.rightPad (BaseDefenseModification.getInstance ().getVersion (), 18) + "  +");
+                        BaseDefenseModification.getInstance ().getLogger ().warn ("+---------------------------------+");
+                }
+
+                BaseDefenseModification.getInstance ().getLogger ().info ("Version Check ended (took " + (System.currentTimeMillis () - initializationTime) + " ms)");
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void onPreInitialization (FMLPreInitializationEvent event) {
+                super.onPreInitialization (event);
+
+                this.executeVersionCheck ();
+        }
 
         /**
          * {@inheritDoc}
@@ -54,7 +110,7 @@ public class ClientProxy extends CommonProxy {
         public void onPostInitialization (FMLPostInitializationEvent event) {
                 super.onPostInitialization (event);
 
-                BaseDefenseModification.getInstance ().getLatestVersion ().ifPresent (v -> {
+                this.latestVersion.ifPresent (v -> {
                         if (v.equalsIgnoreCase (BaseDefenseModification.getInstance ().getVersion ())) return;
                         MinecraftForge.EVENT_BUS.register (new OutdatedVersionGUIRenderer (BaseDefenseModification.getInstance ().getVersion (), v));
                 });

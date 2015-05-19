@@ -18,17 +18,13 @@ package basedefense;
 
 import basedefense.common.CommonProxy;
 import basedefense.common.component.ComponentManager;
-import basedefense.common.version.ModificationVersionCheck;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Optional;
 
 /**
  * Provides a modification entry point for Forge.
@@ -51,48 +47,6 @@ public class BaseDefenseModification {
         private Logger logger = null;
         @Getter
         private String version = null;
-        @Getter
-        private Optional<String> latestVersion = null;
-
-        /**
-         * Executes a version check using GitHub's API.
-         */
-        private void executeVersionCheck () {
-                this.getLogger ().info ("Version Check");
-                long initializationTime = System.currentTimeMillis ();
-
-
-                if (!Boolean.valueOf (System.getProperty ("basedefense.disableVersionCheck", "false"))) {
-                        this.latestVersion = (new ModificationVersionCheck ()).check ();
-                        this.latestVersion.ifPresent (v -> {
-                                if (v.equalsIgnoreCase (this.getVersion ())) return;
-
-                                this.getLogger ().warn ("+--------------------------------+");
-                                this.getLogger ().warn ("+          Base Defense          +");
-                                this.getLogger ().warn ("+          is outdated!          +");
-                                this.getLogger ().warn ("+--------------------------------+");
-                                this.getLogger ().warn ("+  The support for this version  +");
-                                this.getLogger ().warn ("+  has been discontinued.        +");
-                                this.getLogger ().warn ("+  Please update to a newer      +");
-                                this.getLogger ().warn ("+  release!                      +");
-                                this.getLogger ().warn ("+--------------------------------+");
-                                this.getLogger ().warn ("+  Installed: " + StringUtils.rightPad (this.getVersion (), 17) + "  +");
-                                this.getLogger ().warn ("+  Latest:    " + StringUtils.rightPad (v, 17) + "  +");
-                                this.getLogger ().warn ("+--------------------------------+");
-                        });
-                } else {
-                        this.latestVersion = Optional.empty ();
-
-                        this.getLogger ().warn ("+---------------------------------+");
-                        this.getLogger ().warn ("+          VERSION CHECK          +");
-                        this.getLogger ().warn ("+             DISABLED            +");
-                        this.getLogger ().warn ("+---------------------------------+");
-                        this.getLogger ().warn ("+  Installed: " + StringUtils.rightPad (this.getVersion (), 18) + "  +");
-                        this.getLogger ().warn ("+---------------------------------+");
-                }
-
-                this.getLogger ().info ("Version Check ended (took " + (System.currentTimeMillis () - initializationTime) + " ms)");
-        }
 
         /**
          * Stores the component manager.
@@ -138,7 +92,6 @@ public class BaseDefenseModification {
         private void onPreInitialization (FMLPreInitializationEvent event) {
                 this.logger = event.getModLog ();
                 this.version = event.getModMetadata ().version;
-                this.executeVersionCheck ();
 
                 this.getLogger ().info ("Pre Initialization");
                 long initializationTime = System.currentTimeMillis ();
